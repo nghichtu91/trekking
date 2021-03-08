@@ -7,3 +7,5 @@ jspm_packages
 .serverless_nextjs
 .out
 .next
+out
+.env

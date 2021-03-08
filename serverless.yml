@@ -1,5 +1,5 @@
 nextamplified:
-  component: "@sls-next/serverless-component@1.19.0-alpha.33"
+  component: "@sls-next/serverless-component@1.19.0-alpha.35"
   inputs:
     domain: "leonui.app"
     publicDirectoryCache:

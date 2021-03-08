@@ -1,0 +1,4 @@
+#
+# GitHub Action for Serverless NextJS staging environment
+#
+name: Deploy staging leonui.app
