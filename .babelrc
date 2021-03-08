@@ -1,0 +1,44 @@
+{
+  "presets": ["next/babel"],
+  "plugins": [
+    [
+      "import",
+      {
+        "libraryName": "antd"
+        // "style": true
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "@Styled/*": "./src/Styled/*",
+          "@Styled": "./src/Styled",
+          "@Interfaces/*": ["src/Interfaces/*"],
+          "@Interfaces": ["src/Interfaces"],
+          "@I18n": "./src/I18n",
+          "@I18n/*": "./src/I18n/*",
+          "@Router/*": ["src/Router/*"],
+          "@Router": ["src/Router"],
+          "@Redux/*": ["src/Redux/*"],
+          "@Redux": ["src/Redux"],
+          "@Services/*": ["src/Services/*"],
+          "@Services": ["src/Services"],
+          "@Test/*": ["test/pages/*"],
+          "@shared": "./src/shared",
+          "@shared/*": "./src/shared/*",
+          "@layout": "./src//shared/layout",
+          "@layout/*": "./src/shared/layout/*",
+          "@assets": "./src/assets",
+          "@assets/*": "./src/assets/*",
+          "@utils": ["src/utils"],
+          "@utils/*": ["./src/utils/*"],
+          "@modules": "./src/modules",
+          "@modules/*": "./src/modules/*"
+         
+        }
+      }
+    ]
+  ]
+}

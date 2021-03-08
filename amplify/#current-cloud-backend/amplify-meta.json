@@ -1,0 +1,76 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-trekking-dev-05915-authRole",
+      "UnauthRoleArn": "arn:aws:iam::075497711430:role/amplify-trekking-dev-05915-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::075497711430:role/amplify-trekking-dev-05915-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-trekking-dev-05915-deployment",
+      "UnauthRoleName": "amplify-trekking-dev-05915-unauthRole",
+      "StackName": "amplify-trekking-dev-05915",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:075497711430:stack/amplify-trekking-dev-05915/2e0a2450-7960-11eb-802e-0aabc55731ec",
+      "AmplifyAppId": "d3azvcgpbg2boe"
+    }
+  },
+  "function": {
+    "trekkingfae27ca0fae27ca0PreTokenGeneration": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "output": {
+        "Region": "ap-southeast-1",
+        "Arn": "arn:aws:lambda:ap-southeast-1:075497711430:function:trekkingfae27ca0fae27ca0PreTokenGeneration-dev",
+        "Name": "trekkingfae27ca0fae27ca0PreTokenGeneration-dev",
+        "LambdaExecutionRole": "trekkingfae27ca0fae27ca0PreTokenGeneration-dev"
+      },
+      "lastPushTimeStamp": "2021-03-06T03:00:06.305Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-trekking-dev-05915-deployment/amplify-cfn-templates/function/trekkingfae27ca0fae27ca0PreTokenGeneration-cloudformation-template.json",
+        "logicalId": "functiontrekkingfae27ca0fae27ca0PreTokenGeneration"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-trekking-dev-05915-deployment",
+        "s3Key": "amplify-builds/trekkingfae27ca0fae27ca0PreTokenGeneration-744d7a4e3578656e666f-build.zip"
+      }
+    }
+  },
+  "auth": {
+    "trekking": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "output": {
+        "UserPoolId": "ap-southeast-1_Mb5tQC4f5",
+        "AppClientIDWeb": "28343nqae5fv63ti9fcdjnvvft",
+        "AppClientID": "3pmtfcf5hqa8r9rolafb22vkgn",
+        "HostedUIDomain": "tt0l03fwiugb-dev",
+        "IdentityPoolId": "ap-southeast-1:19d01e3c-f689-4ca1-9a55-9f3ebf4d1e2e",
+        "IdentityPoolName": "testAuthIdentityPool__dev",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
+        "UserPoolName": "trekking"
+      },
+      "lastPushTimeStamp": "2021-03-06T03:00:06.366Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-trekking-dev-05915-deployment/amplify-cfn-templates/auth/trekking-cloudformation-template.yml",
+        "logicalId": "authtrekking"
+      },
+      "lastPushDirHash": "iMaMLlrXiWcPmDgy6n4rmYq4sXs="
+    }
+  },
+  "storage": {
+    "s36e41cad7": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "BucketName": "trekkingdc9a24046fa34230bb60c2296f74075605915-dev",
+        "Region": "ap-southeast-1"
+      },
+      "lastPushTimeStamp": "2021-03-06T03:00:06.332Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-trekking-dev-05915-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+        "logicalId": "storages36e41cad7"
+      }
+    }
+  }
+}

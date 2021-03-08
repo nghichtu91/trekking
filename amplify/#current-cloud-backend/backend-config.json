@@ -1,0 +1,23 @@
+{
+  "function": {
+    "trekkingfae27ca0fae27ca0PreTokenGeneration": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "auth": {
+    "trekking": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "s36e41cad7": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  }
+}
