@@ -1,5 +1,6 @@
-import 'antd/dist/antd.css'
-import '../shared/layout/baseLayout.css'
+// import 'antd/dist/antd.css'
+import '@shared/assets/tailwind.css'
+import '@shared/layout/baseLayout.css'
 import '@shared/components/button/styles/LoadMoreButton.css'
 import awsExports from '../aws-exports'
 import { useState, useEffect } from 'react'

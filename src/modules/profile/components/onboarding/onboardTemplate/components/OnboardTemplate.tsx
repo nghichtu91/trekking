@@ -38,7 +38,7 @@ const OnboardTemplate: React.FC<OnboardTemplateProps> = () => {
             borderColor: '#ddd',
           }}
         >
-          <Typography.Title style={{ textAlign: 'center' }} className="test-csd" level={3}>
+          <Typography.Title className="text-center" level={3}>
             Đăng nhập
           </Typography.Title>
           <Space style={{ width: '100%' }} direction="vertical">

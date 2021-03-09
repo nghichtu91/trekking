@@ -65,7 +65,7 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({ isAuthenticated, childre
           </Col>
         </Row>
       </Layout.Content>
-      <Layout.Footer>©2021 by ThanhLe </Layout.Footer>
+      <Layout.Footer>©2021 by TrangKute </Layout.Footer>
     </Layout>
   )
 }

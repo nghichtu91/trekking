@@ -1,6 +1,11 @@
-nextamplified:
+app: leonuiapp
+stage: "staging"
+leonuiapp:
   component: "@sls-next/serverless-component@1.19.0-alpha.35"
   inputs:
+    # bucketName: "${stage}-${app}"
+    # bucketRegion: ap-southeast-1
+    deploy: false
     domain: "leonui.app"
     publicDirectoryCache:
       value: public, max-age=604800
