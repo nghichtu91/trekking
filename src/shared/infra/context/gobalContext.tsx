@@ -1,16 +1,29 @@
 import contextCreator from './contextCreator'
 import { Draft } from 'immer'
 import { combineReducers } from '@shared/utils/combineReducers'
-import { reducerProfile, ProfileState, ccc } from '@modules/profile/context/store'
+import {
+  reducerProfile,
+  ProfileState,
+  ProfileActionTypes,
+  ProfileUpdate,
+} from '@modules/profile/context/reducer'
+import { IUser } from '@modules/profile/models'
 
-interface State extends ProfileState {
+interface State {
   theme?: {
     isMenuShown: boolean
     type: number | ''
   }
 }
 
-const initState: State = {
+interface RootState extends ProfileState {
+  theme?: {
+    isMenuShown: boolean
+    type: number | ''
+  }
+}
+
+const initState: RootState = {
   theme: {
     isMenuShown: false,
     type: '',
@@ -18,11 +31,11 @@ const initState: State = {
   profile: {},
 }
 
-type mainccc = ccc | 'CLOSE_MENU' | 'OPEN_MENU'
+type mainccc = ProfileActionTypes | ProfileUpdate | 'CLOSE_MENU' | 'OPEN_MENU'
 
 interface Action {
   type: mainccc
-  payload?: unknown
+  payload?: unknown | IUser
 }
 
 const reducer = (draft: Draft<State>, action: Action) => {
@@ -39,5 +52,5 @@ const reducer = (draft: Draft<State>, action: Action) => {
 }
 
 const mainReducers = combineReducers(reducer, reducerProfile)
-const { Context, ContextProvider } = contextCreator<State, Action>(initState, mainReducers)
+const { Context, ContextProvider } = contextCreator<RootState, Action>(initState, mainReducers)
 export { Context, ContextProvider }

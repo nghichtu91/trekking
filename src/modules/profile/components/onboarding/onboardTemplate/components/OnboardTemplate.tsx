@@ -39,7 +39,14 @@ const OnboardTemplate: React.FC<OnboardTemplateProps> = () => {
             >
               Facebook
             </Button>
-            <Button size="large" icon={<GoogleCircleFilled />} style={{ width: '100%' }}>
+            <Button
+              onClick={() =>
+                Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google })
+              }
+              size="large"
+              icon={<GoogleCircleFilled />}
+              style={{ width: '100%' }}
+            >
               Google
             </Button>
           </Space>

@@ -8,4 +8,7 @@ export interface IUser {
   phoneVerify?: boolean
   peopleId?: number
   username?: string
+  avatar?: string
+  name?: string
+  identified?: boolean
 }

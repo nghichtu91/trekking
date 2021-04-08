@@ -1,38 +1,214 @@
-import React from 'react'
-import { Layout, Menu, Row, Col, Typography, Avatar, Space } from 'antd'
-import Image from 'next/image'
-import { UserOutlined, MenuOutlined } from '@ant-design/icons'
-import Link from 'next/link'
+import React, { useState } from 'react'
 import { Auth } from 'aws-amplify'
+//#region nextjs components
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import Image from 'next/image'
+// #endregion
+//#region  antd components
+import {
+  Layout,
+  Menu,
+  Row,
+  Col,
+  Typography,
+  Avatar,
+  Space,
+  Popover,
+  Tooltip,
+  Badge,
+  List,
+} from 'antd'
+import {
+  UserOutlined,
+  MenuOutlined,
+  BellOutlined,
+  EditOutlined,
+  InfoCircleFilled,
+  // EditFilled,
+  // SnippetsFilled,
+  SafetyCertificateFilled,
+  LogoutOutlined,
+} from '@ant-design/icons'
+//#endregion
+//#region  components
+import Helper from '@shared/utils/helper'
+import { useProfile } from '@modules/profile/hooks/userProfile'
+import { UseAws } from '@modules/profile/hooks/useAuthe'
+//#endregion
+//#region  Constants
+import { ProfileMenus } from '@shared/constants'
+//#endregion
 
 interface BaseLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
-  isAuthenticated: boolean
+  isAuthenticated?: boolean
 }
-export const BaseLayout: React.FC<BaseLayoutProps> = ({ isAuthenticated, children }) => {
-  const menuHandle = ({ key }) => {
-    console.log(key)
+
+export const BaseLayout: React.FC<BaseLayoutProps> = ({ children }) => {
+  const { profile } = useProfile()
+  const [isAuthenticated] = UseAws()
+  const router = useRouter()
+  const [PopoverProfile, setIsPopoverProfile] = useState<boolean>(false)
+
+  const profileMenuHandle = (url?: string) => {
+    if (!url || url !== '#') {
+      router.push(url.replace('[id]', profile.userId))
+    }
+    setIsPopoverProfile(false)
+    return false
+  }
+
+  const handleVisibleChange = visible => {
+    setIsPopoverProfile(visible)
+  }
+
+  const profileMenuItemsRender = () => {
+    return ProfileMenus.map(item => (
+      <Menu.Item
+        onClick={() => profileMenuHandle(item.uri)}
+        className="my-0 px-3 hover:bg-gray-100"
+        icon={item.icon}
+        key={item.key}
+      >
+        {item.title}
+      </Menu.Item>
+    ))
+  }
+
+  const profileMenus = () => {
+    return (
+      <Row className="" justify="space-between" gutter={[0, 0]}>
+        <Col className="p-3 border-b border-gray-200" span={24}>
+          <Row>
+            <Col span={6}>
+              <Avatar size={55} src={profile.avatar} icon={<UserOutlined />} />
+            </Col>
+            <Col span={18}>
+              <Typography.Title className="text-blue-500 mb-1" level={5}>
+                {profile.fullName}
+                {profile.identified ? (
+                  <SafetyCertificateFilled className="align-baseline text-base text-yellow-500" />
+                ) : null}
+              </Typography.Title>
+              <Typography.Text type="secondary">@{profile.username}</Typography.Text>
+            </Col>
+          </Row>
+        </Col>
+        <Col slot="popover-profile--menu" className="popover-profile--menu" span={24}>
+          <Menu className="border-0">{profileMenuItemsRender()}</Menu>
+        </Col>
+        <Col className="p-3 border-t border-gray-200 hover:bg-gray-100" span={24}>
+          <Typography.Link onClick={() => Auth.signOut()}>
+            <LogoutOutlined className="align-text-middle" /> Thoát
+          </Typography.Link>
+        </Col>
+      </Row>
+    )
+  }
+
+  const InformationRender = () => {
+    const data = [
+      'Racing car sprays burning fuel into crowd.',
+      'Japanese princess to wed commoner.',
+      'Australian walks 100km after outback crash.',
+      'Man charged over missing wedding girl.',
+      'Los Angeles battles huge wildfires.',
+    ]
+
+    return (
+      <Popover
+        trigger="click"
+        overlayClassName="tt-popover"
+        placement="bottom"
+        getPopupContainer={() => Helper.getContainer()}
+        content={
+          <List
+            bordered
+            header={<div>Header</div>}
+            footer={<div>Footer</div>}
+            dataSource={data}
+            renderItem={item => (
+              <List.Item>
+                <Typography.Text mark>[ITEM]</Typography.Text> {item}
+              </List.Item>
+            )}
+          />
+        }
+      >
+        <Badge overflowCount={9} count={9}>
+          <Typography.Link id="badge-information">
+            <InfoCircleFilled className="text-lg" />
+          </Typography.Link>
+        </Badge>
+      </Popover>
+    )
+  }
+
+  const AuthenticatedRender = () => {
+    return isAuthenticated ? (
+      <>
+        <Badge overflowCount={9} count={9}>
+          <BellOutlined className="text-lg" />
+        </Badge>
+        <Tooltip
+          placement="bottomRight"
+          align={{
+            offset: [20, 11],
+          }}
+          title="Đăng ký gửi"
+          arrowPointAtCenter={true}
+        >
+          <Typography.Link type="secondary">
+            <EditOutlined className="text-lg" />
+          </Typography.Link>
+        </Tooltip>
+        <Popover
+          visible={PopoverProfile}
+          onVisibleChange={handleVisibleChange}
+          overlayClassName={`popover--profile`}
+          trigger="click"
+          arrowPointAtCenter={true}
+          content={profileMenus()}
+          destroyTooltipOnHide
+          placement="topRight"
+          align={{
+            offset: [20, 11],
+          }}
+          getPopupContainer={() => Helper.getContainer()}
+        >
+          <Typography.Link
+            className="block"
+            onClick={() => setIsPopoverProfile(true)}
+            type="secondary"
+          >
+            <Avatar src={profile.avatar} icon={<UserOutlined id="fdfdf" />} />
+          </Typography.Link>
+        </Popover>
+      </>
+    ) : (
+      <Link href="/reg">Đăng ký/Đăng nhập</Link>
+    )
   }
 
   return (
     <Layout className="app-layout base-layout">
-      <Layout.Header id="header">
-        <Row justify="space-around">
-          <Col xs={24} sm={24} xxl={14} xl={14} lg={17} md={17}>
+      <Layout.Header className="px-4" id="header">
+        <Row gutter={[0, 0]} justify="center">
+          <Col xs={24} sm={24} xxl={15} xl={15} lg={18} md={18}>
             <Row justify="space-between">
-              <Col xxl={4} xl={5} lg={6} md={6} xs={20} sm={20}>
+              <Col xs={4} sm={4} xxl={9} xl={9} lg={9} md={9}>
                 <Typography.Title className="h-full">
                   <a href="/" className="align-middle inline-block" style={{ height: 32 }}>
                     <Image src="/logo/logo_pc1.png" width={32} height={32} />
                   </a>
                 </Typography.Title>
               </Col>
-              <Col className="menu-row" xs={4} sm={4} xxl={20} xl={19} lg={18} md={18}>
-                <Row justify="end">
-                  <Col span={24}>
+              <Col className="menu-row text-right" xs={20} sm={20} xxl={15} xl={15} lg={15} md={15}>
+                <Row gutter={[0, 0]} justify="space-around">
+                  <Col xs={0} sm={0} xxl={16} xl={16} lg={16} md={16}>
                     <Menu
                       overflowedIndicator={<MenuOutlined />}
                       className="text-right"
-                      onClick={menuHandle}
                       id="nav"
                       direction="ltr"
                       mode="horizontal"
@@ -46,36 +222,14 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({ isAuthenticated, childre
                       <Menu.Item key="buy">
                         <Link href="/buy"> Bán</Link>
                       </Menu.Item>
-                      <Menu.Item key="cccccc">
-                        {isAuthenticated ? (
-                          <Space>
-                            <Typography.Link>
-                              <Link href="/profile">
-                                <Avatar icon={<UserOutlined />} />
-                              </Link>
-                            </Typography.Link>
-                            <Typography.Link onClick={() => Auth.signOut()}>Thoát</Typography.Link>
-                          </Space>
-                        ) : (
-                          <Link href="/reg">Đăng ký/Đăng nhập</Link>
-                        )}
-                      </Menu.Item>
                     </Menu>
                   </Col>
-                  {/* <Col span={4}>
-                    {isAuthenticated ? (
-                      <Space>
-                        <Typography.Link>
-                          <Link href="/profile">
-                            <Avatar icon={<UserOutlined />} />
-                          </Link>
-                        </Typography.Link>
-                        <Typography.Link onClick={() => Auth.signOut()}>Thoát</Typography.Link>
-                      </Space>
-                    ) : (
-                      <Link href="/reg">Đăng ký/Đăng nhập</Link>
-                    )}
-                  </Col> */}
+                  <Col xs={24} sm={24} xxl={8} xl={8} lg={8} md={8}>
+                    <Space size="middle">
+                      {InformationRender()}
+                      {AuthenticatedRender()}
+                    </Space>
+                  </Col>
                 </Row>
               </Col>
             </Row>

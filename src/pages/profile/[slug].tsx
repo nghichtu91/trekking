@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { Typography, List, Row, Col, Button } from 'antd'
 import { Context } from '@shared/infra/context/gobalContext'
+import { useDispatch } from '@shared/infra/hooks/useDispatch'
 const data = [
   'Racing car sprays burning fuel into crowd.',
   'Japanese princess to wed commoner.',
@@ -10,16 +11,29 @@ const data = [
 ]
 
 const Profile = () => {
-  const { profile, dispatch } = useContext(Context)
-  console.log(profile)
+  const { profile } = useContext(Context)
+  const dispatch = useDispatch()
+
   return (
     <Row justify="center">
-      <Button onClick={() => dispatch({ type: 'CLOSE_MENU1111' })}> dsd </Button>
+      <Button
+        onClick={() =>
+          dispatch({
+            type: 'profile_update',
+            payload: {
+              fullName: 'Lê Nhật Thành',
+              maill: 'nhatthanh5891@gmail.com',
+            },
+          })
+        }
+      >
+        Test button
+      </Button>
       <Col sm={24} md={15} xl={20} xxl={10}>
         <List
           header={
             <div>
-              <Typography.Title level={4}> Thanhffs Brief </Typography.Title>
+              <Typography.Title level={4}> {profile.fullName} Brief </Typography.Title>
             </div>
           }
           footer={null}
