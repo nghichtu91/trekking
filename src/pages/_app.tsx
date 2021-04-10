@@ -7,6 +7,7 @@
 import 'antd/dist/antd.css'
 import 'tailwindcss/tailwind.css'
 import '@shared/layout/baseLayout.css'
+import 'nprogress/nprogress.css'
 import '@shared/components/button/styles/LoadMoreButton.css'
 // #endregion
 // #region  import package
@@ -14,9 +15,10 @@ import Router from 'next/router'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { appWithTranslation } from 'next-i18next'
+import NProgress from 'nprogress'
 //#endregion
 // #region  import global
-import { BaseLayout } from '@shared/layout/baseLayout'
+import { BaseLayout } from '@shared/layout/BaseLayout'
 import '@shared/infra/services/awsServices'
 import nextI18NextConfig from '../../next-i18next.config.js'
 import { ContextProvider } from '@shared/infra/context/gobalContext'
@@ -27,10 +29,10 @@ import { ContextProvider } from '@shared/infra/context/gobalContext'
 // listing router loading
 Router.events.on('routeChangeStart', url => {
   console.log(`Loading: ${url}`)
-  // NProgress.start()
+  NProgress.start()
 })
-// Router.events.on('routeChangeComplete', () => NProgress.done())
-// Router.events.on('routeChangeError', () => NProgress.done())
+Router.events.on('routeChangeComplete', () => NProgress.done())
+Router.events.on('routeChangeError', () => NProgress.done())
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

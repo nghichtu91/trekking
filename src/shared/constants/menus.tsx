@@ -6,6 +6,7 @@ import {
   QuestionCircleOutlined,
 } from '@ant-design/icons'
 import { Routers } from './routers'
+
 export interface IProfileMenus {
   key: string
   title?: string | React.ReactNode
@@ -45,5 +46,20 @@ export const ProfileMenus: IProfileMenus[] = [
     icon: <QuestionCircleOutlined className="align-text-top" />,
     uri: '#',
     title: 'Hỗ trợ',
+  },
+]
+
+export const MainMenus: IProfileMenus[] = [
+  {
+    key: 'main--menu-home',
+    // icon: <ProfileOutlined className="align-text-top" />,
+    uri: Routers.HomePage,
+    title: 'Trang chủ',
+  },
+  {
+    key: 'main--menu-sell',
+    // icon: <ContainerOutlined className="align-text-top" />,
+    uri: Routers.SellPage,
+    title: 'Mua',
   },
 ]

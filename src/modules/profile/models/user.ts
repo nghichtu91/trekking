@@ -11,4 +11,5 @@ export interface IUser {
   avatar?: string
   name?: string
   identified?: boolean
+  address?: string
 }
