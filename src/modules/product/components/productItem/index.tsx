@@ -1,3 +1,3 @@
-import { ProductItem } from "./components/ProductItem";
+import { ProductItem } from './components/ProductItem'
 
-export { ProductItem };
+export { ProductItem }

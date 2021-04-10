@@ -1,25 +1,20 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-trekking-dev-05915-authRole",
-      "UnauthRoleArn": "arn:aws:iam::075497711430:role/amplify-trekking-dev-05915-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::075497711430:role/amplify-trekking-dev-05915-authRole",
+      "AuthRoleName": "amplify-trekking-dev-112657-authRole",
+      "UnauthRoleArn": "arn:aws:iam::212277315627:role/amplify-trekking-dev-112657-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::212277315627:role/amplify-trekking-dev-112657-authRole",
       "Region": "ap-southeast-1",
-      "DeploymentBucketName": "amplify-trekking-dev-05915-deployment",
-      "UnauthRoleName": "amplify-trekking-dev-05915-unauthRole",
-      "StackName": "amplify-trekking-dev-05915",
-      "StackId": "arn:aws:cloudformation:ap-southeast-1:075497711430:stack/amplify-trekking-dev-05915/2e0a2450-7960-11eb-802e-0aabc55731ec",
-      "AmplifyAppId": "d3azvcgpbg2boe"
+      "DeploymentBucketName": "amplify-trekking-dev-112657-deployment",
+      "UnauthRoleName": "amplify-trekking-dev-112657-unauthRole",
+      "StackName": "amplify-trekking-dev-112657",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:212277315627:stack/amplify-trekking-dev-112657/b0e853b0-825c-11eb-812a-0ad6379c6aaa",
+      "AmplifyAppId": "d37aipbpk472gv"
     },
     "categories": {
-      "function": {
-        "trekkingfae27ca0fae27ca0PreTokenGeneration": {
-          "deploymentBucketName": "amplify-trekking-dev-05915-deployment",
-          "s3Key": "amplify-builds/trekkingfae27ca0fae27ca0PreTokenGeneration-744d7a4e3578656e666f-build.zip"
-        }
-      },
       "auth": {
-        "trekking": {}
+        "trekkingd0cda650d0cda650": {},
+        "userPoolGroups": {}
       }
     }
   }

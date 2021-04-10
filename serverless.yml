@@ -1,12 +1,15 @@
 app: leonuiapp
-stage: "staging"
+stage: "test"
 leonuiapp:
   component: "@sls-next/serverless-component@1.19.0-alpha.35"
   inputs:
+    timeout: 30
+    build:
+      postBuildCommands: ["node post-build.js"]
     # bucketName: "${stage}-${app}"
     # bucketRegion: ap-southeast-1
-    deploy: false
+    # deploy: false
     domain: "leonui.app"
-    publicDirectoryCache:
-      value: public, max-age=604800
-      test: /\.(gif|jpe?g|png|txt|xml)$/i
+    # publicDirectoryCache:
+    #   value: public, max-age=604800
+    #   test: /\.(gif|jpe?g|png|txt|xml)$/i

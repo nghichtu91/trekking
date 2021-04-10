@@ -1,23 +1,27 @@
 {
-  "function": {
-    "trekkingfae27ca0fae27ca0PreTokenGeneration": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
   "auth": {
-    "trekking": {
+    "userPoolGroups": {
+      "service": "Cognito-UserPool-Groups",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "trekkingd0cda650d0cda650",
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ]
+        }
+      ]
+    },
+    "trekkingd0cda650d0cda650": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false
     }
   },
-  "storage": {
-    "s36e41cad7": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation"
-    }
-  }
+  "function": {}
 }

@@ -1,0 +1,26 @@
+name: Deploy test leonui.app
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths-ignore:
+      - '**.md'
+jobs:
+  build:
+    name: build 
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest]
+      fail-fast: false
+    runs-on: ${{ matrix.runs-on }}
+    steps:
+    - name: Set Node.js 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - run: npm install -g yarn
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install yarn dependencies
+      run: yarn install --frozen-lockfile

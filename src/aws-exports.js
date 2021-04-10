@@ -3,12 +3,12 @@
 
 const awsmobile = {
     "aws_project_region": "ap-southeast-1",
-    "aws_cognito_identity_pool_id": "ap-southeast-1:19d01e3c-f689-4ca1-9a55-9f3ebf4d1e2e",
+    "aws_cognito_identity_pool_id": "ap-southeast-1:11fcf8f6-36ba-4191-8d93-16a787b67beb",
     "aws_cognito_region": "ap-southeast-1",
-    "aws_user_pools_id": "ap-southeast-1_Mb5tQC4f5",
-    "aws_user_pools_web_client_id": "28343nqae5fv63ti9fcdjnvvft",
+    "aws_user_pools_id": "ap-southeast-1_X3xMscZcu",
+    "aws_user_pools_web_client_id": "1c72aun8uj48g017dtp94u6nss",
     "oauth": {
-        "domain": "tt0l03fwiugb-dev.auth.ap-southeast-1.amazoncognito.com",
+        "domain": "trekkingd0cda650-d0cda650-dev.auth.ap-southeast-1.amazoncognito.com",
         "scope": [
             "phone",
             "email",
@@ -20,9 +20,7 @@ const awsmobile = {
         "redirectSignOut": "http://localhost:3000/",
         "responseType": "code"
     },
-    "federationTarget": "COGNITO_USER_POOLS",
-    "aws_user_files_s3_bucket": "trekkingdc9a24046fa34230bb60c2296f74075605915-dev",
-    "aws_user_files_s3_bucket_region": "ap-southeast-1"
+    "federationTarget": "COGNITO_USER_POOLS"
 };
 
 

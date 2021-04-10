@@ -26,7 +26,7 @@
 }
 #header .menu-row>* {
   flex: none;
-  margin: 0 16px 0 0;
+  /* margin: 0 16px 0 0; */
 }
 .main-container,
 .main-wrapper {
@@ -36,4 +36,22 @@
   padding-right: 10px;
   padding-top: 30px;
   padding-bottom: 30px;
+}
+
+.popover--profile {
+  min-width: 250px;
+  max-width: 300px;
+}
+.popover--profile .ant-popover-content .ant-popover-inner-content {
+  padding: 0 !important;
+}
+
+.tt-popover .ant-popover-content .ant-popover-inner-content {
+  padding: 0 !important;
+}
+
+@media screen and (max-width: 480px) {
+  .tt-popover {
+    width: 100%!important;
+  }
 }
