@@ -1,5 +1,5 @@
 app: leonuiapp
-stage: "staging"
+stage: "test"
 leonuiapp:
   component: "@sls-next/serverless-component@1.19.0-alpha.35"
   inputs:
