@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import { Typography, Row, Col, Collapse, Space, Form, Input, Button, Card } from 'antd'
+import { Typography, Row, Col, Collapse, Space, Form, Input, Button } from 'antd'
 import { Context } from '@shared/infra/context/gobalContext'
 import {
   BankOutlined,
