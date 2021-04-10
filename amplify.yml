@@ -9,8 +9,8 @@ frontend:
   phases:
     preBuild:
       commands:
-        - yarn ci
-        - yarn global -g serverless
+        - npm ci
+        - npm i -g serverless
     build:
       commands:
         - serverless
