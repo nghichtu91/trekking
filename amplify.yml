@@ -9,7 +9,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - yarn ci
+        # - yarn add ci
         - yarn global add serverless
     build:
       commands:
