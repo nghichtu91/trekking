@@ -8,8 +8,6 @@ import { Layout } from 'antd'
 //#region  components
 import { Header } from './Header'
 //#endregion
-//#region  Constants
-//#endregion
 
 interface BaseLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
   isAuthenticated?: boolean

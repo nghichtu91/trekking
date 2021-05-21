@@ -4,7 +4,7 @@
  *
  */
 
-import { Auth } from 'aws-amplify'
+import { Auth, Storage } from 'aws-amplify'
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth/lib/types'
 
 interface IAuthService {
@@ -49,11 +49,29 @@ export class AuthService implements IAuthService {
 
   async signIn(username: string, password: string): Promise<boolean> {
     try {
-      const user = await Auth.signIn(username, password)
-      console.log(user)
+      await Auth.signIn(username, password)
       return Promise.resolve(true)
     } catch (error) {
       console.log('error signing in', error)
+    }
+  }
+
+  async updateUserAttributes(attributes: Record<string, unknown>): Promise<boolean> {
+    try {
+      const user = await Auth.currentAuthenticatedUser()
+      await Auth.updateUserAttributes(user, attributes)
+      return Promise.resolve(true)
+    } catch (error) {
+      return Promise.resolve(false)
+    }
+  }
+
+  async uploadAvatar(fileUpload: File): Promise<boolean | string | unknown> {
+    try {
+      const avatar = await Storage.put(fileUpload.name, fileUpload)
+      return Promise.resolve(avatar['key'])
+    } catch (error) {
+      return Promise.resolve(false)
     }
   }
 }

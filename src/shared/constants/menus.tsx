@@ -4,6 +4,7 @@ import {
   ContainerOutlined,
   HistoryOutlined,
   QuestionCircleOutlined,
+  BankFilled,
 } from '@ant-design/icons'
 import { Routers } from './routers'
 
@@ -34,6 +35,12 @@ export const ProfileMenus: IProfileMenus[] = [
     icon: <HistoryOutlined className="align-text-top" />,
     uri: '#',
     title: 'Lịch sử giao dịch',
+  },
+  {
+    key: 'popover-profile--menu-bankings',
+    icon: <BankFilled className="align-text-top" />,
+    uri: Routers.BankingsPage,
+    title: 'Phương thức thanh toán',
   },
   {
     key: 'popover-profile--menu-settings',

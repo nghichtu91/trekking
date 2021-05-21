@@ -6,7 +6,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "trekkingd0cda650d0cda650",
+          "resourceName": "trekking73950f9273950f92",
           "attributes": [
             "UserPoolId",
             "AppClientIDWeb",
@@ -16,12 +16,18 @@
         }
       ]
     },
-    "trekkingd0cda650d0cda650": {
+    "trekking73950f9273950f92": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false
     }
   },
-  "function": {}
+  "function": {},
+  "storage": {
+    "s381a6f277": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  }
 }

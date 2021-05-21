@@ -10,7 +10,7 @@ const withPlugins = require('next-compose-plugins')
 // const clone = require('clone')
 const path = require('path')
 module.exports = withPlugins([[withBundleAnalyzer]], {
-  target: 'serverless',
+  // target: 'serverless',
   i18n: {
     defaultNS: 'common',
     defaultLocale: 'vi',

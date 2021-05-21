@@ -16,12 +16,13 @@ import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { appWithTranslation } from 'next-i18next'
 import NProgress from 'nprogress'
+import { ConfigProvider } from 'antd'
 //#endregion
 // #region  import global
-import { BaseLayout } from '@shared/layout/BaseLayout'
+import { BaseLayout } from '@shared/layout/baseLayout'
 import '@shared/infra/services/awsServices'
-import nextI18NextConfig from '../../next-i18next.config.js'
 import { ContextProvider } from '@shared/infra/context/gobalContext'
+import { defaultValidateMessages } from '@shared/constants/messages'
 // import { UseAws } from '@modules/profile/hooks/useAuthe'
 
 // #endregion
@@ -43,13 +44,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <ContextProvider>
-        <BaseLayout>
-          <Component {...pageProps} />
-        </BaseLayout>
+        <ConfigProvider form={{ validateMessages: defaultValidateMessages }}>
+          <BaseLayout>
+            <Component {...pageProps} />
+          </BaseLayout>
+        </ConfigProvider>
       </ContextProvider>
       <div id="popup"> </div>
     </>
   )
 }
 
-export default appWithTranslation(MyApp, nextI18NextConfig)
+export default appWithTranslation(MyApp)
