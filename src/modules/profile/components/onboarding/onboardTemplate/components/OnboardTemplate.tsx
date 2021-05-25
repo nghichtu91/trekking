@@ -8,7 +8,8 @@ import {
   LockOutlined,
   FacebookFilled,
   GoogleCircleFilled,
-  PhoneFilled,
+  PhoneOutlined,
+  MailOutlined,
 } from '@ant-design/icons'
 import { Row, Col, Divider, Button, Typography, Space, Card, Form, Input } from 'antd'
 type TemplateType = 'login' | 'signup'
@@ -50,7 +51,7 @@ const OnboardTemplate: React.FC<OnboardTemplateProps> = () => {
               Google
             </Button>
           </Space>
-          <Divider plain>hoặc bằng email</Divider>
+          <Divider plain>Hoặc</Divider>
           <Form
             autoComplete="false"
             className="signin-form"
@@ -60,23 +61,26 @@ const OnboardTemplate: React.FC<OnboardTemplateProps> = () => {
           >
             <Form.Item name="email">
               <Input
+                allowClear
                 id="signin-email"
                 prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Tên đăng nhập hoặc email"
+                placeholder="Số điện thoại hoặc email"
               />
             </Form.Item>
-            <Form.Item>
-              <Form.Item noStyle name="password">
-                <Input.Password
-                  autoComplete="false"
-                  id="signin-password"
-                  prefix={<LockOutlined className="site-form-item-icon" />}
-                  placeholder="Mật khẩu"
-                />
-              </Form.Item>
-              <a className="login-form-forgot" href="">
-                Quên mật khẩu
-              </a>
+            <Form.Item
+              extra={
+                <a className="login-form-forgot" href="">
+                  Quên mật khẩu
+                </a>
+              }
+            >
+              <Input.Password
+                allowClear
+                autoComplete="false"
+                id="signin-password"
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                placeholder="Mật khẩu"
+              />
             </Form.Item>
             <Form.Item noStyle>
               <Button size="large" type="primary" style={{ width: '100%' }}>
@@ -97,15 +101,16 @@ const OnboardTemplate: React.FC<OnboardTemplateProps> = () => {
           <Form className="signup-form" slot="signup-form" hidden={!isSignUp} size="large">
             <Form.Item id="add-email" name="email">
               <Input
+                type="email"
                 id="signup-email"
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Tên đăng nhập hoặc email"
+                prefix={<MailOutlined className="site-form-item-icon" />}
+                placeholder="Nhập email"
               />
             </Form.Item>
             <Form.Item name="phone">
               <Input
-                prefix={<PhoneFilled className="site-form-item-icon" />}
-                placeholder="Số điện thoại"
+                prefix={<PhoneOutlined className="site-form-item-icon" />}
+                placeholder="Nhập số điện thoại"
               />
             </Form.Item>
             <Form.Item>

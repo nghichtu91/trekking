@@ -18,5 +18,26 @@
     "errros": {
       "patternMismatch":"Wrong"
     }
+  },
+  "authentication": {
+    "signUp": {
+      "titleHeader": "Signin to abc",
+      "email": "Email",
+      "emailPlaceholder": "Please enter your email",
+      "emailExist": "Email đã được sử dụng",
+      "phone":"Số điện thoại",
+      "phonePlaceholder": "Nhập số điện thoại",
+      "phoneNotValid":"Số điện thoại không đúng",
+      "phoneExist":"Số điện đã được sử dụng",
+      "password": "Mật khẩu",
+      "passwordPlaceholder": "Nhập mật khẩu",
+      "rePassword": "Xác nhận mật khẩu",
+      "rePasswordPlaceholder": "Nhập lại mật khẩu",
+      "rePasswordNotValid": "Xác nhận mật khẩu và mật khẩu không giống",
+      "textSignIn": "Đăng nhập",
+      "textSignUp": "Đăng ký",
+      "textYouHaveAccount": "Bạn đã có tài khoản?"
+    },
+    "signIn": {}
   }
 }

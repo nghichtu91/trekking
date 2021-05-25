@@ -20,5 +20,26 @@
     "errros": {
       "patternMismatch":"Có ký tự không được phép nhập"
     }
+  },
+  "authentication": {
+    "signUp": {
+      "titleHeader": "Đăng ký",
+      "email": "Email",
+      "emailPlaceholder": "Nhập email",
+      "emailExist": "Email đã được sử dụng",
+      "phone":"số điện thoại",
+      "phonePlaceholder": "Nhập số điện thoại",
+      "phoneExist":"Số điện đã được sử dụng",
+      "phoneNotValid":"Số điện thoại không đúng",
+      "password": "mật khẩu",
+      "passwordPlaceholder": "Nhập mật khẩu",
+      "rePassword": "Nhập lại mật khẩu",
+      "rePasswordPlaceholder": "Xác nhập mật khẩu",
+      "rePasswordNotValid": "Xác nhận mật khẩu và mật khẩu không giống",
+      "textSignIn": "Đăng nhập",
+      "textSignUp": "Đăng ký",
+      "textYouHaveAccount": "Bạn đã có tài khoản?"
+    },
+    "signIn": {}
   }
 }

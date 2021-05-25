@@ -2,7 +2,7 @@ const typeTemplate = '${label} is not a valid ${type}'
 
 export const defaultValidateMessages = {
   default: 'Validation error on field ${label}',
-  required: '${label} vui lòng nhập',
+  required: 'Vui lòng nhập ${label}',
   enum: '${label} must be one of [${enum}]',
   whitespace: '${label} cannot be empty',
   date: {
