@@ -1,23 +1,23 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Parameters": {
-        "authtrekkingd0cda650d0cda650UserPoolId": {
+        "authtrekking73950f9273950f92UserPoolId": {
             "Type": "String",
-            "Default": "authtrekkingd0cda650d0cda650UserPoolId"
+            "Default": "authtrekking73950f9273950f92UserPoolId"
         },
         
-        "authtrekkingd0cda650d0cda650IdentityPoolId": {
+        "authtrekking73950f9273950f92IdentityPoolId": {
             "Type": "String",
-            "Default": "authtrekkingd0cda650d0cda650IdentityPoolId"
+            "Default": "authtrekking73950f9273950f92IdentityPoolId"
         },
         
-        "authtrekkingd0cda650d0cda650AppClientID": {
+        "authtrekking73950f9273950f92AppClientID": {
             "Type": "String",
-            "Default": "authtrekkingd0cda650d0cda650AppClientID"
+            "Default": "authtrekking73950f9273950f92AppClientID"
         },
-        "authtrekkingd0cda650d0cda650AppClientIDWeb": {
+        "authtrekking73950f9273950f92AppClientIDWeb": {
             "Type": "String",
-            "Default": "authtrekkingd0cda650d0cda650AppClientIDWeb"
+            "Default": "authtrekking73950f9273950f92AppClientIDWeb"
         },
         "AuthRoleArn": {
             "Type": "String"
@@ -41,26 +41,26 @@
     },
     "Resources": {
     
-        "trekleonuiGroup": {
+        "rokGroup": {
           "Type" : "AWS::Cognito::UserPoolGroup",
           "Properties" : {
-              "GroupName" : "trekleonui",
+              "GroupName" : "rok",
               "Precedence" : 1,
               
               "RoleArn" : {
                 "Fn::GetAtt": [
-                    "trekleonuiGroupRole",
+                    "rokGroupRole",
                     "Arn"
                 ]
               },
               
               "UserPoolId" : {
-                "Ref": "authtrekkingd0cda650d0cda650UserPoolId"
+                "Ref": "authtrekking73950f9273950f92UserPoolId"
               }
             }
         },
         
-        "trekleonuiGroupRole": {
+        "rokGroupRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
                 "RoleName":{
@@ -68,9 +68,9 @@
                         "",
                         [
                           {
-                            "Ref": "authtrekkingd0cda650d0cda650UserPoolId"
+                            "Ref": "authtrekking73950f9273950f92UserPoolId"
                           },
-                          "-trekleonuiGroupRole"
+                          "-rokGroupRole"
                         ]
                     ]
                 },
@@ -85,7 +85,7 @@
                             },
                             "Action": "sts:AssumeRoleWithWebIdentity",
                             "Condition": {
-                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authtrekkingd0cda650d0cda650IdentityPoolId"}},
+                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authtrekking73950f9273950f92IdentityPoolId"}},
                               "ForAnyValue:StringLike": {"cognito-identity.amazonaws.com:amr": "authenticated"}
                             }
                         }
@@ -111,7 +111,7 @@
                                 "",
                                 [
 
-                                  "trekkingd0cda650d0cda650",
+                                  "trekking73950f9273950f92",
                                   "-ExecutionRole-",
                                   {
                                     "Ref": "env"
@@ -270,16 +270,16 @@
                     "Ref": "UnauthRoleArn"
                 },
                 "identityPoolId": {
-                    "Ref": "authtrekkingd0cda650d0cda650IdentityPoolId"
+                    "Ref": "authtrekking73950f9273950f92IdentityPoolId"
                 },
                 "userPoolId": {
-                    "Ref": "authtrekkingd0cda650d0cda650UserPoolId"
+                    "Ref": "authtrekking73950f9273950f92UserPoolId"
                 },
                 "appClientIDWeb": {
-                    "Ref": "authtrekkingd0cda650d0cda650AppClientIDWeb"
+                    "Ref": "authtrekking73950f9273950f92AppClientIDWeb"
                 },
                 "appClientID": {
-                    "Ref": "authtrekkingd0cda650d0cda650AppClientID"
+                    "Ref": "authtrekking73950f9273950f92AppClientID"
                 },
                 "region": {
                     "Ref": "AWS::Region"
@@ -295,10 +295,10 @@
     
     "Outputs": {
       
-        "trekleonuiGroupRole": {
+        "rokGroupRole": {
             "Value": {
                 "Fn::GetAtt": [
-                    "trekleonuiGroupRole",
+                    "rokGroupRole",
                     "Arn"
                 ]
             }

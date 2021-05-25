@@ -53,7 +53,7 @@ export const Header: React.FC<HeaderProps> = props => {
   const router = useRouter()
   const [PopoverProfile, setIsPopoverProfile] = useState<boolean>(false)
 
-  const logoDom = () => {
+  const logoSite = () => {
     const logo = !props.logoDom ? LOGO_SITE : props.logoDom
     if (typeof logo === 'string') {
       return (
@@ -84,6 +84,13 @@ export const Header: React.FC<HeaderProps> = props => {
     setIsPopoverProfile(visible)
   }
 
+  const popoverProfileShow = () => setIsPopoverProfile(true)
+
+  const signOutHandle = () => {
+    Auth.signOut()
+    setIsPopoverProfile(false)
+  }
+
   const profileMenus = () => {
     return (
       <Row className="" justify="space-between" gutter={[0, 0]}>
@@ -107,7 +114,7 @@ export const Header: React.FC<HeaderProps> = props => {
           <BaseMenu onMenuclick={profileMenuHandle} className="border-0" items={ProfileMenus} />
         </Col>
         <Col className="p-3 border-t border-gray-200 hover:bg-gray-100" span={24}>
-          <Typography.Link onClick={() => Auth.signOut()}>
+          <Typography.Link onClick={signOutHandle}>
             <LogoutOutlined className="align-text-middle" /> Thoát
           </Typography.Link>
         </Col>
@@ -185,11 +192,7 @@ export const Header: React.FC<HeaderProps> = props => {
           }}
           getPopupContainer={() => Helper.getContainer()}
         >
-          <Typography.Link
-            className="block"
-            onClick={() => setIsPopoverProfile(true)}
-            type="secondary"
-          >
+          <Typography.Link className="block" onClick={popoverProfileShow} type="secondary">
             <Avatar src={profile.avatar} icon={<UserOutlined id="fdfdf" />} />
           </Typography.Link>
         </Popover>
@@ -239,7 +242,7 @@ export const Header: React.FC<HeaderProps> = props => {
         <Col xs={24} sm={24} xxl={15} xl={15} lg={18} md={18}>
           <Row justify="space-between">
             <Col xs={4} sm={4} xxl={9} xl={9} lg={9} md={9}>
-              {logoDom()}
+              {logoSite()}
             </Col>
             {rightComponentRender()}
           </Row>

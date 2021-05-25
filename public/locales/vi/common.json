@@ -1,8 +1,45 @@
 {
-  "h1": "A simple example",
-  "change-locale": "Change locale",
-  "to-second-page": "To second page",
-  "error-with-status": "A {{statusCode}} error occurred on server",
-  "error-without-status": "An error occurred on the server",
-  "auth-sigin-text": "Đăng nhập"
+  "updateProfile": {
+    "titleHeader": "Cài đặt tài khoản chung",
+    "fullName": "Họ và tên",
+    "fullNameEnterNotValid":"Họ và tên bạn nhập phải từ 3 kí tự trở lên.",
+    "email": "Email",
+    "emailExist": "Email đã được sử dụng",
+    "address": "Địa chỉ",
+    "addressEnterNotValid": "Địa chỉ bạn nhập không hợp lệ",
+    "personId": "CMND/CCCD",
+    "phone":"Số điện thoại",
+    "textBtnChangeAvatar": "Thay đổi",
+    "textBtnCancel": "Huỷ bỏ",
+    "textBtnUpdate": "Cập nhật",
+    "buttons": {
+      "changeAvatar": "Thay đổi",
+      "cancel": "Huỷ bỏ",
+      "update": "Cập nhật"
+    },
+    "errros": {
+      "patternMismatch":"Có ký tự không được phép nhập"
+    }
+  },
+  "authentication": {
+    "signUp": {
+      "titleHeader": "Đăng ký",
+      "email": "Email",
+      "emailPlaceholder": "Nhập email",
+      "emailExist": "Email đã được sử dụng",
+      "phone":"số điện thoại",
+      "phonePlaceholder": "Nhập số điện thoại",
+      "phoneExist":"Số điện đã được sử dụng",
+      "phoneNotValid":"Số điện thoại không đúng",
+      "password": "mật khẩu",
+      "passwordPlaceholder": "Nhập mật khẩu",
+      "rePassword": "Nhập lại mật khẩu",
+      "rePasswordPlaceholder": "Xác nhập mật khẩu",
+      "rePasswordNotValid": "Xác nhận mật khẩu và mật khẩu không giống",
+      "textSignIn": "Đăng nhập",
+      "textSignUp": "Đăng ký",
+      "textYouHaveAccount": "Bạn đã có tài khoản?"
+    },
+    "signIn": {}
+  }
 }

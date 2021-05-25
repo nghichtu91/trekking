@@ -2,6 +2,7 @@ import { List, Row, Col } from 'antd'
 import { Products } from '@modules/product/faker/products'
 import { ProductItem } from '@modules/product/components/productItem'
 import { LoadMoreButton } from '@shared/components/button'
+
 const App = () => {
   // const router = useRouter();
   // const { locale, locales, defaultLocale } = router;

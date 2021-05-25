@@ -17,13 +17,16 @@ export const UseAws = () => {
 
   const authListener = async () => {
     try {
-      const user = await Auth.currentAuthenticatedUser()
-      const userAttibutes: UserAttributesDTO = user.attributes
+      const userInfo = await Auth.currentUserInfo()
+      const userAttibutes: UserAttributesDTO = userInfo.attributes
       const userPlayload: IUser = {
         fullName: userAttibutes.name,
         email: userAttibutes.email,
-        userId: user.getUsername(),
+        userId: userInfo.id,
         avatar: userAttibutes.picture,
+        username: userInfo.username,
+        address: userAttibutes.address,
+        phoneNumber: userAttibutes.phone_number,
       }
       updateProfile(userPlayload)
       setIsAuthenticated(true)
