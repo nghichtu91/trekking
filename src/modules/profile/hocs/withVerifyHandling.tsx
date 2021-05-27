@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify'
 import { useRouter } from 'next/router'
 import { Routers } from '@shared/constants/routers'
 import { authService } from '@modules/profile/services'
-import { Form, notification } from 'antd'
+import { Form } from 'antd'
 import { FormInstance } from 'antd/lib/form'
 import { useTranslation } from 'next-i18next'
 import { AuthError } from '@aws-amplify/auth/lib/Errors'
@@ -23,6 +23,7 @@ export interface IForumOperations {
   formLoading?: boolean
   isUpdated?: boolean
   form?: FormInstance
+  errors?: string[]
 }
 
 export function withVerifyHandling<P extends IForumOperations>(
@@ -31,8 +32,9 @@ export function withVerifyHandling<P extends IForumOperations>(
   const ComponentWithExtraInfo = (props: P) => {
     const [isFormLoading, setIsFormLoading] = useState(false)
     const router = useRouter()
-    const [signUpForm] = Form.useForm()
+    const [verifyForm] = Form.useForm()
     const { t } = useTranslation()
+    const [verifyErrors, setVerifyErrors] = useState<string[]>([])
 
     useEffect(() => {
       isCheckoutUser()
@@ -53,32 +55,52 @@ export function withVerifyHandling<P extends IForumOperations>(
         return false
       }
       try {
-        authService.confirmAaccount('thanh2@yopmail.com', verifyParams.pin)
+        const username = router.query['username'] as string
+        await authService.confirmAaccount(username, verifyParams.pin)
         afterVerifySuccess(verifyParams)
       } catch (error) {
-        console.log(error)
         afterVerifyFailure(error)
       }
     }
 
     const afterVerifySuccess = (verifyParams: VerifyParams) => {
       console.log(verifyParams)
-      notification.success({
-        message: 'ABBB',
-        description: 'dsdsds',
-        placement: 'bottomRight',
-      })
     }
 
     const afterVerifyFailure = (error: SignUpError) => {
-      console.log(error)
+      switch (error.code) {
+        case 'NotAuthorizedException':
+          {
+            // verifyForm.setFields([
+            //   {
+            //     name: 'pin',
+            //     errors: ['Tài khoản đã được kích hoạt'],
+            //   },
+            // ])
+            setVerifyErrors(['Tài khoản đã được kích hoạt'])
+          }
+          break
+        case 'UserNotFoundException':
+          {
+            // verifyForm.setFields([
+            //   {
+            //     name: 'pin',
+            //     errors: ['Email hoặc số điện thoại không tồn tại'],
+            //   },
+            // ])
+            setVerifyErrors(['Email hoặc số điện thoại không tồn tại'])
+          }
+          break
+        default:
+      }
     }
 
     return (
       <WrappedComponent
         formLoading={isFormLoading}
         handleVerify={handleVerify}
-        form={signUpForm}
+        form={verifyForm}
+        errors={verifyErrors}
         {...props}
       />
     )

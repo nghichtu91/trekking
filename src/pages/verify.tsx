@@ -10,7 +10,7 @@ import { Typography, Card, Form } from 'antd'
 import { Trans } from 'next-i18next'
 import { Verify } from '@modules/profile/components/Authentication'
 
-const VerifyPage: React.FC<IForumOperations> = ({ handleVerify, handleReSendOtp }) => {
+const VerifyPage: React.FC<IForumOperations> = ({ handleVerify, handleReSendOtp, form }) => {
   return (
     <PageWrapper>
       <Card>
@@ -32,7 +32,7 @@ const VerifyPage: React.FC<IForumOperations> = ({ handleVerify, handleReSendOtp 
           </Typography>
         </Form.Item>
 
-        <Verify send={handleVerify} reSend={handleReSendOtp} />
+        <Verify form={form} send={handleVerify} reSend={handleReSendOtp} />
       </Card>
     </PageWrapper>
   )
