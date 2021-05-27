@@ -2,15 +2,34 @@ import React, { useState, useEffect } from 'react'
 import { Auth } from 'aws-amplify'
 import { useRouter } from 'next/router'
 import { Routers } from '@shared/constants/routers'
-import { ProfileFormProps } from '@modules/profile/components/general'
-// import { authService } from '@modules/profile/services'
+import { authService } from '@modules/profile/services'
+import { Form } from 'antd'
+import { FormInstance } from 'antd/lib/form'
+import { useTranslation } from 'next-i18next'
+import { AuthError } from '@aws-amplify/auth/lib/Errors'
+
+interface SignUpFields {
+  email: string
+  password: string
+  phone: string
+}
+interface VerifyParams {
+  code: string
+}
+
+interface SignUpError extends AuthError {
+  code: string
+}
 
 export interface IForumOperations {
-  handleSignUp?: (opts: unknown) => void
+  handleSignUp?: (fileds: SignUpFields) => void
   handleSignIn?: (opts: unknown) => void
+  handleVerify?: (opts: unknown) => void
+  handleReSendOtp?: (opts: unknown) => void
   loading?: boolean
   formLoading?: boolean
   isUpdated?: boolean
+  form?: FormInstance
 }
 
 export function withExtraAuthen<P extends IForumOperations>(
@@ -19,6 +38,9 @@ export function withExtraAuthen<P extends IForumOperations>(
   const ComponentWithExtraInfo = (props: P) => {
     const [isFormLoading, setIsFormLoading] = useState(false)
     const router = useRouter()
+    const [signUpForm] = Form.useForm()
+    const { t } = useTranslation()
+
     useEffect(() => {
       isCheckoutUser()
     }, [])
@@ -32,20 +54,57 @@ export function withExtraAuthen<P extends IForumOperations>(
       }
     }
 
-    const handleSignUp = async (opts: ProfileFormProps) => {
-      console.log(opts)
+    const handleSignUp = async (signInFileds: SignUpFields) => {
       setIsFormLoading(true)
+      try {
+        const { phone, password, email } = signInFileds
+        await authService.signUp(email, password, email, `+${phone}`, '')
+        afterSignUpSuccess()
+      } catch (error) {
+        afterSignUpFailure(error)
+      }
     }
 
-    const handleSignIn = async (opts: ProfileFormProps) => {
-      console.log(opts)
+    const afterSignUpSuccess = () => {
+      router.push({
+        pathname: Routers.VerifyPage,
+      })
+      return false
+    }
+
+    const afterSignUpFailure = (error: SignUpError) => {
+      setIsFormLoading(false)
+      switch (error.code) {
+        case 'UsernameExistsException':
+          {
+            const emailExist = t('authentication.signUp.emailExist')
+            signUpForm.setFields([
+              {
+                name: 'email',
+                errors: [emailExist],
+              },
+            ])
+          }
+          break
+        default:
+      }
+    }
+
+    const handleSignIn = async (signInFileds: SignUpFields) => {
+      console.log(signInFileds)
+    }
+
+    const handleVerify = async (verifyParams: VerifyParams) => {
+      console.log(verifyParams)
     }
 
     return (
       <WrappedComponent
         formLoading={isFormLoading}
-        handleSignUp={handleSignIn}
-        handleSignIn={handleSignUp}
+        handleSignUp={handleSignUp}
+        handleSignIn={handleSignIn}
+        handleVerify={handleVerify}
+        form={signUpForm}
         {...props}
       />
     )

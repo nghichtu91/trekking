@@ -6,10 +6,15 @@
 
 import { Auth, Storage } from 'aws-amplify'
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth/lib/types'
-
+import { ISignUpResult } from 'amazon-cognito-identity-js'
 interface IAuthService {
-  signUp(username: string, password: string, email: string, phone_number: string): Promise<boolean>
-  signIn(username: string, password: string): Promise<boolean>
+  signUp(
+    username: string,
+    password: string,
+    email: string,
+    phone_number: string
+  ): Promise<ISignUpResult>
+  signIn(username: string, password: string): Promise<unknown>
   signInWithEmail(): Promise<boolean>
   signInWithSocial(provider: CognitoHostedUIIdentityProvider): Promise<boolean>
 }
@@ -24,36 +29,27 @@ export class AuthService implements IAuthService {
     return Promise.resolve(true)
   }
 
-  async signUp(
+  signUp(
     username: string,
     password: string,
     email: string,
-    phone_number: string
-  ): Promise<boolean> {
-    try {
-      const { user } = await Auth.signUp({
-        username,
-        password,
-        attributes: {
-          email, // optional
-          phone_number, // optional - E.164 number convention
-          // other custom attributes
-        },
-      })
-      console.log(user)
-      return Promise.resolve(true)
-    } catch (error) {
-      console.log('error signing up:', error)
-    }
+    phone_number: string,
+    name?: string
+  ): Promise<ISignUpResult> {
+    return Auth.signUp({
+      username,
+      password,
+      attributes: {
+        email, // optional
+        phone_number, // optional - E.164 number convention
+        name,
+        // other custom attributes
+      },
+    })
   }
 
-  async signIn(username: string, password: string): Promise<boolean> {
-    try {
-      await Auth.signIn(username, password)
-      return Promise.resolve(true)
-    } catch (error) {
-      console.log('error signing in', error)
-    }
+  signIn(username: string, password: string): Promise<unknown> {
+    return Auth.signIn(username, password)
   }
 
   async updateUserAttributes(attributes: Record<string, unknown>): Promise<boolean> {

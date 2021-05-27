@@ -25,6 +25,7 @@
       "email": "Email",
       "emailPlaceholder": "Please enter your email",
       "emailExist": "Email đã được sử dụng",
+      "emailNotValid": "Email không hợp lệ",
       "phone":"Số điện thoại",
       "phonePlaceholder": "Nhập số điện thoại",
       "phoneNotValid":"Số điện thoại không đúng",
@@ -39,5 +40,14 @@
       "textYouHaveAccount": "Bạn đã có tài khoản?"
     },
     "signIn": {}
+  },
+  "verifyOTP": {
+    "title": "Xác minh tài khoản",
+    "receivedOTP":"Bạn chưa nhận được mã OTP?",
+    "confirm":"Kích hoạt",
+    "retry": "Gửi lại",
+    "textBtnTryAgain": "",
+    "pleaseEnterPin": "Vui lòng nhập mã OTP",
+    "labelPin": "mã xác nhận"
   }
 }

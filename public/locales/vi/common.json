@@ -27,6 +27,7 @@
       "email": "Email",
       "emailPlaceholder": "Nhập email",
       "emailExist": "Email đã được sử dụng",
+      "emailNotValid": "Email không đúng",
       "phone":"số điện thoại",
       "phonePlaceholder": "Nhập số điện thoại",
       "phoneExist":"Số điện đã được sử dụng",
@@ -34,12 +35,21 @@
       "password": "mật khẩu",
       "passwordPlaceholder": "Nhập mật khẩu",
       "rePassword": "Nhập lại mật khẩu",
-      "rePasswordPlaceholder": "Xác nhập mật khẩu",
-      "rePasswordNotValid": "Xác nhận mật khẩu và mật khẩu không giống",
+      "rePasswordPlaceholder": "Xác nhận mật khẩu",
+      "rePasswordNotValid": "Xác nhận mật khẩu và mật khẩu không khớp",
       "textSignIn": "Đăng nhập",
       "textSignUp": "Đăng ký",
       "textYouHaveAccount": "Bạn đã có tài khoản?"
     },
     "signIn": {}
+  },
+  "verifyOTP": {
+    "title": "Xác minh tài khoản",
+    "receivedOTP":"Bạn chưa nhận được mã OTP?",
+    "confirm":"Kích hoạt",
+    "retry": "Gửi lại",
+    "textBtnTryAgain": "",
+    "pleaseEnterPin": "Vui lòng nhập mã OTP",
+    "labelPin": "mã xác nhận"
   }
 }
