@@ -8,4 +8,5 @@ export enum Routers {
   SellPage = '/sell-page/[id]',
   BuyPage = '/buy-page/[id]',
   RegisterPage = '/reg',
+  VerifyPage = '/verify',
 }

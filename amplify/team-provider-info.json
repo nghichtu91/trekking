@@ -16,13 +16,20 @@
         "S3Trigger6fbbc67e": {
           "deploymentBucketName": "amplify-trekking-dev-112657-deployment",
           "s3Key": "amplify-builds/S3Trigger6fbbc67e-7a774a59596a527a794a-build.zip"
-        }
+        },
+        "trekking73950f9273950f92PreAuthentication": {},
+        "trekking73950f9273950f92PreSignup": {
+          "DOMAINALLOWLIST": "",
+          "DOMAINDENYLIST": ""
+        },
+        "trekking73950f9273950f92PreTokenGeneration": {}
       },
       "auth": {
         "trekking73950f9273950f92": {
           "facebookAppId": "529385911299633",
           "googleClientId": "890232829702-je7nqsdk16dmlmbtcjd5keqbcfu2j3k5.apps.googleusercontent.com"
-        }
+        },
+        "userPoolGroups": {}
       }
     }
   }
