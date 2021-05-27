@@ -49,6 +49,8 @@
     "textBtnTryAgain": "",
     "pleaseEnterPin": "Vui lòng nhập mã OTP",
     "labelPin": "mã xác nhận",
-    "pinNotValid": "Mã kích hoạt không hợp lệ"
+    "pinNotValid": "Mã kích hoạt không hợp lệ",
+    "usernameNotExist": "Mã kích hoạt không hợp lệ",
+    "otpIncorrect": "Mã OTP không đúng. Bạn vui lòng thử lại."
   }
 }

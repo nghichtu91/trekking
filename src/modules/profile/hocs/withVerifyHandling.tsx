@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Auth } from 'aws-amplify'
 import { useRouter } from 'next/router'
 import { Routers } from '@shared/constants/routers'
@@ -35,6 +35,15 @@ export function withVerifyHandling<P extends IForumOperations>(
     const [verifyForm] = Form.useForm()
     const { t } = useTranslation()
     const [verifyErrors, setVerifyErrors] = useState<string[]>([])
+    const usernameVerify = useRef<string>()
+
+    const getUserNameVerifyFormQuery = useCallback(() => {
+      usernameVerify.current = router.query['username'] as string
+    }, [router])
+
+    useEffect(() => {
+      getUserNameVerifyFormQuery()
+    }, [getUserNameVerifyFormQuery])
 
     useEffect(() => {
       isCheckoutUser()
@@ -55,12 +64,15 @@ export function withVerifyHandling<P extends IForumOperations>(
         return false
       }
       try {
-        const username = router.query['username'] as string
-        await authService.confirmAaccount(username, verifyParams.pin)
+        await authService.confirmAaccount(usernameVerify.current, verifyParams.pin)
         afterVerifySuccess(verifyParams)
       } catch (error) {
         afterVerifyFailure(error)
       }
+    }
+
+    const handleResendOpt = () => {
+      console.log('sdsd')
     }
 
     const afterVerifySuccess = (verifyParams: VerifyParams) => {
@@ -99,6 +111,7 @@ export function withVerifyHandling<P extends IForumOperations>(
       <WrappedComponent
         formLoading={isFormLoading}
         handleVerify={handleVerify}
+        handleReSendOtp={handleResendOpt}
         form={verifyForm}
         errors={verifyErrors}
         {...props}

@@ -56,6 +56,10 @@ export class AuthService implements IAuthService {
     return Auth.confirmSignUp(username, code)
   }
 
+  resendOpt(username: string): Promise<unknown> {
+    return Auth.resendSignUp(username)
+  }
+
   async updateUserAttributes(attributes: Record<string, unknown>): Promise<boolean> {
     try {
       const user = await Auth.currentAuthenticatedUser()
