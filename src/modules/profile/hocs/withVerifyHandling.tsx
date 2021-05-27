@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify'
 import { useRouter } from 'next/router'
 import { Routers } from '@shared/constants/routers'
 import { authService } from '@modules/profile/services'
-import { Form } from 'antd'
+import { Form, Modal } from 'antd'
 import { FormInstance } from 'antd/lib/form'
 import { useTranslation } from 'next-i18next'
 import { AuthError } from '@aws-amplify/auth/lib/Errors'
@@ -59,7 +59,9 @@ export function withVerifyHandling<P extends IForumOperations>(
       }
     }
 
+    const resetErrors = () => setVerifyErrors([])
     const handleVerify = async (verifyParams: VerifyParams) => {
+      resetErrors()
       setIsFormLoading(true)
       if (!verifyParams.pin) {
         return false
@@ -72,12 +74,68 @@ export function withVerifyHandling<P extends IForumOperations>(
       }
     }
 
-    const handleResendOpt = () => {
-      console.log('sdsd')
+    const handleResendOpt = async () => {
+      resetErrors()
+      try {
+        await authService.resendOpt(usernameVerify.current)
+        afterResendOptSuccess()
+      } catch (error) {
+        afterResendOptFailure(error)
+      }
+    }
+
+    const afterResendOptSuccess = () => {
+      Modal.success({
+        title: 'Thông báo',
+        content: t('verifyOTP.titleSub'),
+        okText: t('verifyOTP.textClose'),
+        centered: true,
+        closable: true,
+      })
+    }
+
+    const afterResendOptFailure = (error: SignUpError) => {
+      switch (error.code) {
+        case 'LimitExceededException':
+          {
+            setVerifyErrors([t('verifyOTP.limitExceeded')])
+          }
+          break
+        case 'UserNotFoundException':
+          {
+            setVerifyErrors([t('verifyOTP.usernameNotExist')])
+          }
+          break
+        case 'InvalidParameterException':
+          {
+            {
+              setVerifyErrors([t('verifyOTP.confirmed')])
+            }
+          }
+          break
+        case 'CodeMismatchException':
+          {
+            verifyForm.setFields([
+              {
+                name: 'pin',
+                errors: [t('verifyOTP.otpIncorrect')],
+              },
+            ])
+          }
+          break
+        default:
+      }
     }
 
     const afterVerifySuccess = (verifyParams: VerifyParams) => {
       console.log(verifyParams)
+      Modal.success({
+        title: 'Thông báo',
+        content: t('verifyOTP.otpsuccess'),
+        okText: t('verifyOTP.textClose'),
+        centered: true,
+        closable: true,
+      })
     }
 
     const afterVerifyFailure = (error: SignUpError) => {

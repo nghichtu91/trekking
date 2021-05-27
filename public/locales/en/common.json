@@ -55,6 +55,8 @@
     "usernameNotExist": "Mã kích hoạt không hợp lệ",
     "otpIncorrect": "Mã OTP không đúng. Bạn vui lòng thử lại.",
     "confirmed": "Tài khoản này đã xác minh",
-    "otpsuccess": "Xác thực OTP thành công"
+    "otpsuccess": "Xác thực OTP thành công",
+    "limitExceeded": "Bạn đã lấy opt quá nhiều lần, vui lòng thử lại sau.",
+    "textClose": "Đóng"
   }
 }
