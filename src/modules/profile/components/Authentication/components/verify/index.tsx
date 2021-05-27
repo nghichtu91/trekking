@@ -2,9 +2,9 @@ import React from 'react'
 
 import { Button, Typography, Form, Input } from 'antd'
 import { Trans, useTranslation } from 'next-i18next'
-import { FormInstance } from 'antd/lib/form'
+import { FormInstance, Rule } from 'antd/lib/form'
 import { RequiredItem } from '@shared/components'
-
+import { VERIFY_NUMBER_PATTERN } from '@shared/constants/patterns'
 export interface VerifyFields {
   email: string
   phone: string
@@ -27,7 +27,12 @@ export const Verify: React.FC<VerifyProps> = ({
 }) => {
   const { t } = useTranslation()
   const [verifyForm] = Form.useForm<VerifyProps>()
-
+  const pinRules: Rule[] = [
+    {
+      pattern: VERIFY_NUMBER_PATTERN,
+      message: t('verifyOTP.pinNotValid'),
+    },
+  ]
   return (
     <div className={className}>
       <Form
@@ -44,14 +49,10 @@ export const Verify: React.FC<VerifyProps> = ({
           messageVariables={{
             label: t('verifyOTP.labelPin'),
           }}
+          rules={pinRules}
           name="pin"
         >
-          <Input
-            autoComplete="false"
-            id="verify-pin"
-            // prefix={<LockOutlined className="site-form-item-icon" />}
-            placeholder={t('verifyOTP.pleaseEnterPin')}
-          />
+          <Input autoComplete="false" id="verify-pin" placeholder={t('verifyOTP.pleaseEnterPin')} />
         </RequiredItem>
 
         <Form.Item className="text-center" noStyle>

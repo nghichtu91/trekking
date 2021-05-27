@@ -50,6 +50,7 @@
     "retry": "Gửi lại",
     "textBtnTryAgain": "",
     "pleaseEnterPin": "Vui lòng nhập mã OTP",
-    "labelPin": "mã xác nhận"
+    "labelPin": "mã OTP",
+    "pinNotValid": "Mã kích hoạt không hợp lệ"
   }
 }
