@@ -5,7 +5,7 @@
 
 import { PageWrapper } from '@shared/components/wrapper'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { IForumOperations, withExtraAuthen } from '@modules/profile/hocs/withAuthenService'
+import { IForumOperations, withVerifyHandling } from '@modules/profile/hocs/withVerifyHandling'
 import { Typography, Card, Form } from 'antd'
 import { Trans } from 'next-i18next'
 import { Verify } from '@modules/profile/components/Authentication'
@@ -44,4 +44,4 @@ export const getServerSideProps = async ({ locale }) => ({
   },
 })
 
-export default withExtraAuthen(VerifyPage)
+export default withVerifyHandling(VerifyPage)

@@ -52,6 +52,10 @@ export class AuthService implements IAuthService {
     return Auth.signIn(username, password)
   }
 
+  confirmAaccount(username: string, code: string): Promise<unknown> {
+    return Auth.confirmSignUp(username, code)
+  }
+
   async updateUserAttributes(attributes: Record<string, unknown>): Promise<boolean> {
     try {
       const user = await Auth.currentAuthenticatedUser()

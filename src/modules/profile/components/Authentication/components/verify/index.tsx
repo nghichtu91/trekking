@@ -16,6 +16,7 @@ export interface VerifyProps extends React.HTMLAttributes<HTMLDivElement> {
   reSend?: (opts: unknown) => void
   loading?: boolean
   errors?: Record<string, unknown>[]
+  username?: string
 }
 
 export const Verify: React.FC<VerifyProps> = ({
