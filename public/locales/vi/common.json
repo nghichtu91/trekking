@@ -45,6 +45,8 @@
   },
   "verifyOTP": {
     "title": "Xác minh tài khoản",
+    "titleSub": "Chúng tôi có gửi một mã xác thực đến {{email}}.",
+    "plsEnterPin":"Vui lòng nhập để xác minh tài khoản",
     "receivedOTP":"Bạn chưa nhận được mã OTP?",
     "confirm":"Kích hoạt",
     "retry": "Gửi lại",
@@ -52,7 +54,9 @@
     "pleaseEnterPin": "Vui lòng nhập mã OTP",
     "labelPin": "mã OTP",
     "pinNotValid": "Mã kích hoạt không hợp lệ",
-    "usernameNotExist": "Mã kích hoạt không hợp lệ",
-    "otpIncorrect": "Mã OTP không đúng. Bạn vui lòng thử lại."
+    "usernameNotExist": "Tài khoản không tồn tại",
+    "otpIncorrect": "Mã OTP không đúng. Bạn vui lòng thử lại.",
+    "confirmed": "Tài khoản này đã xác minh",
+    "otpsuccess": "Xác thực OTP thành công"
   }
 }

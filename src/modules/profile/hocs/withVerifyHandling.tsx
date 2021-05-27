@@ -24,6 +24,7 @@ export interface IForumOperations {
   isUpdated?: boolean
   form?: FormInstance
   errors?: string[]
+  userName?: string
 }
 
 export function withVerifyHandling<P extends IForumOperations>(
@@ -83,24 +84,23 @@ export function withVerifyHandling<P extends IForumOperations>(
       switch (error.code) {
         case 'NotAuthorizedException':
           {
-            // verifyForm.setFields([
-            //   {
-            //     name: 'pin',
-            //     errors: ['Tài khoản đã được kích hoạt'],
-            //   },
-            // ])
-            setVerifyErrors(['Tài khoản đã được kích hoạt'])
+            setVerifyErrors([t('verifyOTP.confirmed')])
           }
           break
         case 'UserNotFoundException':
           {
-            // verifyForm.setFields([
-            //   {
-            //     name: 'pin',
-            //     errors: ['Email hoặc số điện thoại không tồn tại'],
-            //   },
-            // ])
-            setVerifyErrors(['Email hoặc số điện thoại không tồn tại'])
+            setVerifyErrors([t('verifyOTP.usernameNotExist')])
+          }
+          break
+        case 'CodeMismatchException':
+          {
+            verifyForm.setFields([
+              {
+                name: 'pin',
+                errors: [t('verifyOTP.otpIncorrect')],
+              },
+            ])
+            // setVerifyErrors([t('verifyOTP.otpIncorrect')])
           }
           break
         default:
