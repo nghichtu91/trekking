@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify'
 import { useRouter } from 'next/router'
 import { Routers } from '@shared/constants/routers'
 import { authService } from '@modules/profile/services'
-import { Form } from 'antd'
+import { Form, notification } from 'antd'
 import { FormInstance } from 'antd/lib/form'
 import { useTranslation } from 'next-i18next'
 import { AuthError } from '@aws-amplify/auth/lib/Errors'
@@ -13,8 +13,10 @@ interface SignUpFields {
   password: string
   phone: string
 }
+
 interface VerifyParams {
-  code: string
+  pin: string
+  username?: string
 }
 
 interface SignUpError extends AuthError {
@@ -47,6 +49,7 @@ export function withExtraAuthen<P extends IForumOperations>(
 
     const isCheckoutUser = async () => {
       const user = await Auth.currentUserInfo()
+      console.log(user)
       if (user) {
         router.push({
           pathname: Routers.HomePage,
@@ -59,15 +62,16 @@ export function withExtraAuthen<P extends IForumOperations>(
       try {
         const { phone, password, email } = signInFileds
         await authService.signUp(email, password, email, `+${phone}`, '')
-        afterSignUpSuccess()
+        afterSignUpSuccess(email)
       } catch (error) {
         afterSignUpFailure(error)
       }
     }
 
-    const afterSignUpSuccess = () => {
+    const afterSignUpSuccess = (username: string) => {
       router.push({
         pathname: Routers.VerifyPage,
+        query: { username },
       })
       return false
     }
@@ -95,7 +99,30 @@ export function withExtraAuthen<P extends IForumOperations>(
     }
 
     const handleVerify = async (verifyParams: VerifyParams) => {
+      setIsFormLoading(true)
+      if (!verifyParams.pin) {
+        return false
+      }
+      try {
+        authService.confirmAaccount('thanh2@yopmail.com', verifyParams.pin)
+        afterVerifySuccess(verifyParams)
+      } catch (error) {
+        console.log(error)
+        afterVerifyFailure(error)
+      }
+    }
+
+    const afterVerifySuccess = (verifyParams: VerifyParams) => {
       console.log(verifyParams)
+      notification.success({
+        message: 'ABBB',
+        description: 'dsdsds',
+        placement: 'bottomRight',
+      })
+    }
+
+    const afterVerifyFailure = (error: SignUpError) => {
+      console.log(error)
     }
 
     return (

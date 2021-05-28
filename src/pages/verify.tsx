@@ -5,12 +5,22 @@
 
 import { PageWrapper } from '@shared/components/wrapper'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { IForumOperations, withExtraAuthen } from '@modules/profile/hocs/withAuthenService'
-import { Typography, Card, Form } from 'antd'
+import { IForumOperations, withVerifyHandling } from '@modules/profile/hocs/withVerifyHandling'
+import { Typography, Card, Form, Alert } from 'antd'
 import { Trans } from 'next-i18next'
 import { Verify } from '@modules/profile/components/Authentication'
 
-const VerifyPage: React.FC<IForumOperations> = ({ handleVerify, handleReSendOtp }) => {
+const VerifyPage: React.FC<IForumOperations> = ({
+  handleVerify,
+  handleReSendOtp,
+  form,
+  errors = [],
+  loading = false,
+}) => {
+  const renderErrors = () => {
+    return errors.map((error, index) => <Typography.Text key={index}>{error}</Typography.Text>)
+  }
+
   return (
     <PageWrapper>
       <Card>
@@ -20,19 +30,19 @@ const VerifyPage: React.FC<IForumOperations> = ({ handleVerify, handleReSendOtp 
           </Typography.Title>
           <Typography className="text-center">
             <Typography.Text className="block">
-              <Trans i18nKey="authentication.verify.titleHeader">
+              <Trans values={{ email: 'example@gmail.com' }} i18nKey="verifyOTP.titleSub">
                 Chúng tôi có gửi một mã xác thực đến số điện thoại.
               </Trans>
             </Typography.Text>
-            <Typography.Text className="block">
-              <Trans i18nKey="authentication.verify.titleHeader">
-                Vui lòng nhập để xác minh tài khoản
-              </Trans>
-            </Typography.Text>
+            {/* <Typography.Text className="block">
+              <Trans i18nKey="verifyOTP.plsEnterPin">Vui lòng nhập để xác minh tài khoản</Trans>
+            </Typography.Text> */}
           </Typography>
         </Form.Item>
-
-        <Verify send={handleVerify} reSend={handleReSendOtp} />
+        <Form.Item hidden={errors.length === 0}>
+          <Alert showIcon type="error" message={renderErrors()} />
+        </Form.Item>
+        <Verify loading={loading} form={form} send={handleVerify} reSend={handleReSendOtp} />
       </Card>
     </PageWrapper>
   )
@@ -44,4 +54,4 @@ export const getServerSideProps = async ({ locale }) => ({
   },
 })
 
-export default withExtraAuthen(VerifyPage)
+export default withVerifyHandling(VerifyPage)
