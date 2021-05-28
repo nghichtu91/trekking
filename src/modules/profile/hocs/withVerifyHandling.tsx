@@ -50,25 +50,29 @@ export function withVerifyHandling<P extends IForumOperations>(
       isCheckoutUser()
     }, [])
 
+    const goToHomePage = () => {
+      router.push({
+        pathname: Routers.HomePage,
+      })
+    }
+
     const isCheckoutUser = async () => {
       const user = await Auth.currentUserInfo()
       if (user) {
-        router.push({
-          pathname: Routers.HomePage,
-        })
+        goToHomePage()
       }
     }
 
     const resetErrors = () => setVerifyErrors([])
+
     const handleVerify = async (verifyParams: VerifyParams) => {
-      resetErrors()
       setIsFormLoading(true)
       if (!verifyParams.pin) {
         return false
       }
       try {
         await authService.confirmAaccount(usernameVerify.current, verifyParams.pin)
-        afterVerifySuccess(verifyParams)
+        afterVerifySuccess()
       } catch (error) {
         afterVerifyFailure(error)
       }
@@ -108,9 +112,7 @@ export function withVerifyHandling<P extends IForumOperations>(
           break
         case 'InvalidParameterException':
           {
-            {
-              setVerifyErrors([t('verifyOTP.confirmed')])
-            }
+            setVerifyErrors([t('verifyOTP.confirmed')])
           }
           break
         case 'CodeMismatchException':
@@ -125,16 +127,21 @@ export function withVerifyHandling<P extends IForumOperations>(
           break
         default:
       }
+      setIsFormLoading(false)
     }
 
-    const afterVerifySuccess = (verifyParams: VerifyParams) => {
-      console.log(verifyParams)
+    const afterCloseModal = () => {
+      goToHomePage()
+    }
+
+    const afterVerifySuccess = () => {
       Modal.success({
         title: 'Thông báo',
         content: t('verifyOTP.otpsuccess'),
         okText: t('verifyOTP.textClose'),
         centered: true,
         closable: true,
+        onOk: afterCloseModal,
       })
     }
 
@@ -158,11 +165,11 @@ export function withVerifyHandling<P extends IForumOperations>(
                 errors: [t('verifyOTP.otpIncorrect')],
               },
             ])
-            // setVerifyErrors([t('verifyOTP.otpIncorrect')])
           }
           break
         default:
       }
+      setIsFormLoading(false)
     }
 
     return (
@@ -172,6 +179,7 @@ export function withVerifyHandling<P extends IForumOperations>(
         handleReSendOtp={handleResendOpt}
         form={verifyForm}
         errors={verifyErrors}
+        loading={isFormLoading}
         {...props}
       />
     )

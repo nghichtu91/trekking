@@ -15,6 +15,7 @@ const VerifyPage: React.FC<IForumOperations> = ({
   handleReSendOtp,
   form,
   errors = [],
+  loading = false,
 }) => {
   const renderErrors = () => {
     return errors.map((error, index) => <Typography.Text key={index}>{error}</Typography.Text>)
@@ -33,15 +34,15 @@ const VerifyPage: React.FC<IForumOperations> = ({
                 Chúng tôi có gửi một mã xác thực đến số điện thoại.
               </Trans>
             </Typography.Text>
-            <Typography.Text className="block">
+            {/* <Typography.Text className="block">
               <Trans i18nKey="verifyOTP.plsEnterPin">Vui lòng nhập để xác minh tài khoản</Trans>
-            </Typography.Text>
+            </Typography.Text> */}
           </Typography>
         </Form.Item>
         <Form.Item hidden={errors.length === 0}>
           <Alert showIcon type="error" message={renderErrors()} />
         </Form.Item>
-        <Verify form={form} send={handleVerify} reSend={handleReSendOtp} />
+        <Verify loading={loading} form={form} send={handleVerify} reSend={handleReSendOtp} />
       </Card>
     </PageWrapper>
   )
