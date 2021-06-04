@@ -7,6 +7,7 @@ import { FormInstance } from 'antd/lib/form'
 import { useTranslation } from 'next-i18next'
 import { AuthError } from '@aws-amplify/auth/lib/Errors'
 import { authService } from '@modules/profile/services'
+import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth'
 
 interface SignUpFields {
   username: string
@@ -22,6 +23,8 @@ export interface IForumOperations {
   handleSignUp?: (fileds: SignUpFields) => void
   handleSignIn?: (opts: unknown) => void
   goToSignUpPage?: () => void
+  signInWithGooogle?: () => void
+  signInWithFacebook?: () => void
   loading?: boolean
   formLoading?: boolean
   isUpdated?: boolean
@@ -112,11 +115,21 @@ export function withLoginHandling<P extends IForumOperations>(
       }
     }
 
+    const handleSignInFb = () => {
+      authService.signInWithSocial(CognitoHostedUIIdentityProvider.Facebook)
+    }
+
+    const handleSignInGg = () => {
+      authService.signInWithSocial(CognitoHostedUIIdentityProvider.Google)
+    }
+
     return (
       <WrappedComponent
         formLoading={isFormLoading}
         handleSignIn={handleSignIn}
         goToSignUpPage={goToPage}
+        signInWithFacebook={handleSignInFb}
+        signInWithGooogle={handleSignInGg}
         form={signUpForm}
         errors={siginErrors}
         {...props}

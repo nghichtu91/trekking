@@ -14,6 +14,8 @@ const SignInPage: React.FC<IForumOperations> = props => {
       <SignIn
         signUpHandle={props.goToSignUpPage}
         signInHandle={props.handleSignIn}
+        signInWithGooogle={props.signInWithGooogle}
+        signInWithFacebook={props.signInWithFacebook}
         form={props.form}
         loading={props.formLoading}
       />

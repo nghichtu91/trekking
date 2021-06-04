@@ -5,7 +5,7 @@
  */
 
 import { Auth, Storage } from 'aws-amplify'
-import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth/lib/types'
+import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth'
 import { ISignUpResult } from 'amazon-cognito-identity-js'
 interface IAuthService {
   signUp(
@@ -16,7 +16,7 @@ interface IAuthService {
   ): Promise<ISignUpResult>
   signIn(username: string, password: string): Promise<unknown>
   signInWithEmail(): Promise<boolean>
-  signInWithSocial(provider: CognitoHostedUIIdentityProvider): Promise<boolean>
+  signInWithSocial(provider: CognitoHostedUIIdentityProvider): Promise<unknown>
 }
 
 export class AuthService implements IAuthService {
@@ -24,9 +24,8 @@ export class AuthService implements IAuthService {
     throw new Error('Method not implemented.')
   }
 
-  signInWithSocial(provider: CognitoHostedUIIdentityProvider): Promise<boolean> {
-    Auth.federatedSignIn({ provider: provider })
-    return Promise.resolve(true)
+  signInWithSocial(provider: CognitoHostedUIIdentityProvider): Promise<unknown> {
+    return Auth.federatedSignIn({ provider: provider })
   }
 
   signUp(
