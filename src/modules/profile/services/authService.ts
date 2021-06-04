@@ -49,6 +49,7 @@ export class AuthService implements IAuthService {
   }
 
   signIn(username: string, password: string): Promise<unknown> {
+    console.log(username, password)
     return Auth.signIn(username, password)
   }
 

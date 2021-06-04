@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Auth } from 'aws-amplify'
 import { useRouter } from 'next/router'
 import { Routers } from '@shared/constants/routers'
-import { authService } from '@modules/profile/services'
-import { Form } from 'antd'
+import { Form, Modal } from 'antd'
 import { FormInstance } from 'antd/lib/form'
 import { useTranslation } from 'next-i18next'
 import { AuthError } from '@aws-amplify/auth/lib/Errors'
+import { authService } from '@modules/profile/services'
 
 interface SignUpFields {
-  email: string
+  username: string
   password: string
   phone: string
 }
@@ -21,10 +21,12 @@ interface SignInError extends AuthError {
 export interface IForumOperations {
   handleSignUp?: (fileds: SignUpFields) => void
   handleSignIn?: (opts: unknown) => void
+  goToSignUpPage?: () => void
   loading?: boolean
   formLoading?: boolean
   isUpdated?: boolean
   form?: FormInstance
+  errors?: string[]
 }
 
 export function withLoginHandling<P extends IForumOperations>(
@@ -35,6 +37,8 @@ export function withLoginHandling<P extends IForumOperations>(
     const router = useRouter()
     const [signUpForm] = Form.useForm()
     const { t } = useTranslation()
+    const [siginErrors, setSiginErrors] = useState<string[]>([])
+    const usernameRef = useRef<string>()
 
     useEffect(() => {
       isCheckoutUser()
@@ -49,53 +53,71 @@ export function withLoginHandling<P extends IForumOperations>(
       }
     }
 
-    const handleSignUp = async (signInFileds: SignUpFields) => {
-      setIsFormLoading(true)
-      try {
-        const { phone, password, email } = signInFileds
-        await authService.signUp(email, password, email, `+${phone}`, '')
-        afterSignUpSuccess(email)
-      } catch (error) {
-        afterSignUpFailure(error)
-      }
-    }
-
-    const afterSignUpSuccess = (username: string) => {
-      router.push({
-        pathname: Routers.VerifyPage,
-        query: { username },
-      })
-      return false
-    }
-
-    const afterSignUpFailure = (error: SignInError) => {
-      setIsFormLoading(false)
-      switch (error.code) {
-        case 'UsernameExistsException':
-          {
-            const emailExist = t('authentication.signUp.emailExist')
-            signUpForm.setFields([
-              {
-                name: 'email',
-                errors: [emailExist],
-              },
-            ])
-          }
-          break
-        default:
-      }
+    const goToHomePage = () => {
+      return router.push(Routers.HomePage)
     }
 
     const handleSignIn = async (signInFileds: SignUpFields) => {
-      console.log(signInFileds)
+      setIsFormLoading(true)
+      try {
+        await authService.signIn(signInFileds.username, signInFileds.password)
+        afterSignInSuccess()
+      } catch (error) {
+        usernameRef.current = signInFileds.username
+        afterSignInFailure(error)
+      }
+    }
+
+    const afterSignInSuccess = () => {
+      goToHomePage()
+    }
+
+    const goToPage = () => {
+      return router.push(Routers.RegisterPage)
+    }
+
+    const handleOkBtn = () => {
+      authService.resendOpt(usernameRef.current)
+      router.push({
+        pathname: Routers.VerifyPage,
+        query: { username: usernameRef.current },
+      })
+    }
+
+    const afterSignInFailure = (errors: SignInError) => {
+      const { code } = errors
+      switch (code) {
+        case 'UserNotConfirmedException':
+          {
+            Modal.error({
+              title: 'Thông báo',
+              content: 'Tài khoản chưa được xác thực, vui lòng xác thực trước khi đăng nhập.',
+              centered: true,
+              okText: 'Xác thực ngay',
+              maskClosable: true,
+              closable: true,
+              onOk: handleOkBtn,
+            })
+          }
+          break
+        case 'UserNotFoundException':
+          {
+            setSiginErrors(['Tài khoản hoặc mật khẩu không đúng.'])
+          }
+          break
+
+        default:
+          break
+      }
     }
 
     return (
       <WrappedComponent
         formLoading={isFormLoading}
-        handleSignUp={handleSignUp}
         handleSignIn={handleSignIn}
+        goToSignUpPage={goToPage}
         form={signUpForm}
+        errors={siginErrors}
         {...props}
       />
     )

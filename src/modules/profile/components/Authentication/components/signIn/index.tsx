@@ -1,66 +1,79 @@
-import React, { useState } from 'react'
-import styles from '../styles/OnboardTemplate.module.scss'
+import React from 'react'
 import { Trans } from 'next-i18next'
-import { Auth } from 'aws-amplify'
-import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth/lib/types'
 import { UserOutlined, LockOutlined, FacebookFilled, GoogleCircleFilled } from '@ant-design/icons'
 import { Row, Col, Divider, Button, Typography, Space, Card, Form, Input } from 'antd'
-type TemplateType = 'login' | 'signup'
+import { FormInstance } from 'antd/lib/form'
+import styles from './styles/signIn.module.scss'
 
 interface OnboardTemplateProps {
-  type: TemplateType
-  updateFormField?: (fieldName: string, value: string) => void
   onSubmit?: () => void
+  form?: FormInstance
+  loading?: boolean
+  signInWithGooogle?: () => void
+  signInWithFacebook?: () => void
+  signInHandle?: (opt: unknown) => void
+  signUpHandle?: () => void
 }
 
-const SignIn: React.FC<OnboardTemplateProps> = () => {
-  const [isSignUp, setIsSignUp] = useState(false)
+interface SignInFieldProps {
+  username: string
+  password: string
+}
+
+export const SignIn: React.FC<OnboardTemplateProps> = ({
+  signInWithFacebook,
+  signInWithGooogle,
+  signInHandle,
+  signUpHandle,
+  form,
+  loading,
+}) => {
+  const [signInForm] = Form.useForm<SignInFieldProps>()
+
   return (
-    <Row className="onboard-container" justify="center">
+    <Row id={styles['signin']} className="onboard-container" justify="center">
       <Col xxl={15} xl={15} lg={18} md={18} xs={24} sm={24}>
-        <Card className={styles['auth-box']}>
+        <Card>
           <Typography.Title className="text-center" level={3}>
             <Trans i18nKey="auth-sigin-text">Đăng nhập</Trans>
           </Typography.Title>
           <Space style={{ width: '100%' }} direction="vertical">
             <Button
-              onClick={() =>
-                Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Facebook })
-              }
+              onClick={signInWithFacebook}
               size="large"
               icon={<FacebookFilled size={40} />}
-              style={{ width: '100%', background: '#4267b2', color: '#fff', fontWeight: 400 }}
+              className={`${styles['btn--social']} ${styles['btn--social--fb']}`}
             >
               Facebook
             </Button>
             <Button
-              onClick={() =>
-                Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google })
-              }
+              onClick={signInWithGooogle}
               size="large"
               icon={<GoogleCircleFilled />}
-              style={{ width: '100%' }}
+              className={`${styles['btn--social']} ${styles['btn--social--gg']}`}
             >
               Google
             </Button>
           </Space>
           <Divider plain>Hoặc</Divider>
           <Form
+            form={form || signInForm}
             autoComplete="false"
             className="signin-form"
             slot="signin-form"
-            hidden={isSignUp}
             size="large"
+            onFinish={signInHandle}
           >
-            <Form.Item name="email">
+            <Form.Item name="username">
               <Input
                 allowClear
-                id="signin-email"
+                id="signin-username"
                 prefix={<UserOutlined className="site-form-item-icon" />}
                 placeholder="Số điện thoại hoặc email"
               />
             </Form.Item>
             <Form.Item
+              name="password"
               extra={
                 <a className="login-form-forgot" href="">
                   Quên mật khẩu
@@ -76,16 +89,18 @@ const SignIn: React.FC<OnboardTemplateProps> = () => {
               />
             </Form.Item>
             <Form.Item noStyle>
-              <Button size="large" type="primary" style={{ width: '100%' }}>
+              <Button
+                loading={loading}
+                htmlType="submit"
+                size="large"
+                type="primary"
+                style={{ width: '100%' }}
+              >
                 Đăng nhập
               </Button>
-              <Typography style={{ marginTop: 10, textAlign: 'center' }}>
+              <Typography className={styles['not-have-account']}>
                 Bạn chưa có tài khoản?
-                <Button
-                  style={{ padding: 0, paddingLeft: 5 }}
-                  type="link"
-                  onClick={() => setIsSignUp(true)}
-                >
+                <Button onClick={signUpHandle} className={styles['btn-signup']} type="link">
                   Đăng ký
                 </Button>
               </Typography>
@@ -96,5 +111,3 @@ const SignIn: React.FC<OnboardTemplateProps> = () => {
     </Row>
   )
 }
-
-export default SignIn
