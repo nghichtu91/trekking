@@ -1,0 +1,22 @@
+
+#signin {
+  .btn--social {
+    width: 100%;
+    color: #fff; 
+    font-weight: 400;
+    &.btn--social--fb {
+      background: #4267b2;
+    }
+    &.btn--social--gg {
+      background: #ea4335;
+    }
+  }
+  .not-have-account { 
+    margin-top: 10px;
+    text-align: center;
+  }
+  .btn-signup {
+    padding: 0;
+    padding-left: 5px;
+  }
+}

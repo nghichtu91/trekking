@@ -41,7 +41,22 @@
       "textSignUp": "Đăng ký",
       "textYouHaveAccount": "Bạn đã có tài khoản?"
     },
-    "signIn": {}
+    "signIn": {
+      "titleHeader": "Đăng nhập",
+      "userName": "Email hoặc số điện thoại",
+      "userNamePlaceholder": "Số điện thoại hoặc email",
+      "passwordPlaceholder": "Mật khẩu",
+      "forGotPassword": "Quên mật khẩu",
+      "usernameNotExist" : "Tài khoản không tồn tại",
+      "textVerifyNow": "Xác thực ngay",
+      "verifyModalContent": "Tài khoản chưa được xác thực, vui lòng xác thực trước khi đăng nhập.",
+      "verifyModalTitle": "Thông Báo",
+      "userNameOrPassIncorrect": "Tài khoản hoặc mât khẩu không đúng.",
+      "textSignUp":"Đăng ký",
+      "textSignIn": "Đăng nhập",
+      "textYouNotHaveAccount": "Bạn chưa có tài khoản?",
+      "textOr": "Hoặc"
+    }
   },
   "verifyOTP": {
     "title": "Xác minh tài khoản",

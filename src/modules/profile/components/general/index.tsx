@@ -12,7 +12,7 @@ import {
 import Helper from '@shared/utils/helper'
 import { IUser } from '@modules/profile/models'
 import { Rule } from 'antd/lib/form'
-import { VietNamePhonePattern, NumberPattern } from '@shared/constants/patterns'
+import { VN_PHONE_PATTERN, NUMBER_PATTERN } from '@shared/constants/patterns'
 import { Trans, useTranslation } from 'next-i18next'
 
 interface ProfileGeneralProps extends React.HTMLAttributes<HTMLElement> {
@@ -44,12 +44,12 @@ export const ProfileGeneral: React.FC<ProfileGeneralProps> = props => {
 
   const phoneRules: Rule[] = [
     {
-      pattern: VietNamePhonePattern,
+      pattern: VN_PHONE_PATTERN,
     },
     { required: true },
   ]
 
-  const personIdRules: Rule[] = [{ max: 12 }, { pattern: NumberPattern }]
+  const personIdRules: Rule[] = [{ max: 12 }, { pattern: NUMBER_PATTERN }]
 
   useEffect(() => {
     profileGeneralForm.setFieldsValue({
