@@ -17,7 +17,12 @@ const SignUpAndSignInPage: React.FC<IForumOperations> = props => {
         <Typography.Title className="text-center" level={3}>
           <Trans i18nKey="authentication.signUp.titleHeader">Đăng ký tài khoản</Trans>
         </Typography.Title>
-        <SignUp form={props.form} loading={props.formLoading} onSignUp={props.handleSignUp} />
+        <SignUp
+          onSignIn={props.handleSignIn}
+          form={props.form}
+          loading={props.formLoading}
+          onSignUp={props.handleSignUp}
+        />
       </Card>
     </PageWrapper>
   )
