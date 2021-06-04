@@ -94,8 +94,10 @@ export function withExtraAuthen<P extends IForumOperations>(
       }
     }
 
-    const handleSignIn = async (signInFileds: SignUpFields) => {
-      console.log(signInFileds)
+    const handleSignIn = () => {
+      router.push({
+        pathname: Routers.SignUpPage,
+      })
     }
 
     const handleVerify = async (verifyParams: VerifyParams) => {
