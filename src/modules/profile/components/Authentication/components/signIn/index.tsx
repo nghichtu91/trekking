@@ -1,5 +1,5 @@
 import React from 'react'
-import { Trans } from 'next-i18next'
+import { Trans, useTranslation } from 'next-i18next'
 import { UserOutlined, LockOutlined, FacebookFilled, GoogleCircleFilled } from '@ant-design/icons'
 import { Row, Col, Divider, Button, Typography, Space, Card, Form, Input } from 'antd'
 import { FormInstance } from 'antd/lib/form'
@@ -29,15 +29,15 @@ export const SignIn: React.FC<OnboardTemplateProps> = ({
   loading,
 }) => {
   const [signInForm] = Form.useForm<SignInFieldProps>()
-
+  const { t } = useTranslation()
   return (
     <Row id={styles['signin']} className="onboard-container" justify="center">
       <Col xxl={15} xl={15} lg={18} md={18} xs={24} sm={24}>
         <Card>
           <Typography.Title className="text-center" level={3}>
-            <Trans i18nKey="auth-sigin-text">Đăng nhập</Trans>
+            <Trans i18nKey="authentication.signIn.titleHeader">Đăng nhập</Trans>
           </Typography.Title>
-          <Space style={{ width: '100%' }} direction="vertical">
+          <Space className="w-full" direction="vertical">
             <Button
               onClick={signInWithFacebook}
               size="large"
@@ -55,7 +55,9 @@ export const SignIn: React.FC<OnboardTemplateProps> = ({
               Google
             </Button>
           </Space>
-          <Divider plain>Hoặc</Divider>
+          <Divider plain>
+            <Trans i18nKey="authentication.signIn.textOr">Hoặc</Trans>
+          </Divider>
           <Form
             form={form || signInForm}
             autoComplete="false"
@@ -69,14 +71,14 @@ export const SignIn: React.FC<OnboardTemplateProps> = ({
                 allowClear
                 id="signin-username"
                 prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Số điện thoại hoặc email"
+                placeholder={t('authentication.signIn.userNamePlaceholder')}
               />
             </Form.Item>
             <Form.Item
               name="password"
               extra={
                 <a className="login-form-forgot" href="">
-                  Quên mật khẩu
+                  <Trans i18nKey="authentication.signIn.forGotPassword">Quên mật khẩu</Trans>
                 </a>
               }
             >
@@ -85,7 +87,7 @@ export const SignIn: React.FC<OnboardTemplateProps> = ({
                 autoComplete="false"
                 id="signin-password"
                 prefix={<LockOutlined className="site-form-item-icon" />}
-                placeholder="Mật khẩu"
+                placeholder={t('authentication.signIn.passwordPlaceholder')}
               />
             </Form.Item>
             <Form.Item noStyle>
@@ -94,14 +96,16 @@ export const SignIn: React.FC<OnboardTemplateProps> = ({
                 htmlType="submit"
                 size="large"
                 type="primary"
-                style={{ width: '100%' }}
+                className="w-full"
               >
-                Đăng nhập
+                <Trans i18nKey="authentication.signIn.textSignIn">Đăng nhập</Trans>
               </Button>
               <Typography className={styles['not-have-account']}>
-                Bạn chưa có tài khoản?
+                <Trans i18nKey="authentication.signIn.textYouNotHaveAccount">
+                  Bạn chưa có tài khoản?
+                </Trans>
                 <Button onClick={signUpHandle} className={styles['btn-signup']} type="link">
-                  Đăng ký
+                  <Trans i18nKey="authentication.signIn.textSignUp">Đăng ký</Trans>
                 </Button>
               </Typography>
             </Form.Item>

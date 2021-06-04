@@ -85,15 +85,16 @@ export function withLoginHandling<P extends IForumOperations>(
     }
 
     const afterSignInFailure = (errors: SignInError) => {
+      setIsFormLoading(false)
       const { code } = errors
       switch (code) {
         case 'UserNotConfirmedException':
           {
             Modal.error({
-              title: 'Thông báo',
-              content: 'Tài khoản chưa được xác thực, vui lòng xác thực trước khi đăng nhập.',
+              title: t('authentication.signIn.verifyModalTitle'),
+              content: t('authentication.signIn.verifyModalContent'),
               centered: true,
-              okText: 'Xác thực ngay',
+              okText: t('authentication.signIn.textVerifyNow'),
               maskClosable: true,
               closable: true,
               onOk: handleOkBtn,
@@ -102,7 +103,7 @@ export function withLoginHandling<P extends IForumOperations>(
           break
         case 'UserNotFoundException':
           {
-            setSiginErrors(['Tài khoản hoặc mật khẩu không đúng.'])
+            setSiginErrors([t('authentication.signIn.userNameOrPassIncorrect')])
           }
           break
 

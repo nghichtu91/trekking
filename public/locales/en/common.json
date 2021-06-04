@@ -42,18 +42,18 @@
     "signIn": {
       "titleHeader": "SignUp",
       "userName": "Email or phone number",
-      "userNamePlaceholder": "Số điện thoại hoặc email",
+      "userNamePlaceholder": "Email or phone number",
       "passwordPlaceholder": "Enter password",
       "forGotPassword": "Forgot password",
       "usernameNotExist" : "Tài khoản không tồn tại",
       "textVerifyNow": "Verify now",
-      "verifyModalContent": "Tài khoản chưa được xác thực, vui lòng xác thực trước khi đăng nhập.",
+      "verifyModalContent": "Account not verify, you need verify account.",
       "verifyModalTitle": "Notification",
       "userNameOrPassIncorrect": "Username or password is incorrect.",
-      "textSignUp":"SignUp",
-      "textSignIn": "SignIn",
-      "textYouNotHaveAccount": "Bạn chưa có tài khoản?",
-      "textOr": "Or"
+      "textSignUp":"sign up",
+      "textSignIn": "Sign in",
+      "textYouNotHaveAccount": "You not have account?",
+      "textOr": "OR"
     }
   },
   "verifyOTP": {
