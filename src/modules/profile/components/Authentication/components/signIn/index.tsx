@@ -13,6 +13,7 @@ interface OnboardTemplateProps {
   signInWithFacebook?: () => void
   signInHandle?: (opt: unknown) => void
   signUpHandle?: () => void
+  forgotPassword?: () => void
 }
 
 interface SignInFieldProps {
@@ -27,6 +28,7 @@ export const SignIn: React.FC<OnboardTemplateProps> = ({
   signUpHandle,
   form,
   loading,
+  forgotPassword,
 }) => {
   const [signInForm] = Form.useForm<SignInFieldProps>()
   const { t } = useTranslation()
@@ -77,9 +79,9 @@ export const SignIn: React.FC<OnboardTemplateProps> = ({
             <Form.Item
               name="password"
               extra={
-                <a className="login-form-forgot" href="">
+                <Typography.Link onClick={forgotPassword} className="login-form-forgot">
                   <Trans i18nKey="authentication.signIn.forGotPassword">Quên mật khẩu</Trans>
-                </a>
+                </Typography.Link>
               }
             >
               <Input.Password
