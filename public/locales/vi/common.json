@@ -56,6 +56,9 @@
       "textSignIn": "Đăng nhập",
       "textYouNotHaveAccount": "Bạn chưa có tài khoản?",
       "textOr": "Hoặc"
+    },
+    "forgot": {
+      
     }
   },
   "verifyOTP": {

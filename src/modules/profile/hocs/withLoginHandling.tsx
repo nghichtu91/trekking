@@ -25,11 +25,13 @@ export interface IForumOperations {
   goToSignUpPage?: () => void
   signInWithGooogle?: () => void
   signInWithFacebook?: () => void
+  handleForGotPassword?: () => void
   loading?: boolean
   formLoading?: boolean
   isUpdated?: boolean
   form?: FormInstance
   errors?: string[]
+  forgot?: boolean
 }
 
 export function withLoginHandling<P extends IForumOperations>(
@@ -37,6 +39,7 @@ export function withLoginHandling<P extends IForumOperations>(
 ) {
   const ComponentWithExtraInfo = (props: P) => {
     const [isFormLoading, setIsFormLoading] = useState(false)
+    const [isForgot, setIsForGot] = useState(false)
     const router = useRouter()
     const [signUpForm] = Form.useForm()
     const { t } = useTranslation()
@@ -62,6 +65,7 @@ export function withLoginHandling<P extends IForumOperations>(
 
     const handleSignIn = async (signInFileds: SignUpFields) => {
       setIsFormLoading(true)
+      setSiginErrors([])
       try {
         await authService.signIn(signInFileds.username, signInFileds.password)
         afterSignInSuccess()
@@ -122,6 +126,7 @@ export function withLoginHandling<P extends IForumOperations>(
     const handleSignInGg = () => {
       authService.signInWithSocial(CognitoHostedUIIdentityProvider.Google)
     }
+    const handleForGotPassword = () => {}
 
     return (
       <WrappedComponent
@@ -130,6 +135,7 @@ export function withLoginHandling<P extends IForumOperations>(
         goToSignUpPage={goToPage}
         signInWithFacebook={handleSignInFb}
         signInWithGooogle={handleSignInGg}
+        handleForGotPassword={handleForGotPassword}
         form={signUpForm}
         errors={siginErrors}
         {...props}

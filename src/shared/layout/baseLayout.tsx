@@ -15,7 +15,7 @@ interface BaseLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const BaseLayout: React.FC<BaseLayoutProps> = ({ children }) => {
   return (
-    <Layout className="app-layout base-layout">
+    <Layout style={{ minHeight: '100vh' }} className="app-layout base-layout">
       <Header />
       <Layout.Content className="main-wrapper">{children}</Layout.Content>
       <Layout.Footer>©2021 by TrangKute </Layout.Footer>

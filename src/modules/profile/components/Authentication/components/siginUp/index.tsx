@@ -63,7 +63,7 @@ export const SignUp: React.FC<SignUpProps> = ({
           />
         </PhoneItem>
 
-        <Form.Item
+        <RequiredItem
           messageVariables={{
             label: t('authentication.signUp.email'),
           }}
@@ -78,7 +78,7 @@ export const SignUp: React.FC<SignUpProps> = ({
             prefix={<MailOutlined className="site-form-item-icon" />}
             placeholder={t('authentication.signUp.emailPlaceholder')}
           />
-        </Form.Item>
+        </RequiredItem>
 
         <RequiredItem
           hasFeedback
