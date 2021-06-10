@@ -36,7 +36,7 @@ export const ForGot: React.FC<ForGotProps> = ({
   const codeRules: Rule[] = [
     {
       pattern: VERIFY_NUMBER_PATTERN,
-      message: 'Mã xác thực không hợp lệ',
+      message: t('authentication.forgot.codeNotValid'),
     },
   ]
 
@@ -46,7 +46,7 @@ export const ForGot: React.FC<ForGotProps> = ({
       <Form.Item noStyle>
         <RequiredItem
           messageVariables={{
-            label: t('authentication.forgot.pin'),
+            label: t('authentication.forgot.code'),
           }}
           name="code"
           rules={codeRules}
@@ -60,7 +60,7 @@ export const ForGot: React.FC<ForGotProps> = ({
 
         <RequiredItem
           messageVariables={{
-            label: t('authentication.forgot.repassword'),
+            label: t('authentication.forgot.newPassword'),
           }}
         >
           <Input.Password
@@ -102,7 +102,7 @@ export const ForGot: React.FC<ForGotProps> = ({
   return (
     <Card hidden={hidden} className={`${styles['forgot']} ${className}`}>
       <Typography.Title className="text-center" level={3}>
-        <Trans i18nKey="authentication.signIn.titleHeader">Quên mật khẩu</Trans>
+        <Trans i18nKey="authentication.forgot.titleHeader">Quên mật khẩu</Trans>
       </Typography.Title>
       <Form
         layout="vertical"
@@ -113,7 +113,7 @@ export const ForGot: React.FC<ForGotProps> = ({
         scrollToFirstError
       >
         <Form.Item hidden={!isSend}>
-          <Alert message="Chúng tôi đã gửi 1 xác nhận vào email hoặc số điện thoại."></Alert>
+          <Alert message={<Trans i18nKey="authentication.forgot.getOptSuccess" />} />
         </Form.Item>
         <RequiredItem
           hidden={isSend}

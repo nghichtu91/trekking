@@ -54,6 +54,23 @@
       "textSignIn": "Sign in",
       "textYouNotHaveAccount": "You not have account?",
       "textOr": "OR"
+    },
+    "forgot": {
+      "titleHeader": "Forgot Password",
+      "username": "Email or phone number",
+      "usernameNotExist": "Email or phone number not exist",
+      "placeholderUsername": "Enter email or phone number",
+      "txtReset": "Get Otp",
+      "txtUpdate": "Update",
+      "backSignIn": "Back signin",
+      "code": "mã xác thực",
+      "placeholderCode": "Enter opt",
+      "codeNotValid": "Mã xác thực không hợp lệ",
+      "newPassword": "mật khẩu mới",
+      "placeholderNewPassword": "Nhập mật khẩu mới",
+      "reNewPassword": "Nhập lại mật khẩu mới",
+      "placeholderReNewPassword": "Nhập lại mật khẩu mới",
+      "getOptSuccess": "Chúng tôi đã gửi 1 xác nhận vào email hoặc số điện thoại."
     }
   },
   "verifyOTP": {
