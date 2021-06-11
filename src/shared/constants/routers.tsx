@@ -10,4 +10,5 @@ export enum Routers {
   RegisterPage = '/reg',
   SignUpPage = '/signin',
   VerifyPage = '/verify',
+  ForgotPasswordPage = '/forgotpassword',
 }

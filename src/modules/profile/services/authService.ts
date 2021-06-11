@@ -78,4 +78,12 @@ export class AuthService implements IAuthService {
       return Promise.resolve(false)
     }
   }
+
+  getOtpForGot(username: string): Promise<unknown> {
+    return Auth.forgotPassword(username)
+  }
+
+  resetPassword(username: string, code: string, password: string): Promise<unknown> {
+    return Auth.forgotPasswordSubmit(username, code, password)
+  }
 }

@@ -23,15 +23,17 @@ export interface IForumOperations {
   handleSignUp?: (fileds: SignUpFields) => void
   handleSignIn?: (opts: unknown) => void
   goToSignUpPage?: () => void
+  goToForGotPassPage?: () => void
   signInWithGooogle?: () => void
   signInWithFacebook?: () => void
-  handleForGotPassword?: () => void
+  handleForGotPassword?: (fileds: SignUpFields) => void
   loading?: boolean
   formLoading?: boolean
   isUpdated?: boolean
   form?: FormInstance
+  forgotForm?: FormInstance
   errors?: string[]
-  forgot?: boolean
+  isGetOpt?: boolean
 }
 
 export function withLoginHandling<P extends IForumOperations>(
@@ -39,7 +41,6 @@ export function withLoginHandling<P extends IForumOperations>(
 ) {
   const ComponentWithExtraInfo = (props: P) => {
     const [isFormLoading, setIsFormLoading] = useState(false)
-    const [isForgot, setIsForGot] = useState(false)
     const router = useRouter()
     const [signUpForm] = Form.useForm()
     const { t } = useTranslation()
@@ -79,7 +80,7 @@ export function withLoginHandling<P extends IForumOperations>(
       goToHomePage()
     }
 
-    const goToPage = () => {
+    const goToPageSignUp = () => {
       return router.push(Routers.RegisterPage)
     }
 
@@ -113,7 +114,6 @@ export function withLoginHandling<P extends IForumOperations>(
             setSiginErrors([t('authentication.signIn.userNameOrPassIncorrect')])
           }
           break
-
         default:
           break
       }
@@ -126,16 +126,21 @@ export function withLoginHandling<P extends IForumOperations>(
     const handleSignInGg = () => {
       authService.signInWithSocial(CognitoHostedUIIdentityProvider.Google)
     }
-    const handleForGotPassword = () => {}
+
+    const goToForGotPasswordPage = () => {
+      router.push({
+        pathname: Routers.ForgotPasswordPage,
+      })
+    }
 
     return (
       <WrappedComponent
         formLoading={isFormLoading}
         handleSignIn={handleSignIn}
-        goToSignUpPage={goToPage}
+        goToSignUpPage={goToPageSignUp}
+        goToForGotPassPage={goToForGotPasswordPage}
         signInWithFacebook={handleSignInFb}
         signInWithGooogle={handleSignInGg}
-        handleForGotPassword={handleForGotPassword}
         form={signUpForm}
         errors={siginErrors}
         {...props}

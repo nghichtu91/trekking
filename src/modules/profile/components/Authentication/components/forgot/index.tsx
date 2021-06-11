@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import { Button, Typography, Form, Input, Card, Alert } from 'antd'
 import { Trans, useTranslation } from 'next-i18next'
 import { FormInstance } from 'antd/lib/form'
@@ -15,24 +14,22 @@ export interface ForGotFields {
 }
 
 export interface ForGotProps extends React.HTMLAttributes<HTMLDivElement> {
-  send?: (opts: unknown) => void
+  handleGetOtp?: (opts: unknown) => void
+  handleUpdateNewPassword?: (opts: unknown) => void
   form?: FormInstance
   goBack?: () => void
   loading?: boolean
-  errors?: Record<string, unknown>[]
+  errors?: string[]
+  isGetOtp?: boolean
 }
 
-export const ForGot: React.FC<ForGotProps> = ({
-  send,
-  form,
-  className,
-  goBack,
-  loading = false,
-  hidden,
-}) => {
+export const ForGot: React.FC<ForGotProps> = props => {
+  const { goBack, handleGetOtp = () => false, handleUpdateNewPassword = () => false } = props
+  const { form, className, hidden, loading = false, isGetOtp = false } = props
   const { t } = useTranslation()
-  const [verifyForm] = Form.useForm<ForGotFields>()
-  const [isSend, setIsSend] = useState<boolean>(false)
+  const [defaultForm] = Form.useForm<ForGotFields>()
+  const verifyForm = form || defaultForm
+
   const codeRules: Rule[] = [
     {
       pattern: VERIFY_NUMBER_PATTERN,
@@ -40,8 +37,8 @@ export const ForGot: React.FC<ForGotProps> = ({
     },
   ]
 
-  const afterSendRend = () => {
-    if (!isSend) return null
+  const afterGetOtpSuccessRend = () => {
+    if (!isGetOtp) return null
     return (
       <Form.Item noStyle>
         <RequiredItem
@@ -59,6 +56,7 @@ export const ForGot: React.FC<ForGotProps> = ({
         </RequiredItem>
 
         <RequiredItem
+          name="password"
           messageVariables={{
             label: t('authentication.forgot.newPassword'),
           }}
@@ -70,7 +68,7 @@ export const ForGot: React.FC<ForGotProps> = ({
             placeholder={t('authentication.forgot.placeholderNewPassword')}
           />
         </RequiredItem>
-        <RequiredItem>
+        <RequiredItem name="confirm-password">
           <Input.Password
             allowClear
             autoComplete="false"
@@ -82,21 +80,8 @@ export const ForGot: React.FC<ForGotProps> = ({
     )
   }
 
-  const handleGoBackSignIn = () => {
-    setIsSend(false)
-    verifyForm.resetFields()
-    goBack()
-  }
-
-  const handleGetOpt = (fields: ForGotFields) => {
-    if (!isSend) {
-      setIsSend(true)
-      send(fields)
-    }
-  }
-
   const onFinish = (fields: ForGotFields) => {
-    handleGetOpt(fields)
+    return !isGetOtp ? handleGetOtp(fields) : handleUpdateNewPassword(fields)
   }
 
   return (
@@ -107,16 +92,16 @@ export const ForGot: React.FC<ForGotProps> = ({
       <Form
         layout="vertical"
         onFinish={onFinish}
-        form={form || verifyForm}
+        form={verifyForm}
         className="forgot--form"
         size="large"
         scrollToFirstError
       >
-        <Form.Item hidden={!isSend}>
+        <Form.Item hidden={!isGetOtp}>
           <Alert message={<Trans i18nKey="authentication.forgot.getOptSuccess" />} />
         </Form.Item>
         <RequiredItem
-          hidden={isSend}
+          hidden={isGetOtp}
           hasFeedback
           messageVariables={{
             label: t('authentication.forgot.username'),
@@ -129,7 +114,7 @@ export const ForGot: React.FC<ForGotProps> = ({
             placeholder={t('authentication.forgot.placeholderUsername')}
           />
         </RequiredItem>
-        {afterSendRend()}
+        {afterGetOtpSuccessRend()}
         <Form.Item className="text-center" noStyle>
           <Button
             loading={loading}
@@ -137,7 +122,7 @@ export const ForGot: React.FC<ForGotProps> = ({
             size="large"
             htmlType="submit"
             className="w-full"
-            hidden={isSend}
+            hidden={isGetOtp}
           >
             <Trans i18nKey="authentication.forgot.txtReset">Lấy mã</Trans>
           </Button>
@@ -147,12 +132,12 @@ export const ForGot: React.FC<ForGotProps> = ({
             size="large"
             htmlType="submit"
             className="w-full"
-            hidden={!isSend}
+            hidden={!isGetOtp}
           >
             <Trans i18nKey="authentication.forgot.txtUpdate">Cập nhật</Trans>
           </Button>
           <Form.Item className="text-center mb-0">
-            <Button onClick={handleGoBackSignIn} className={styles['btn--go-back']} type="link">
+            <Button onClick={goBack} className={styles['btn--go-back']} type="link">
               <Trans i18nKey="authentication.forgot.backSignIn">Quay lại đăng nhập</Trans>
             </Button>
           </Form.Item>
