@@ -105,10 +105,11 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
     const resetPasswordSuccess = () => {
       setIsFormLoading(false)
       Modal.success({
-        content: 'Bạn đã cập nhật mật khẩu mới thành công.',
-        title: 'Thông báo',
-        okText: 'Đóng',
+        content: t('authentication.forgot.resetPasswordSuccess'),
+        title: t('authentication.forgot.modalTitle'),
+        okText: t('authentication.forgot.textOk'),
         centered: true,
+        onOk: goToSignInPage,
       })
     }
 

@@ -73,7 +73,10 @@
       "confirmPassword": "Nhập lại mật khẩu mới",
       "placeholderConfirmPassword": "Nhập lại mật khẩu mới",
       "getOptSuccess": "Chúng tôi đã gửi 1 xác nhận vào email hoặc số điện thoại.",
-      "codeInvalid": "Mã xác thực không hợp lệ"
+      "codeInvalid": "Mã xác thực không hợp lệ",
+      "resetPasswordSuccess": "Bạn đã cập nhật mật khẩu mới thành công",
+      "modalTitle": "Thông báo",
+      "textOk": "Đóng"
     }
   },
   "verifyOTP": {
