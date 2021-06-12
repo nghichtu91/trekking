@@ -13,18 +13,19 @@ import { ForGot } from '@modules/profile/components/Authentication'
 import { Row, Col } from 'antd'
 
 const ForGotPassworPage: React.FC<IForumOperations> = props => {
-  const { handleGetOpt, handleResetPassword, goToSignInPage } = props
+  const { handleGetOpt, handleResetPassword, hendleResendOpt, errors } = props
   return (
     <PageWrapper>
       <Row className="onboard-container" justify="center">
         <Col xxl={15} xl={15} lg={18} md={18} xs={24} sm={24}>
           <ForGot
             isGetOtp={props.isGetOpt}
-            goBack={goToSignInPage}
             handleGetOtp={handleGetOpt}
             handleUpdateNewPassword={handleResetPassword}
+            hendleResendOpt={hendleResendOpt}
             form={props.form}
             loading={props.formLoading}
+            errors={errors}
           />
         </Col>
       </Row>

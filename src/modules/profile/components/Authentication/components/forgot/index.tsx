@@ -16,16 +16,20 @@ export interface ForGotFields {
 export interface ForGotProps extends React.HTMLAttributes<HTMLDivElement> {
   handleGetOtp?: (opts: unknown) => void
   handleUpdateNewPassword?: (opts: unknown) => void
+  hendleResendOpt?: (opts: unknown) => void
   form?: FormInstance
-  goBack?: () => void
   loading?: boolean
   errors?: string[]
   isGetOtp?: boolean
 }
 
 export const ForGot: React.FC<ForGotProps> = props => {
-  const { goBack, handleGetOtp = () => false, handleUpdateNewPassword = () => false } = props
-  const { form, className, hidden, loading = false, isGetOtp = false } = props
+  const {
+    handleGetOtp = () => false,
+    handleUpdateNewPassword = () => false,
+    hendleResendOpt = () => false,
+  } = props
+  const { form, className, hidden, loading = false, isGetOtp = false, errors = [] } = props
   const { t } = useTranslation()
   const [defaultForm] = Form.useForm<ForGotFields>()
   const verifyForm = form || defaultForm
@@ -42,7 +46,7 @@ export const ForGot: React.FC<ForGotProps> = props => {
   const codeRules: Rule[] = [
     {
       pattern: VERIFY_NUMBER_PATTERN,
-      message: t('authentication.forgot.codeNotValid'),
+      message: t('authentication.forgot.optNotValid'),
     },
   ]
 
@@ -100,6 +104,21 @@ export const ForGot: React.FC<ForGotProps> = props => {
     return !isGetOtp ? handleGetOtp(fields) : handleUpdateNewPassword(fields)
   }
 
+  const errorsRender = () => {
+    if (errors.length === 0) return null
+    return (
+      <Form.Item>
+        <Alert
+          type="error"
+          showIcon
+          message={errors.map((messge, index) => (
+            <Typography.Text key={index}> {messge} </Typography.Text>
+          ))}
+        />
+      </Form.Item>
+    )
+  }
+
   return (
     <Card hidden={hidden} className={`${styles['forgot']} ${className}`}>
       <Typography.Title className="text-center" level={3}>
@@ -116,6 +135,9 @@ export const ForGot: React.FC<ForGotProps> = props => {
         <Form.Item hidden={!isGetOtp}>
           <Alert message={<Trans i18nKey="authentication.forgot.getOptSuccess" />} />
         </Form.Item>
+
+        {errorsRender()}
+
         <RequiredItem
           hidden={isGetOtp}
           hasFeedback
@@ -152,10 +174,13 @@ export const ForGot: React.FC<ForGotProps> = props => {
           >
             <Trans i18nKey="authentication.forgot.txtUpdate">Cập nhật</Trans>
           </Button>
-          <Form.Item className="text-center mb-0">
-            <Button onClick={goBack} className={styles['btn--go-back']} type="link">
-              <Trans i18nKey="authentication.forgot.backSignIn">Quay lại đăng nhập</Trans>
-            </Button>
+          <Form.Item hidden={!isGetOtp} className="text-center mb-0">
+            <Typography.Text>
+              <Trans i18nKey="authentication.forgot.textMissOpt">Bạn chưa nhận mã xác nhận?</Trans>
+              <Button onClick={hendleResendOpt} className={styles['btn--go-back']} type="link">
+                <Trans i18nKey="authentication.forgot.textBtnTryAgain">Lấy lại</Trans>
+              </Button>
+            </Typography.Text>
           </Form.Item>
         </Form.Item>
       </Form>

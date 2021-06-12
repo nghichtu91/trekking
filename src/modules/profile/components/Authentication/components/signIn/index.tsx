@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Trans, useTranslation } from 'next-i18next'
 import { UserOutlined, LockOutlined, FacebookFilled, GoogleCircleFilled } from '@ant-design/icons'
 import { Divider, Button, Typography, Space, Card, Form, Input, Alert } from 'antd'

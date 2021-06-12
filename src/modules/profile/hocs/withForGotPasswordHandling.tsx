@@ -22,9 +22,9 @@ interface SignInError extends AuthError {
 
 export interface IForumOperations {
   handleSignIn?: (opts: unknown) => void
-  goToSignInPage?: () => void
   handleGetOpt?: (fileds: SignUpFields) => void
   handleResetPassword?: (fileds: SignUpFields) => void
+  hendleResendOpt?: () => void
   loading?: boolean
   formLoading?: boolean
   isUpdated?: boolean
@@ -59,6 +59,7 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
 
     const getOptForGotPassword = async (fields: SignUpFields) => {
       setIsFormLoading(true)
+      setForgotErrors([])
       try {
         await authService.getOtpForGot(fields.username)
         setIsGetOpt(true)
@@ -67,9 +68,32 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
         getOtpFailure(error)
       }
     }
+
     const getOtpFailure = (errors: SignInError) => {
       setIsFormLoading(false)
       switch (errors.code) {
+        case 'InvalidParameterException':
+          {
+            forGotForm.setFields([
+              {
+                name: 'username',
+                errors: [''],
+              },
+            ])
+            setForgotErrors([t('authentication.forgot.usernameNotVerified')])
+          }
+          break
+        case 'LimitExceededException':
+          {
+            setForgotErrors([t('authentication.forgot.limited')])
+            forGotForm.setFields([
+              {
+                name: 'username',
+                errors: [''],
+              },
+            ])
+          }
+          break
         case 'UserNotFoundException':
           {
             forGotForm.setFields([
@@ -122,7 +146,17 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
             forGotForm.setFields([
               {
                 name: 'code',
-                errors: [t('authentication.forgot.codeInvalid')],
+                errors: [t('authentication.forgot.otpIncorrect')],
+              },
+            ])
+          }
+          break
+        case 'InvalidPasswordException':
+          {
+            forGotForm.setFields([
+              {
+                name: 'password',
+                errors: [t('authentication.forgot.newPasswordNotValid')],
               },
             ])
           }
@@ -132,12 +166,22 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
       }
     }
 
+    const resendOpt = () => {
+      setForgotErrors([])
+      setIsGetOpt(false)
+      forGotForm.setFieldsValue({
+        code: null,
+        password: null,
+        'confirm-password': null,
+      })
+    }
+
     return (
       <WrappedComponent
         formLoading={isFormLoading}
         handleGetOpt={getOptForGotPassword}
         handleResetPassword={handleResetPassword}
-        goToSignInPage={goToSignInPage}
+        hendleResendOpt={resendOpt}
         isGetOpt={isGetOpt}
         form={forGotForm}
         errors={forgotErrors}
