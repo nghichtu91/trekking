@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Typography, Form, Input, Card, Alert } from 'antd'
 import { Trans, useTranslation } from 'next-i18next'
 import { FormInstance } from 'antd/lib/form'
@@ -29,6 +29,15 @@ export const ForGot: React.FC<ForGotProps> = props => {
   const { t } = useTranslation()
   const [defaultForm] = Form.useForm<ForGotFields>()
   const verifyForm = form || defaultForm
+
+  const rePasswordCheckMatchPassword: Rule = ({ getFieldValue }) => ({
+    validator(_, value) {
+      if (!value || getFieldValue('password') === value) {
+        return Promise.resolve()
+      }
+      return Promise.reject(new Error(t('authentication.signUp.rePasswordNotValid')))
+    },
+  })
 
   const codeRules: Rule[] = [
     {
@@ -68,12 +77,19 @@ export const ForGot: React.FC<ForGotProps> = props => {
             placeholder={t('authentication.forgot.placeholderNewPassword')}
           />
         </RequiredItem>
-        <RequiredItem name="confirm-password">
+        <RequiredItem
+          messageVariables={{
+            label: t('authentication.forgot.confirmPassword'),
+          }}
+          rules={[rePasswordCheckMatchPassword]}
+          dependencies={['password']}
+          name="confirm-password"
+        >
           <Input.Password
             allowClear
             autoComplete="false"
             id="forgot-renew-password"
-            placeholder={t('authentication.forgot.placeholderReNewPassword')}
+            placeholder={t('authentication.forgot.placeholderConfirmPassword')}
           />
         </RequiredItem>
       </Form.Item>

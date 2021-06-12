@@ -61,7 +61,7 @@
       "titleHeader": "Quên mật khẩu",
       "username": "Email hoặc số điện thoại",
       "placeholderUsername": "Nhập email hoặc số điện thoại",
-      "usernameNotExist": "Email or số điện không tồn tại",
+      "usernameNotExist": "Email hoặc số điện không tồn tại",
       "txtReset": "Lấy mã",
       "txtUpdate": "Cập nhật mật khẩu mới",
       "backSignIn": "Quay lại đăng nhập",
@@ -69,10 +69,11 @@
       "placeholderCode": "Nhập mã xác nhận",
       "codeNotValid": "Mã xác thực không hợp lệ",
       "newPassword": "mật khẩu mới",
-      "placeholderNewPassword": "Nhập mật khẩu mới",
-      "reNewPassword": "Nhập lại mật khẩu mới",
-      "placeholderReNewPassword": "Nhập lại mật khẩu mới",
-      "getOptSuccess": "Chúng tôi đã gửi 1 xác nhận vào email hoặc số điện thoại."
+      "placeholderNewPassword": "lại mật khẩu mới",
+      "confirmPassword": "Nhập lại mật khẩu mới",
+      "placeholderConfirmPassword": "Nhập lại mật khẩu mới",
+      "getOptSuccess": "Chúng tôi đã gửi 1 xác nhận vào email hoặc số điện thoại.",
+      "codeInvalid": "Mã xác thực không hợp lệ"
     }
   },
   "verifyOTP": {

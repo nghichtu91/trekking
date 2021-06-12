@@ -7,6 +7,7 @@ import { FormInstance } from 'antd/lib/form'
 import { useTranslation } from 'next-i18next'
 import { AuthError } from '@aws-amplify/auth/lib/Errors'
 import { authService } from '@modules/profile/services'
+import { Modal } from 'antd'
 
 interface SignUpFields {
   username: string
@@ -95,10 +96,38 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
       try {
         const { username, code, password } = fields
         await authService.resetPassword(username, code, password)
-        setIsFormLoading(false)
+        resetPasswordSuccess()
       } catch (errors) {
-        console.log(errors)
-        setIsFormLoading(false)
+        resetPasswordFailure(errors)
+      }
+    }
+
+    const resetPasswordSuccess = () => {
+      setIsFormLoading(false)
+      Modal.success({
+        content: 'Bạn đã cập nhật mật khẩu mới thành công.',
+        title: 'Thông báo',
+        okText: 'Đóng',
+        centered: true,
+      })
+    }
+
+    const resetPasswordFailure = (errors: SignInError) => {
+      setIsFormLoading(false)
+      switch (errors.code) {
+        case 'ExpiredCodeException':
+        case 'CodeMismatchException':
+          {
+            forGotForm.setFields([
+              {
+                name: 'code',
+                errors: [t('authentication.forgot.codeInvalid')],
+              },
+            ])
+          }
+          break
+        default:
+          break
       }
     }
 

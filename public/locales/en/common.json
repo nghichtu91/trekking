@@ -68,9 +68,10 @@
       "codeNotValid": "Mã xác thực không hợp lệ",
       "newPassword": "mật khẩu mới",
       "placeholderNewPassword": "Nhập mật khẩu mới",
-      "reNewPassword": "Nhập lại mật khẩu mới",
-      "placeholderReNewPassword": "Nhập lại mật khẩu mới",
-      "getOptSuccess": "Chúng tôi đã gửi 1 xác nhận vào email hoặc số điện thoại."
+      "confirmPassword": "Nhập lại mật khẩu mới",
+      "placeholderConfirmPassword": "Nhập lại mật khẩu mới",
+      "getOptSuccess": "Chúng tôi đã gửi 1 xác nhận vào email hoặc số điện thoại.",
+      "codeInvalid": "Mã xác thực không hợp lệ"
     }
   },
   "verifyOTP": {
