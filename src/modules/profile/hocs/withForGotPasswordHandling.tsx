@@ -8,7 +8,7 @@ import { useTranslation } from 'next-i18next'
 import { Routers } from '@shared/constants/routers'
 import { authService } from '@modules/profile/services'
 import { ForGotFields } from '@modules/profile/components/Authentication'
-import { AwsError } from '@shared/constants'
+import { AwsError, ResetPassword } from '@shared/constants'
 
 export interface IForumOperations {
   handleSignIn?: (opts: unknown) => void
@@ -62,7 +62,7 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
     const getOtpFailure = (errors: AwsError) => {
       setIsFormLoading(false)
       switch (errors.code) {
-        case 'InvalidParameterException':
+        case ResetPassword.InvalidParameter:
           {
             forGotForm.setFields([
               {
@@ -73,7 +73,7 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
             setForgotErrors([t('authentication.forgot.usernameNotVerified')])
           }
           break
-        case 'LimitExceededException':
+        case ResetPassword.LimitExceeded:
           {
             setForgotErrors([t('authentication.forgot.limited')])
             forGotForm.setFields([
@@ -84,7 +84,7 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
             ])
           }
           break
-        case 'UserNotFoundException':
+        case ResetPassword.UserNotFound:
           {
             forGotForm.setFields([
               {
@@ -130,8 +130,8 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
     const resetPasswordFailure = (errors: AwsError) => {
       setIsFormLoading(false)
       switch (errors.code) {
-        case 'ExpiredCodeException':
-        case 'CodeMismatchException':
+        case ResetPassword.ExpiredCode:
+        case ResetPassword.CodeMismatch:
           {
             forGotForm.setFields([
               {
@@ -141,7 +141,7 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
             ])
           }
           break
-        case 'InvalidPasswordException':
+        case ResetPassword.InvalidParameter:
           {
             forGotForm.setFields([
               {
