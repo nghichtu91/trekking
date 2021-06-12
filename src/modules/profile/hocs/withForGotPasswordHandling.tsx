@@ -1,29 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import { Modal, Form } from 'antd'
+import { FormInstance } from 'antd/lib/form'
 import { Auth } from 'aws-amplify'
 import { useRouter } from 'next/router'
-import { Routers } from '@shared/constants/routers'
-import { Form } from 'antd'
-import { FormInstance } from 'antd/lib/form'
 import { useTranslation } from 'next-i18next'
-import { AuthError } from '@aws-amplify/auth/lib/Errors'
+
+import { Routers } from '@shared/constants/routers'
 import { authService } from '@modules/profile/services'
-import { Modal } from 'antd'
-
-interface SignUpFields {
-  username: string
-  password: string
-  phone: string
-  code: string
-}
-
-interface SignInError extends AuthError {
-  code: string
-}
+import { ForGotFields } from '@modules/profile/components/Authentication'
+import { AwsError } from '@shared/constants'
 
 export interface IForumOperations {
   handleSignIn?: (opts: unknown) => void
-  handleGetOpt?: (fileds: SignUpFields) => void
-  handleResetPassword?: (fileds: SignUpFields) => void
+  handleGetOpt?: (fileds: ForGotFields) => void
+  handleResetPassword?: (fileds: ForGotFields) => void
   hendleResendOpt?: () => void
   loading?: boolean
   formLoading?: boolean
@@ -57,7 +47,7 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
       }
     }
 
-    const getOptForGotPassword = async (fields: SignUpFields) => {
+    const getOptForGotPassword = async (fields: ForGotFields) => {
       setIsFormLoading(true)
       setForgotErrors([])
       try {
@@ -69,7 +59,7 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
       }
     }
 
-    const getOtpFailure = (errors: SignInError) => {
+    const getOtpFailure = (errors: AwsError) => {
       setIsFormLoading(false)
       switch (errors.code) {
         case 'InvalidParameterException':
@@ -115,7 +105,7 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
       })
     }
 
-    const handleResetPassword = async (fields: SignUpFields) => {
+    const handleResetPassword = async (fields: ForGotFields) => {
       setIsFormLoading(true)
       try {
         const { username, code, password } = fields
@@ -137,7 +127,7 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
       })
     }
 
-    const resetPasswordFailure = (errors: SignInError) => {
+    const resetPasswordFailure = (errors: AwsError) => {
       setIsFormLoading(false)
       switch (errors.code) {
         case 'ExpiredCodeException':
