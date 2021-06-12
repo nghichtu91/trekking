@@ -67,7 +67,7 @@
       "placeholderCode": "Enter opt",
       "optNotValid": "Mã opt không hợp lệ",
       "newPassword": "mật khẩu mới",
-      "newPasswordNotValid": "Mật khẩu đúng định dạng",
+      "passwordNotValid": "Mật khẩu có ít nhất 1 ký tự in hoa, 1 ký tự số và 1 ký tự đặc biệt",
       "placeholderNewPassword": "Nhập mật khẩu mới",
       "confirmPassword": "Nhập lại mật khẩu mới",
       "placeholderConfirmPassword": "Nhập lại mật khẩu mới",

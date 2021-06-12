@@ -6,6 +6,7 @@ import { RequiredItem } from '@shared/components'
 import styles from './styles/forgot.module.scss'
 import { Rule } from 'antd/es/form'
 import { VERIFY_NUMBER_PATTERN } from '@shared/constants/patterns'
+import { StrongPassword } from '@shared/components'
 
 export interface ForGotFields {
   username: string
@@ -34,15 +35,6 @@ export const ForGot: React.FC<ForGotProps> = props => {
   const [defaultForm] = Form.useForm<ForGotFields>()
   const verifyForm = form || defaultForm
 
-  const rePasswordCheckMatchPassword: Rule = ({ getFieldValue }) => ({
-    validator(_, value) {
-      if (!value || getFieldValue('password') === value) {
-        return Promise.resolve()
-      }
-      return Promise.reject(new Error(t('authentication.signUp.rePasswordNotValid')))
-    },
-  })
-
   const codeRules: Rule[] = [
     {
       pattern: VERIFY_NUMBER_PATTERN,
@@ -68,34 +60,14 @@ export const ForGot: React.FC<ForGotProps> = props => {
           />
         </RequiredItem>
 
-        <RequiredItem
+        <StrongPassword
           name="password"
           messageVariables={{
             label: t('authentication.forgot.newPassword'),
           }}
-        >
-          <Input.Password
-            allowClear
-            autoComplete="false"
-            id="forgot-new-password"
-            placeholder={t('authentication.forgot.placeholderNewPassword')}
-          />
-        </RequiredItem>
-        <RequiredItem
-          messageVariables={{
-            label: t('authentication.forgot.confirmPassword'),
-          }}
-          rules={[rePasswordCheckMatchPassword]}
-          dependencies={['password']}
-          name="confirm-password"
-        >
-          <Input.Password
-            allowClear
-            autoComplete="false"
-            id="forgot-renew-password"
-            placeholder={t('authentication.forgot.placeholderConfirmPassword')}
-          />
-        </RequiredItem>
+          placeholder={t('authentication.forgot.placeholderNewPassword')}
+          placeholderConfirm={t('authentication.forgot.placeholderConfirmPassword')}
+        />
       </Form.Item>
     )
   }
@@ -118,6 +90,8 @@ export const ForGot: React.FC<ForGotProps> = props => {
       </Form.Item>
     )
   }
+
+  // const isFormValid = () => form.getFieldsError().some(item => item.errors.length > 0)
 
   return (
     <Card hidden={hidden} className={`${styles['forgot']} ${className}`}>
