@@ -7,17 +7,34 @@ export const InvalidParameter = 'InvalidParameterException'
 export const UserNotFound = 'UserNotFoundException'
 // signin
 export const UserNotConfirmed = 'UserNotConfirmedException'
+// verify account
+export const NotAuthorized = 'NotAuthorizedException'
+// signUp
+export const UsernameExists = 'UsernameExistsException'
 
 export const SignInErrors = {
   UserNotConfirmed,
   UserNotFound,
 }
+
 export const ResetPassword = {
   ExpiredCode,
   CodeMismatch,
   LimitExceeded,
   InvalidParameter,
   UserNotFound,
+}
+
+export const VerifyUsernameErrors = {
+  LimitExceeded,
+  InvalidParameter,
+  CodeMismatch,
+  UserNotFound,
+  NotAuthorized,
+}
+
+export const SignUpErrors = {
+  UsernameExists,
 }
 
 export interface AwsError extends AuthError {

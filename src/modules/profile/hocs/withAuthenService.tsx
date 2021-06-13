@@ -3,25 +3,11 @@ import { Auth } from 'aws-amplify'
 import { useRouter } from 'next/router'
 import { Routers } from '@shared/constants/routers'
 import { authService } from '@modules/profile/services'
-import { Form, notification } from 'antd'
+import { Form } from 'antd'
 import { FormInstance } from 'antd/lib/form'
 import { useTranslation } from 'next-i18next'
-import { AuthError } from '@aws-amplify/auth/lib/Errors'
-
-interface SignUpFields {
-  email: string
-  password: string
-  phone: string
-}
-
-interface VerifyParams {
-  pin: string
-  username?: string
-}
-
-interface SignUpError extends AuthError {
-  code: string
-}
+import { SignUpFields } from '@modules/profile/components/Authentication'
+import { AwsError, SignUpErrors } from '@shared/constants/awsErrorsCode'
 
 export interface IForumOperations {
   handleSignUp?: (fileds: SignUpFields) => void
@@ -76,10 +62,10 @@ export function withExtraAuthen<P extends IForumOperations>(
       return false
     }
 
-    const afterSignUpFailure = (error: SignUpError) => {
+    const afterSignUpFailure = (error: AwsError) => {
       setIsFormLoading(false)
       switch (error.code) {
-        case 'UsernameExistsException':
+        case SignUpErrors.UsernameExists:
           {
             const emailExist = t('authentication.signUp.emailExist')
             signUpForm.setFields([
@@ -100,39 +86,11 @@ export function withExtraAuthen<P extends IForumOperations>(
       })
     }
 
-    const handleVerify = async (verifyParams: VerifyParams) => {
-      setIsFormLoading(true)
-      if (!verifyParams.pin) {
-        return false
-      }
-      try {
-        authService.confirmAaccount('thanh2@yopmail.com', verifyParams.pin)
-        afterVerifySuccess(verifyParams)
-      } catch (error) {
-        console.log(error)
-        afterVerifyFailure(error)
-      }
-    }
-
-    const afterVerifySuccess = (verifyParams: VerifyParams) => {
-      console.log(verifyParams)
-      notification.success({
-        message: 'ABBB',
-        description: 'dsdsds',
-        placement: 'bottomRight',
-      })
-    }
-
-    const afterVerifyFailure = (error: SignUpError) => {
-      console.log(error)
-    }
-
     return (
       <WrappedComponent
         formLoading={isFormLoading}
         handleSignUp={handleSignUp}
         handleSignIn={handleSignIn}
-        handleVerify={handleVerify}
         form={signUpForm}
         {...props}
       />

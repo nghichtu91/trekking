@@ -6,14 +6,10 @@ import { authService } from '@modules/profile/services'
 import { Form, Modal } from 'antd'
 import { FormInstance } from 'antd/lib/form'
 import { useTranslation } from 'next-i18next'
-import { AuthError } from '@aws-amplify/auth/lib/Errors'
+import { AwsError, VerifyUsernameErrors } from '@shared/constants'
 
 interface VerifyParams {
   pin: string
-}
-
-interface SignUpError extends AuthError {
-  code: string
 }
 
 export interface IForumOperations {
@@ -90,7 +86,7 @@ export function withVerifyHandling<P extends IForumOperations>(
 
     const afterResendOptSuccess = () => {
       Modal.success({
-        title: 'Thông báo',
+        title: t('verifyOTP.modalTitle'),
         content: t('verifyOTP.titleSub'),
         okText: t('verifyOTP.textClose'),
         centered: true,
@@ -98,24 +94,24 @@ export function withVerifyHandling<P extends IForumOperations>(
       })
     }
 
-    const afterResendOptFailure = (error: SignUpError) => {
+    const afterResendOptFailure = (error: AwsError) => {
       switch (error.code) {
-        case 'LimitExceededException':
+        case VerifyUsernameErrors.LimitExceeded:
           {
             setVerifyErrors([t('verifyOTP.limitExceeded')])
           }
           break
-        case 'UserNotFoundException':
+        case VerifyUsernameErrors.UserNotFound:
           {
             setVerifyErrors([t('verifyOTP.usernameNotExist')])
           }
           break
-        case 'InvalidParameterException':
+        case VerifyUsernameErrors.InvalidParameter:
           {
             setVerifyErrors([t('verifyOTP.confirmed')])
           }
           break
-        case 'CodeMismatchException':
+        case VerifyUsernameErrors.CodeMismatch:
           {
             verifyForm.setFields([
               {
@@ -136,7 +132,7 @@ export function withVerifyHandling<P extends IForumOperations>(
 
     const afterVerifySuccess = () => {
       Modal.success({
-        title: 'Thông báo',
+        title: t('verifyOTP.modalTitle'),
         content: t('verifyOTP.otpsuccess'),
         okText: t('verifyOTP.textClose'),
         centered: true,
@@ -145,19 +141,19 @@ export function withVerifyHandling<P extends IForumOperations>(
       })
     }
 
-    const afterVerifyFailure = (error: SignUpError) => {
+    const afterVerifyFailure = (error: AwsError) => {
       switch (error.code) {
-        case 'NotAuthorizedException':
+        case VerifyUsernameErrors.NotAuthorized:
           {
             setVerifyErrors([t('verifyOTP.confirmed')])
           }
           break
-        case 'UserNotFoundException':
+        case VerifyUsernameErrors.UserNotFound:
           {
             setVerifyErrors([t('verifyOTP.usernameNotExist')])
           }
           break
-        case 'CodeMismatchException':
+        case VerifyUsernameErrors.CodeMismatch:
           {
             verifyForm.setFields([
               {

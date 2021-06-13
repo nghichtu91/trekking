@@ -101,7 +101,7 @@ export function withForGotPasswordHandling<P extends IForumOperations>(
 
     const goToSignInPage = () => {
       router.push({
-        pathname: Routers.SignUpPage,
+        pathname: Routers.SignInPage,
       })
     }
 

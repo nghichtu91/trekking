@@ -101,6 +101,7 @@
     "confirmed": "Tài khoản này đã xác minh",
     "otpsuccess": "Xác thực OTP thành công",
     "limitExceeded": "Bạn đã lấy opt quá nhiều lần, vui lòng thử lại sau.",
-    "textClose": "Đóng"
+    "textClose": "Đóng",
+    "modalTitle": "Thông báo"
   }
 }
