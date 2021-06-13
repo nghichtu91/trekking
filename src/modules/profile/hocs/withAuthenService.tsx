@@ -96,7 +96,7 @@ export function withExtraAuthen<P extends IForumOperations>(
 
     const handleSignIn = () => {
       router.push({
-        pathname: Routers.SignUpPage,
+        pathname: Routers.SignInPage,
       })
     }
 

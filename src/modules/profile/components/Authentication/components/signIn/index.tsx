@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Trans, useTranslation } from 'next-i18next'
 import { UserOutlined, LockOutlined, FacebookFilled, GoogleCircleFilled } from '@ant-design/icons'
 import { Divider, Button, Typography, Space, Card, Form, Input, Alert } from 'antd'
@@ -18,13 +18,13 @@ interface OnboardTemplateProps extends CardProps {
   errors?: string[]
 }
 
-interface SignInFieldProps {
+export interface SignInField {
   username: string
   password: string
 }
 
 export const SignIn: React.FC<OnboardTemplateProps> = props => {
-  const [signInForm] = Form.useForm<SignInFieldProps>()
+  const [signInForm] = Form.useForm<SignInField>()
   const { t } = useTranslation()
   const {
     signInWithFacebook,
@@ -40,7 +40,13 @@ export const SignIn: React.FC<OnboardTemplateProps> = props => {
   } = props
 
   return (
-    <Card className={className} id={styles['signin']} loading={false} hidden={hidden}>
+    <Card
+      bordered={false}
+      className={`${className}`}
+      id={styles['signin']}
+      loading={false}
+      hidden={hidden}
+    >
       <Typography.Title className="text-center" level={3}>
         <Trans i18nKey="authentication.signIn.titleHeader">Đăng nhập</Trans>
       </Typography.Title>

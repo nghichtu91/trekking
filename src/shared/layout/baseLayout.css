@@ -28,10 +28,13 @@
   flex: none;
   /* margin: 0 16px 0 0; */
 }
+.has--shadow {
+  box-shadow: 0 2px 3px #ddd;
+}
 .main-container,
 .main-wrapper {
   position: relative;
-  background: #fff;
+  background: #f7f7f7;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 30px;

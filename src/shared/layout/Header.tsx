@@ -198,7 +198,7 @@ export const Header: React.FC<HeaderProps> = props => {
         </Popover>
       </>
     ) : (
-      <Link href={Routers.RegisterPage}>Đăng ký/Đăng nhập</Link>
+      <Link href={Routers.SignInPage}>Đăng nhập</Link>
     )
   }
 
@@ -206,7 +206,7 @@ export const Header: React.FC<HeaderProps> = props => {
     return (
       <Col className="menu-row text-right" xs={20} sm={20} xxl={15} xl={15} lg={15} md={15}>
         <Row gutter={[0, 0]} justify="space-around">
-          <Col xs={0} sm={0} xxl={16} xl={16} lg={16} md={16}>
+          <Col xs={0} sm={0} xxl={16} xl={14} lg={14} md={14}>
             <Menu
               overflowedIndicator={<MenuOutlined />}
               className="text-right"
@@ -225,7 +225,7 @@ export const Header: React.FC<HeaderProps> = props => {
               </Menu.Item>
             </Menu>
           </Col>
-          <Col xs={24} sm={24} xxl={8} xl={8} lg={8} md={8}>
+          <Col xs={24} sm={24} xxl={8} xl={10} lg={10} md={10}>
             <Space size={32}>
               {InformationRender()}
               {AuthenticatedRender()}

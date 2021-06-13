@@ -5,6 +5,8 @@ import { Trans, useTranslation } from 'next-i18next'
 import { FormInstance, Rule } from 'antd/lib/form'
 import { RequiredItem } from '@shared/components'
 import { VERIFY_NUMBER_PATTERN } from '@shared/constants/patterns'
+import { BarcodeOutlined } from '@ant-design/icons'
+
 export interface VerifyFields {
   email: string
   phone: string
@@ -53,7 +55,12 @@ export const Verify: React.FC<VerifyProps> = ({
           rules={pinRules}
           name="pin"
         >
-          <Input autoComplete="false" id="verify-pin" placeholder={t('verifyOTP.pleaseEnterPin')} />
+          <Input
+            prefix={<BarcodeOutlined />}
+            autoComplete="false"
+            id="verify-pin"
+            placeholder={t('verifyOTP.pleaseEnterPin')}
+          />
         </RequiredItem>
 
         <Form.Item className="text-center" noStyle>
@@ -62,7 +69,7 @@ export const Verify: React.FC<VerifyProps> = ({
             type="primary"
             size="large"
             htmlType="submit"
-            style={{ width: '100%' }}
+            className="w-full"
           >
             <Trans i18nKey="verifyOTP.confirm" />
           </Button>

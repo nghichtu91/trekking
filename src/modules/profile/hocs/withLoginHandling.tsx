@@ -5,33 +5,26 @@ import { Routers } from '@shared/constants/routers'
 import { Form, Modal } from 'antd'
 import { FormInstance } from 'antd/lib/form'
 import { useTranslation } from 'next-i18next'
-import { AuthError } from '@aws-amplify/auth/lib/Errors'
 import { authService } from '@modules/profile/services'
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth'
-
-interface SignUpFields {
-  username: string
-  password: string
-  phone: string
-}
-
-interface SignInError extends AuthError {
-  code: string
-}
+import { AwsError, SignInErrors } from '@shared/constants/awsErrorsCode'
+import { SignInField } from '@modules/profile/components/Authentication'
 
 export interface IForumOperations {
-  handleSignUp?: (fileds: SignUpFields) => void
+  handleSignUp?: (fileds: SignInField) => void
   handleSignIn?: (opts: unknown) => void
   goToSignUpPage?: () => void
+  goToForGotPassPage?: () => void
   signInWithGooogle?: () => void
   signInWithFacebook?: () => void
-  handleForGotPassword?: () => void
+  handleForGotPassword?: (fileds: SignInField) => void
   loading?: boolean
   formLoading?: boolean
   isUpdated?: boolean
   form?: FormInstance
+  forgotForm?: FormInstance
   errors?: string[]
-  forgot?: boolean
+  isGetOpt?: boolean
 }
 
 export function withLoginHandling<P extends IForumOperations>(
@@ -39,7 +32,6 @@ export function withLoginHandling<P extends IForumOperations>(
 ) {
   const ComponentWithExtraInfo = (props: P) => {
     const [isFormLoading, setIsFormLoading] = useState(false)
-    const [isForgot, setIsForGot] = useState(false)
     const router = useRouter()
     const [signUpForm] = Form.useForm()
     const { t } = useTranslation()
@@ -63,7 +55,7 @@ export function withLoginHandling<P extends IForumOperations>(
       return router.push(Routers.HomePage)
     }
 
-    const handleSignIn = async (signInFileds: SignUpFields) => {
+    const handleSignIn = async (signInFileds: SignInField) => {
       setIsFormLoading(true)
       setSiginErrors([])
       try {
@@ -79,7 +71,7 @@ export function withLoginHandling<P extends IForumOperations>(
       goToHomePage()
     }
 
-    const goToPage = () => {
+    const goToPageSignUp = () => {
       return router.push(Routers.RegisterPage)
     }
 
@@ -91,11 +83,11 @@ export function withLoginHandling<P extends IForumOperations>(
       })
     }
 
-    const afterSignInFailure = (errors: SignInError) => {
+    const afterSignInFailure = (errors: AwsError) => {
       setIsFormLoading(false)
       const { code } = errors
       switch (code) {
-        case 'UserNotConfirmedException':
+        case SignInErrors.UserNotConfirmed:
           {
             Modal.error({
               title: t('authentication.signIn.verifyModalTitle'),
@@ -108,12 +100,11 @@ export function withLoginHandling<P extends IForumOperations>(
             })
           }
           break
-        case 'UserNotFoundException':
+        case SignInErrors.UserNotFound:
           {
             setSiginErrors([t('authentication.signIn.userNameOrPassIncorrect')])
           }
           break
-
         default:
           break
       }
@@ -126,16 +117,21 @@ export function withLoginHandling<P extends IForumOperations>(
     const handleSignInGg = () => {
       authService.signInWithSocial(CognitoHostedUIIdentityProvider.Google)
     }
-    const handleForGotPassword = () => {}
+
+    const goToForGotPasswordPage = () => {
+      router.push({
+        pathname: Routers.ForgotPasswordPage,
+      })
+    }
 
     return (
       <WrappedComponent
         formLoading={isFormLoading}
         handleSignIn={handleSignIn}
-        goToSignUpPage={goToPage}
+        goToSignUpPage={goToPageSignUp}
+        goToForGotPassPage={goToForGotPasswordPage}
         signInWithFacebook={handleSignInFb}
         signInWithGooogle={handleSignInGg}
-        handleForGotPassword={handleForGotPassword}
         form={signUpForm}
         errors={siginErrors}
         {...props}
