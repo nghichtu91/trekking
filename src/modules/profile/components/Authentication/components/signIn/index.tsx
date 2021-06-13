@@ -18,7 +18,7 @@ interface OnboardTemplateProps extends CardProps {
   errors?: string[]
 }
 
-interface SignInFieldProps {
+export interface SignInFieldProps {
   username: string
   password: string
 }

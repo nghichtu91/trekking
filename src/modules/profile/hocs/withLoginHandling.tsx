@@ -5,28 +5,19 @@ import { Routers } from '@shared/constants/routers'
 import { Form, Modal } from 'antd'
 import { FormInstance } from 'antd/lib/form'
 import { useTranslation } from 'next-i18next'
-import { AuthError } from '@aws-amplify/auth/lib/Errors'
 import { authService } from '@modules/profile/services'
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth'
-
-interface SignUpFields {
-  username: string
-  password: string
-  phone: string
-}
-
-interface SignInError extends AuthError {
-  code: string
-}
+import { AwsError, SignInErrors } from '@shared/constants/awsErrorsCode'
+import { SignInFieldProps } from '@modules/profile/components/Authentication'
 
 export interface IForumOperations {
-  handleSignUp?: (fileds: SignUpFields) => void
+  handleSignUp?: (fileds: SignInFieldProps) => void
   handleSignIn?: (opts: unknown) => void
   goToSignUpPage?: () => void
   goToForGotPassPage?: () => void
   signInWithGooogle?: () => void
   signInWithFacebook?: () => void
-  handleForGotPassword?: (fileds: SignUpFields) => void
+  handleForGotPassword?: (fileds: SignInFieldProps) => void
   loading?: boolean
   formLoading?: boolean
   isUpdated?: boolean
@@ -64,7 +55,7 @@ export function withLoginHandling<P extends IForumOperations>(
       return router.push(Routers.HomePage)
     }
 
-    const handleSignIn = async (signInFileds: SignUpFields) => {
+    const handleSignIn = async (signInFileds: SignInFieldProps) => {
       setIsFormLoading(true)
       setSiginErrors([])
       try {
@@ -92,11 +83,11 @@ export function withLoginHandling<P extends IForumOperations>(
       })
     }
 
-    const afterSignInFailure = (errors: SignInError) => {
+    const afterSignInFailure = (errors: AwsError) => {
       setIsFormLoading(false)
       const { code } = errors
       switch (code) {
-        case 'UserNotConfirmedException':
+        case SignInErrors.UserNotConfirmed:
           {
             Modal.error({
               title: t('authentication.signIn.verifyModalTitle'),
@@ -109,7 +100,7 @@ export function withLoginHandling<P extends IForumOperations>(
             })
           }
           break
-        case 'UserNotFoundException':
+        case SignInErrors.UserNotFound:
           {
             setSiginErrors([t('authentication.signIn.userNameOrPassIncorrect')])
           }

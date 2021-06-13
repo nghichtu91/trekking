@@ -5,7 +5,13 @@ export const CodeMismatch = 'CodeMismatchException'
 export const LimitExceeded = 'LimitExceededException'
 export const InvalidParameter = 'InvalidParameterException'
 export const UserNotFound = 'UserNotFoundException'
+// signin
+export const UserNotConfirmed = 'UserNotConfirmedException'
 
+export const SignInErrors = {
+  UserNotConfirmed,
+  UserNotFound,
+}
 export const ResetPassword = {
   ExpiredCode,
   CodeMismatch,

@@ -6,6 +6,7 @@ import { Trans, useTranslation } from 'next-i18next'
 import { FormInstance, Rule } from 'antd/lib/form'
 import { RequiredItem, PhoneItem } from '@shared/components'
 import { EMAIL_PATTERN } from '@shared/constants/patterns'
+
 export interface SignUpFields {
   email: string
   phone: string
