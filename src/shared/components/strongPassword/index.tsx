@@ -3,6 +3,7 @@ import { Input, Form } from 'antd'
 import { RequiredItem } from '../requiredItem'
 import { FormItemProps, Rule } from 'antd/es/form'
 import { useTranslation } from 'next-i18next'
+import { LockOutlined } from '@ant-design/icons'
 
 interface StrongPasswordProps extends FormItemProps {
   placeholder?: string
@@ -38,6 +39,7 @@ export const StrongPassword: React.FC<StrongPasswordProps> = props => {
         <Input.Password
           placeholder={placeholder || t('authentication.forgot.placeholderNewPassword')}
           allowClear
+          prefix={<LockOutlined className="site-form-item-icon" />}
         />
       </RequiredItem>
       <Form.Item
@@ -48,6 +50,7 @@ export const StrongPassword: React.FC<StrongPasswordProps> = props => {
         rules={[rePasswordCheckMatchPassword]}
       >
         <Input.Password
+          prefix={<LockOutlined className="site-form-item-icon" />}
           placeholder={placeholderConfirm || t('authentication.forgot.placeholderConfirmPassword')}
           allowClear
         />

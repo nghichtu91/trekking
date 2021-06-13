@@ -8,16 +8,16 @@ import { useTranslation } from 'next-i18next'
 import { authService } from '@modules/profile/services'
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth'
 import { AwsError, SignInErrors } from '@shared/constants/awsErrorsCode'
-import { SignInFieldProps } from '@modules/profile/components/Authentication'
+import { SignInField } from '@modules/profile/components/Authentication'
 
 export interface IForumOperations {
-  handleSignUp?: (fileds: SignInFieldProps) => void
+  handleSignUp?: (fileds: SignInField) => void
   handleSignIn?: (opts: unknown) => void
   goToSignUpPage?: () => void
   goToForGotPassPage?: () => void
   signInWithGooogle?: () => void
   signInWithFacebook?: () => void
-  handleForGotPassword?: (fileds: SignInFieldProps) => void
+  handleForGotPassword?: (fileds: SignInField) => void
   loading?: boolean
   formLoading?: boolean
   isUpdated?: boolean
@@ -55,7 +55,7 @@ export function withLoginHandling<P extends IForumOperations>(
       return router.push(Routers.HomePage)
     }
 
-    const handleSignIn = async (signInFileds: SignInFieldProps) => {
+    const handleSignIn = async (signInFileds: SignInField) => {
       setIsFormLoading(true)
       setSiginErrors([])
       try {

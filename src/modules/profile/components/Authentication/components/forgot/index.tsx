@@ -7,6 +7,7 @@ import styles from './styles/forgot.module.scss'
 import { Rule } from 'antd/es/form'
 import { VERIFY_NUMBER_PATTERN } from '@shared/constants/patterns'
 import { StrongPassword } from '@shared/components'
+import { UserOutlined, BarcodeOutlined } from '@ant-design/icons'
 
 export interface ForGotFields {
   username: string
@@ -54,6 +55,7 @@ export const ForGot: React.FC<ForGotProps> = props => {
           rules={codeRules}
         >
           <Input
+            prefix={<BarcodeOutlined />}
             autoComplete="false"
             id="forgot-code"
             placeholder={t('authentication.forgot.placeholderCode')}
@@ -91,8 +93,6 @@ export const ForGot: React.FC<ForGotProps> = props => {
     )
   }
 
-  // const isFormValid = () => form.getFieldsError().some(item => item.errors.length > 0)
-
   return (
     <Card hidden={hidden} className={`${styles['forgot']} ${className}`}>
       <Typography.Title className="text-center" level={3}>
@@ -121,6 +121,7 @@ export const ForGot: React.FC<ForGotProps> = props => {
           name="username"
         >
           <Input
+            prefix={<UserOutlined />}
             autoComplete="false"
             id="verify-pin"
             placeholder={t('authentication.forgot.placeholderUsername')}

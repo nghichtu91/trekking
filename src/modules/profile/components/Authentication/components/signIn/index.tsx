@@ -18,13 +18,13 @@ interface OnboardTemplateProps extends CardProps {
   errors?: string[]
 }
 
-export interface SignInFieldProps {
+export interface SignInField {
   username: string
   password: string
 }
 
 export const SignIn: React.FC<OnboardTemplateProps> = props => {
-  const [signInForm] = Form.useForm<SignInFieldProps>()
+  const [signInForm] = Form.useForm<SignInField>()
   const { t } = useTranslation()
   const {
     signInWithFacebook,

@@ -7,23 +7,27 @@ import { SignUp } from '@modules/profile/components/Authentication'
 import { PageWrapper } from '@shared/components/wrapper'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { withExtraAuthen, IForumOperations } from '@modules/profile/hocs/withAuthenService'
-import { Typography, Card } from 'antd'
+import { Typography, Card, Col, Row } from 'antd'
 import { Trans } from 'next-i18next'
 
 const SignUpAndSignInPage: React.FC<IForumOperations> = props => {
   return (
     <PageWrapper>
-      <Card>
-        <Typography.Title className="text-center" level={3}>
-          <Trans i18nKey="authentication.signUp.titleHeader">Đăng ký tài khoản</Trans>
-        </Typography.Title>
-        <SignUp
-          onSignIn={props.handleSignIn}
-          form={props.form}
-          loading={props.formLoading}
-          onSignUp={props.handleSignUp}
-        />
-      </Card>
+      <Row className="onboard-container" justify="center">
+        <Col xxl={15} xl={15} lg={18} md={18} xs={24} sm={24}>
+          <Card>
+            <Typography.Title className="text-center" level={3}>
+              <Trans i18nKey="authentication.signUp.titleHeader">Đăng ký tài khoản</Trans>
+            </Typography.Title>
+            <SignUp
+              onSignIn={props.handleSignIn}
+              form={props.form}
+              loading={props.formLoading}
+              onSignUp={props.handleSignUp}
+            />
+          </Card>
+        </Col>
+      </Row>
     </PageWrapper>
   )
 }

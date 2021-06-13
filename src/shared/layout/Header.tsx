@@ -225,7 +225,7 @@ export const Header: React.FC<HeaderProps> = props => {
               </Menu.Item>
             </Menu>
           </Col>
-          <Col xs={24} sm={24} xxl={10} xl={10} lg={10} md={10}>
+          <Col xs={24} sm={24} xxl={8} xl={10} lg={10} md={10}>
             <Space size={32}>
               {InformationRender()}
               {AuthenticatedRender()}
