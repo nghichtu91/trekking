@@ -11,6 +11,7 @@ import {
 } from '@modules/profile/hocs/withForGotPasswordHandling'
 import { ForGot } from '@modules/profile/components/Authentication'
 import { Row, Col } from 'antd'
+import { i18n } from '../../next-i18next.config'
 
 const ForGotPassworPage: React.FC<IForumOperations> = props => {
   const { handleGetOpt, handleResetPassword, hendleResendOpt, errors } = props
@@ -35,7 +36,7 @@ const ForGotPassworPage: React.FC<IForumOperations> = props => {
 
 export const getServerSideProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['common'])),
+    ...(await serverSideTranslations(locale, ['common'], { i18n })),
   },
 })
 

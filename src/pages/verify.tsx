@@ -9,6 +9,7 @@ import { IForumOperations, withVerifyHandling } from '@modules/profile/hocs/with
 import { Typography, Card, Form, Alert, Col, Row } from 'antd'
 import { Trans } from 'next-i18next'
 import { Verify } from '@modules/profile/components/Authentication'
+import { i18n } from '../../next-i18next.config'
 
 const VerifyPage: React.FC<IForumOperations> = ({
   handleVerify,
@@ -51,7 +52,7 @@ const VerifyPage: React.FC<IForumOperations> = ({
 
 export const getServerSideProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['common'])),
+    ...(await serverSideTranslations(locale, ['common'], { i18n })),
   },
 })
 

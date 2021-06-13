@@ -23,7 +23,7 @@ import { BaseLayout } from '@shared/layout/baseLayout'
 import '@shared/infra/services/awsServices'
 import { ContextProvider } from '@shared/infra/context/gobalContext'
 import { defaultValidateMessages } from '@shared/constants/messages'
-// import { UseAws } from '@modules/profile/hooks/useAuthe'
+import { i18n } from '../../next-i18next.config'
 
 // #endregion
 
@@ -55,4 +55,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default appWithTranslation(MyApp)
+export default appWithTranslation(MyApp, { i18n })

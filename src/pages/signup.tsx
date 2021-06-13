@@ -9,6 +9,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { withExtraAuthen, IForumOperations } from '@modules/profile/hocs/withAuthenService'
 import { Typography, Card, Col, Row } from 'antd'
 import { Trans } from 'next-i18next'
+import { i18n } from '../../next-i18next.config'
 
 const SignUpAndSignInPage: React.FC<IForumOperations> = props => {
   return (
@@ -34,7 +35,7 @@ const SignUpAndSignInPage: React.FC<IForumOperations> = props => {
 
 export const getServerSideProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['common'])),
+    ...(await serverSideTranslations(locale, ['common'], { i18n })),
   },
 })
 
