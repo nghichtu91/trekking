@@ -9,13 +9,13 @@ frontend:
   phases:
     preBuild:
       commands:
-        # - yarn add ci
-        - yarn global add serverless
+        - npm ci
+        # - yarn global add serverless
     build:
       commands:
-        - serverless
+        - npm run build
   artifacts:
-    baseDirectory: ./
+    baseDirectory: .next
     files:
       - '**/*'
   cache:
