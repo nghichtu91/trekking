@@ -28,6 +28,9 @@
   flex: none;
   /* margin: 0 16px 0 0; */
 }
+.has--shadow {
+  box-shadow: 0 2px 3px #ddd;
+}
 .main-container,
 .main-wrapper {
   position: relative;

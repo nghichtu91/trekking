@@ -40,7 +40,13 @@ export const SignIn: React.FC<OnboardTemplateProps> = props => {
   } = props
 
   return (
-    <Card className={className} id={styles['signin']} loading={false} hidden={hidden}>
+    <Card
+      bordered={false}
+      className={`${className}`}
+      id={styles['signin']}
+      loading={false}
+      hidden={hidden}
+    >
       <Typography.Title className="text-center" level={3}>
         <Trans i18nKey="authentication.signIn.titleHeader">Đăng nhập</Trans>
       </Typography.Title>

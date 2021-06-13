@@ -14,8 +14,8 @@ const SignUpAndSignInPage: React.FC<IForumOperations> = props => {
   return (
     <PageWrapper>
       <Row className="onboard-container" justify="center">
-        <Col xxl={15} xl={15} lg={18} md={18} xs={24} sm={24}>
-          <Card>
+        <Col className="has--shadow" xxl={15} xl={15} lg={18} md={18} xs={24} sm={24}>
+          <Card bordered={false}>
             <Typography.Title className="text-center" level={3}>
               <Trans i18nKey="authentication.signUp.titleHeader">Đăng ký tài khoản</Trans>
             </Typography.Title>

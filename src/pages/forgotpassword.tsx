@@ -17,7 +17,7 @@ const ForGotPassworPage: React.FC<IForumOperations> = props => {
   return (
     <PageWrapper>
       <Row className="onboard-container" justify="center">
-        <Col xxl={15} xl={15} lg={18} md={18} xs={24} sm={24}>
+        <Col className="has--shadow" xxl={15} xl={15} lg={18} md={18} xs={24} sm={24}>
           <ForGot
             isGetOtp={props.isGetOpt}
             handleGetOtp={handleGetOpt}

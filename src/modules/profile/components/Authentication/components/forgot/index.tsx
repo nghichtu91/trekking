@@ -94,7 +94,7 @@ export const ForGot: React.FC<ForGotProps> = props => {
   }
 
   return (
-    <Card hidden={hidden} className={`${styles['forgot']} ${className}`}>
+    <Card bordered={false} hidden={hidden} className={`${styles['forgot']} ${className}`}>
       <Typography.Title className="text-center" level={3}>
         <Trans i18nKey="authentication.forgot.titleHeader">Quên mật khẩu</Trans>
       </Typography.Title>
