@@ -9,11 +9,11 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm ci
+        - yarn install --frozen-lockfile
         # - yarn global add serverless
     build:
       commands:
-        - npm run build
+        - yarn run build
   artifacts:
     baseDirectory: .next
     files:
