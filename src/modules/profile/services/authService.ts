@@ -48,7 +48,6 @@ export class AuthService implements IAuthService {
   }
 
   signIn(username: string, password: string): Promise<unknown> {
-    console.log(username, password)
     return Auth.signIn(username, password)
   }
 
@@ -77,5 +76,15 @@ export class AuthService implements IAuthService {
     } catch (error) {
       return Promise.resolve(false)
     }
+  }
+
+  getOtpForGot(username: string): Promise<unknown> {
+    const usernameLower = username.trim().toLowerCase()
+    return Auth.forgotPassword(usernameLower)
+  }
+
+  resetPassword(username: string, code: string, password: string): Promise<unknown> {
+    const usernameLower = username.trim().toLowerCase()
+    return Auth.forgotPasswordSubmit(usernameLower, code, password)
   }
 }
