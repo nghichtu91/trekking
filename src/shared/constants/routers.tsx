@@ -7,7 +7,7 @@ export enum Routers {
   MyContentsPage = '/mycontent-page/[id]',
   SellPage = '/sell-page/[id]',
   BuyPage = '/buy-page/[id]',
-  RegisterPage = '/reg',
+  RegisterPage = '/signup',
   SignInPage = '/signin',
   VerifyPage = '/verify',
   ForgotPasswordPage = '/forgotpassword',
