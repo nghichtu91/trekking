@@ -31,12 +31,12 @@ jobs:
       uses: actions/checkout@v2
     - name: Install yarn dependencies
       run: yarn install --frozen-lockfile
-    - name : tesst dsdsd 
-      run: ls -a
+    # - name : tesst dsdsd 
+    #   run: ls -a
     # - name: Remove file serverless local
     #   run: mv serverless.yml serverless_tmp.yml
     - name: Copy file serverless
       run: cp ./serverless/serverless_test.yml ./serverless.yml
-    - name : tesst dsdsd 2 
-      run: ls -a
+    - name : Deploy to aws serverless
+      run: yarn run deploy
     
