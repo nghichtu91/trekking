@@ -9,7 +9,7 @@ leonuiapp:
     # bucketName: "${stage}-${app}"
     # bucketRegion: ap-southeast-1
     # deploy: false
-    domain: ["local", "leonui.app"]
+    domain: ["test", "leonui.app"]
     # publicDirectoryCache:
     #   value: public, max-age=604800
     #   test: /\.(gif|jpe?g|png|txt|xml)$/i
