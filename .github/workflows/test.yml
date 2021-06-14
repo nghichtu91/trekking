@@ -1,4 +1,4 @@
-name: Deploy test leonui.app
+name: Deploy test test.leonui.app
 on:
   push:
     branches:
@@ -7,7 +7,6 @@ on:
     paths-ignore:
       - '**.md'
 jobs:
-  build:
     name: build 
     strategy:
       matrix:
@@ -23,4 +22,4 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Install yarn dependencies
-      run: yarn install --frozen-lockfile
+      run: ls -a
