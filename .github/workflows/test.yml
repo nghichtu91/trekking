@@ -14,6 +14,7 @@ on:
         default: "false"
   pull_request_target:
 jobs:
+  build:
     name: build 
     strategy:
       matrix:
