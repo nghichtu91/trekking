@@ -24,3 +24,4 @@ jobs:
       uses: actions/checkout@v2
     - name: Install yarn dependencies
       run: yarn install --frozen-lockfile
+    - name: deploy to aws
