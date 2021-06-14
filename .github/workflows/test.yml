@@ -12,6 +12,9 @@ jobs:
         runs-on: [ubuntu-latest]
       fail-fast: false
     runs-on: ${{ matrix.runs-on }}
+    env:
+      AWS_ACCESS_KEY_ID: ${{secrets.AWS_KEY}}
+      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET}}
     steps:
     - name: Set Node.js 12.x
       uses: actions/setup-node@v1
