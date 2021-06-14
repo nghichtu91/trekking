@@ -1,4 +1,4 @@
-name: Deploy test leonui.app
+name: Deploy test test.leonui.app
 on:
   push:
     branches:
@@ -6,8 +6,14 @@ on:
   pull_request:
     paths-ignore:
       - '**.md'
+  workflow_dispatch:
+    inputs:
+      body:
+        default: ""
+      test:
+        default: "false"
+  pull_request_target:
 jobs:
-  build:
     name: build 
     strategy:
       matrix:
