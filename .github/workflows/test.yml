@@ -20,8 +20,8 @@ jobs:
     - run: npm install -g yarn
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Install yarn dependencies
-      run: yarn install --frozen-lockfile
+    # - name: Install yarn dependencies
+    #   run: yarn install --frozen-lockfile
     # - name: Configure AWS Credentials
     #   uses: aws-actions/configure-aws-credentials@v1
     #   with:
@@ -34,6 +34,6 @@ jobs:
     #   run: mv serverless.yml serverless_tmp.yml
     - name: Copy file serverless
       run: cp ./serverless/serverless_test.yml ./serverless.yml
-    - name : Deploy to aws serverless
-      run: yarn run deploy
+    # - name : Deploy to aws serverless
+    #   run: yarn run deploy
     
