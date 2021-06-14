@@ -29,8 +29,12 @@ jobs:
     - run: npm install -g yarn
     - name: Checkout
       uses: actions/checkout@v2
-    # - name: Install yarn dependencies
-    #   run: yarn install --frozen-lockfile
-    - name: Copy file serverless
-      run: mv serverless.yml serverless_tmp.yml
+    - name: Install yarn dependencies
+      run: yarn install --frozen-lockfile
+    - name : tesst dsdsd 
+      run: echo $PATH
+    # - name: Remove file serverless local
+    #   run: mv serverless.yml serverless_tmp.yml
+    # - name: Copy file serverless
+    #   run: cp ./serverless/serverless_test.yml ./serverless.yml
     
