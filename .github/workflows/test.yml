@@ -6,6 +6,13 @@ on:
   pull_request:
     paths-ignore:
       - '**.md'
+  workflow_dispatch:
+    inputs:
+      body:
+        default: ""
+      test:
+        default: "false"
+  pull_request_target:
 jobs:
     name: build 
     strategy:
