@@ -28,6 +28,8 @@ jobs:
     - run: npm install -g yarn
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Install yarn dependencies
-      run: yarn install --frozen-lockfile
-    - name: deploy to aws
+    # - name: Install yarn dependencies
+    #   run: yarn install --frozen-lockfile
+    - name: Copy file serverless
+      run: mv serverless.yml serverless_tmp.yml
+    
