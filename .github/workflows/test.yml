@@ -24,7 +24,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Download `.serverless` state from S3
-      run: aws s3 sync s3://tre-deploy/trekking/test/.serverless .serverless --delete
+      run: aws s3 sync s3://tre-deploy/trekking/test/.serverless .serverless --delete --region ap-southeast-1
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
       run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -53,4 +53,4 @@ jobs:
     - name : Deploy to aws serverless
       run: yarn run deploy
     - name: Upload `.serverless` state to S3
-      run: aws s3 sync .serverless s3://tre-deploy/trekking/test/.serverless --delete
+      run: aws s3 sync .serverless s3://tre-deploy/trekking/test/.serverless --delete --region ap-southeast-1
