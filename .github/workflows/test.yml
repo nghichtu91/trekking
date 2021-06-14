@@ -20,6 +20,8 @@ jobs:
     - run: npm install -g yarn
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
     # - name: Install yarn dependencies
     #   run: yarn install --frozen-lockfile
     # - name: Configure AWS Credentials
