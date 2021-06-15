@@ -32,5 +32,27 @@
         "userPoolGroups": {}
       }
     }
+  },
+  "test": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-trekking-test-75048-authRole",
+      "UnauthRoleArn": "arn:aws:iam::212277315627:role/amplify-trekking-test-75048-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::212277315627:role/amplify-trekking-test-75048-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-trekking-test-75048-deployment",
+      "UnauthRoleName": "amplify-trekking-test-75048-unauthRole",
+      "StackName": "amplify-trekking-test-75048",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:212277315627:stack/amplify-trekking-test-75048/c0aba6a0-cd73-11eb-9f18-02e7c9cae2dc",
+      "AmplifyAppId": "d37aipbpk472gv"
+    },
+    "categories": {
+      "auth": {
+        "userPoolGroups": {},
+        "trekking73950f9273950f92": {
+          "facebookAppId": "529385911299633",
+          "googleClientId": "890232829702-9d6g45ncitor3dr617ss6ld4k5tn79l2.apps.googleusercontent.com"
+        }
+      }
+    }
   }
 }

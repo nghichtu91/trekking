@@ -121,14 +121,6 @@ Parameters:
   authProviders:
     Type: CommaDelimitedList
       
-  facebookAppId:
-    Type: String
-  
-            
-  googleClientId:
-    Type: String
-  
-            
         
   usernameAttributes:
     Type: CommaDelimitedList
@@ -161,19 +153,10 @@ Parameters:
     Type: String
   
             
-  hostedUIProviderCreds:
-    Type: String
-  
-            
-  oAuthMetadata:
-    Type: String
-  
-            
         
   userPoolGroupList:
     Type: CommaDelimitedList
       
-            
   serviceName:
     Type: String
   
@@ -194,6 +177,27 @@ Parameters:
   dependsOn:
     Type: CommaDelimitedList
       
+  hostedUIProviderCreds:
+    Type: String
+  
+            
+  facebookAppId:
+    Type: String
+  
+            
+  googleClientId:
+    Type: String
+  
+            
+  oAuthMetadata:
+    Type: String
+  
+            
+            
+  
+  breakCircularDependency:
+    Type: String
+            
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
   
@@ -842,6 +846,9 @@ Outputs :
   UserPoolId:
     Value: !Ref 'UserPool'
     Description:  Id for the user pool
+  UserPoolArn:
+    Value: !GetAtt UserPool.Arn
+    Description:  Arn for the user pool
   UserPoolName:
     Value: !Ref userPoolName
   AppClientIDWeb:
