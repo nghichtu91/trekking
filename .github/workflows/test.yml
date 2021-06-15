@@ -24,7 +24,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Download `aws-exports.js` state from S3
-      run: aws s3 sync s3://tre-deploy/trekking/test/aws-exports.js src/aws-exports.js --delete --region ap-southeast-1
+      run: aws s3 cp s3://tre-deploy/trekking/test/aws-exports.js src/aws-exports.js --region ap-southeast-1
     - name: Download `.serverless` state from S3
       run: aws s3 sync s3://tre-deploy/trekking/test/.serverless .serverless --delete --region ap-southeast-1
     - name: Get yarn cache directory path
