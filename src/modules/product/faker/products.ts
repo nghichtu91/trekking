@@ -24,4 +24,40 @@ export const Products: IProduct[] = [
     tradeType: 1,
     price: 5000,
   },
+  {
+    id: '5',
+    title: 'Rss',
+    tradeType: 1,
+    price: 5000,
+  },
+  {
+    id: '6',
+    title: 'Rss',
+    tradeType: 1,
+    price: 5000,
+  },
+  {
+    id: '7',
+    title: 'Rss',
+    tradeType: 1,
+    price: 5000,
+  },
+  {
+    id: '8',
+    title: 'Rss',
+    tradeType: 1,
+    price: 5000,
+  },
+  {
+    id: '9',
+    title: 'Rss',
+    tradeType: 1,
+    price: 5000,
+  },
+  {
+    id: '10',
+    title: 'Rss',
+    tradeType: 1,
+    price: 5000,
+  },
 ]
