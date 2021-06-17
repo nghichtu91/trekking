@@ -30,7 +30,7 @@ import {
 import { LayoutProps } from 'antd/es/layout'
 //#endregion
 
-import { MainMenu } from './components'
+import { MainMenu, RightMenu } from './components'
 
 //#region constants
 import { LOGO_SITE, ProfileMenus } from '@shared/constants'
@@ -57,6 +57,9 @@ export const Header: React.FC<HeaderProps> = props => {
   const [menuActivedKeys, setMenuActivedKeys] = useState<string[]>(['main--menu-home'])
   const headerRef = useRef<HTMLDivElement>(null)
 
+  const handleSignIn = () => {
+    return router.push(Routers.SignInPage)
+  }
   // const onScroll = (event: Event) => {
   //   console.log('window scrolled!', event)
   //   console.log('2', headerRef.current.offsetTop)
@@ -263,7 +266,15 @@ export const Header: React.FC<HeaderProps> = props => {
                 </Row>
               </Col>
               <Col className="text-right" xs={8} sm={8} xxl={6} xl={6} lg={9} md={9}>
-                {AuthenticatedRender()}
+                <RightMenu
+                  profile={{
+                    userId: profile.userId,
+                    avatar: profile.avatar,
+                    fullName: profile.fullName,
+                  }}
+                  isAuthenticated={isAuthenticated}
+                  onSignIn={handleSignIn}
+                />
               </Col>
             </Row>
           </Col>
