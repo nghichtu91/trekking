@@ -103,5 +103,9 @@
     "limitExceeded": "Bạn đã lấy opt quá nhiều lần, vui lòng thử lại sau.",
     "textClose": "Đóng",
     "modalTitle": "Thông báo"
+  },
+  "notification": {
+    "titleHeader": "Notification",
+    "empty": "Empty notification"
   }
 }

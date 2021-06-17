@@ -2,6 +2,8 @@ import { List, Row, Col } from 'antd'
 import { Products } from '@modules/product/faker/products'
 import { ProductItem } from '@modules/product/components/productItem'
 import { LoadMoreButton } from '@shared/components/button'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { i18n } from '../../next-i18next.config'
 
 const App = () => {
   // const router = useRouter();
@@ -20,5 +22,9 @@ const App = () => {
     </Row>
   )
 }
-
+export const getServerSideProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common'], { i18n })),
+  },
+})
 export default App

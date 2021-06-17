@@ -1,5 +1,5 @@
 import React from 'react'
-import { Popover, List, Typography, Badge } from 'antd'
+import { Popover, Badge } from 'antd'
 import Helper from '@shared/utils/helper'
 import { BellOutlined } from '@ant-design/icons'
 import { NotificationContent } from './components/content'
@@ -12,15 +12,46 @@ interface NotifyItem {
 }
 
 interface NotificationProps {
-  data?: NotifyItem[]
+  notifies?: NotifyItem[]
   notifycount?: number
 }
 
-export const Notification: React.FC<NotificationProps> = ({ notifycount = 0, data = [] }) => {
+export const Notification: React.FC<NotificationProps> = ({ notifycount = 0, notifies = [] }) => {
   const align = {
     offset: [20, 10],
   }
-
+  const notifisTest: NotifyItem[] = [
+    {
+      id: '1',
+      type: 'styem',
+      title: 'Thông báo thức nhất',
+    },
+    {
+      id: '2',
+      type: 'styem',
+      title: 'Thông báo thức nhất',
+    },
+    {
+      id: '2',
+      type: 'styem',
+      title: 'Thông báo thức nhất',
+    },
+    {
+      id: '3',
+      type: 'styem',
+      title: 'Thông báo thức nhất',
+    },
+    {
+      id: '4',
+      type: 'styem',
+      title: 'Thông báo thức nhất',
+    },
+    {
+      id: '5',
+      type: 'styem',
+      title: 'Thông báo thức nhất',
+    },
+  ]
   return (
     <Popover
       trigger="click"
@@ -29,7 +60,7 @@ export const Notification: React.FC<NotificationProps> = ({ notifycount = 0, dat
       arrowPointAtCenter={true}
       getPopupContainer={() => Helper.getContainer()}
       align={align}
-      content={<NotificationContent />}
+      content={<NotificationContent notifies={notifisTest || notifies} />}
     >
       <Badge overflowCount={9} count={notifycount}>
         <BellOutlined className="text-lg" />

@@ -104,5 +104,9 @@
     "limitExceeded": "Bạn yêu cầu quá nhiều lần, vui lòng thử lại sau.",
     "textClose": "Đóng",
     "modalTitle": "Thông báo"
+  },
+  "notification": {
+    "titleHeader": "Thông báo",
+    "empty": "Không có thông báo"
   }
 }

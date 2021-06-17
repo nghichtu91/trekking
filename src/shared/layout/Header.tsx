@@ -9,7 +9,6 @@ import { LogoSite } from './components'
 //#endregion
 
 import { MainMenu, RightMenu } from './components'
-
 //#region constants
 import { LOGO_SITE } from '@shared/constants'
 //#endregion
