@@ -44,6 +44,12 @@
 .popover--profile {
   min-width: 250px;
   max-width: 300px;
+  position: fixed;
+}
+.tt-popover {
+  min-width: 250px;
+  max-width: 300px;
+  position: fixed;
 }
 .popover--profile .ant-popover-content .ant-popover-inner-content {
   padding: 0 !important;

@@ -101,6 +101,7 @@ export function withLoginHandling<P extends IForumOperations>(
           }
           break
         case SignInErrors.UserNotFound:
+        case SignInErrors.NotAuthorized:
           {
             setSiginErrors([t('authentication.signIn.userNameOrPassIncorrect')])
           }

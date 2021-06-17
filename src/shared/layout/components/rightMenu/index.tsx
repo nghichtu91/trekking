@@ -7,6 +7,8 @@ import styles from './styles/mainmenu.module.scss'
 import { Routers } from '@shared/constants/routers'
 import Helper from '@shared/utils/helper'
 import { CreatePostButton } from './components/createPostButton'
+import { Notification } from './components/notification'
+
 import {
   MenuOutlined,
   LogoutOutlined,
@@ -32,7 +34,6 @@ export const RightMenu: React.FC<RightMenuProps> = props => {
   const [PopoverProfile, setIsPopoverProfile] = useState<boolean>(false)
   const { isAuthenticated = false, profile } = props
   const { onSignIn = () => false } = props
-  // const { userId = 0, fullName = '' } = profile
   const popoverProfileShow = () => setIsPopoverProfile(true)
 
   const data = [
@@ -60,33 +61,7 @@ export const RightMenu: React.FC<RightMenuProps> = props => {
     if (!isAuthenticated) return null
     return (
       <>
-        <Popover
-          trigger="click"
-          overlayClassName="tt-popover popover--profile"
-          placement="bottomRight"
-          arrowPointAtCenter={true}
-          getPopupContainer={() => Helper.getContainer()}
-          align={{
-            offset: [20, 10],
-          }}
-          content={
-            <List
-              bordered
-              header={<div>Header</div>}
-              footer={<div>Footer</div>}
-              dataSource={data}
-              renderItem={item => (
-                <List.Item>
-                  <Typography.Text mark>[ITEM]</Typography.Text> {item}
-                </List.Item>
-              )}
-            />
-          }
-        >
-          <Badge overflowCount={9} count={9}>
-            <BellOutlined className="text-lg" />
-          </Badge>
-        </Popover>
+        <Notification />
         <CreatePostButton />
         <Popover
           visible={PopoverProfile}

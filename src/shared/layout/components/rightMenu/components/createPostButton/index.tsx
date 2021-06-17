@@ -1,12 +1,5 @@
-import { Menu, Space, Popover, List, Typography, Badge, Button, Avatar, Tooltip } from 'antd'
-import {
-  MenuOutlined,
-  LogoutOutlined,
-  SafetyCertificateFilled,
-  UserOutlined,
-  BellOutlined,
-  EditOutlined,
-} from '@ant-design/icons'
+import { Typography, Tooltip } from 'antd'
+import { EditOutlined } from '@ant-design/icons'
 
 export const CreatePostButton = () => {
   const align = {
