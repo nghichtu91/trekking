@@ -9,7 +9,7 @@ export const MainMenu: React.FC<MenuProps> = props => {
   return (
     <Menu id={styles['menu--main']} mode="horizontal" {...props}>
       {MainMenus.map(item => (
-        <Menu.Item key={item.key}>
+        <Menu.Item className={styles['menu--main--iten']} key={item.key}>
           <Trans i18nKey={item.i18nKey}> {item.title} </Trans>
         </Menu.Item>
       ))}

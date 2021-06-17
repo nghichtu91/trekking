@@ -28,6 +28,7 @@ import {
   EditOutlined,
 } from '@ant-design/icons'
 import { LayoutProps } from 'antd/es/layout'
+import { LogoSite } from './components'
 //#endregion
 
 import { MainMenu, RightMenu } from './components'
@@ -43,6 +44,8 @@ import { useProfile } from '@modules/profile/hooks/userProfile'
 import { useRouter } from 'next/router'
 import { Routers } from '@shared/constants/routers'
 
+import { MainMenus } from '@shared/constants/menus'
+
 //#endregion
 interface HeaderProps extends LayoutProps {
   isAuthenticated?: boolean
@@ -53,8 +56,8 @@ export const Header: React.FC<HeaderProps> = props => {
   const { profile } = useProfile()
   const [isAuthenticated] = UseAws()
   const router = useRouter()
-  const [PopoverProfile, setIsPopoverProfile] = useState<boolean>(false)
-  const [menuActivedKeys, setMenuActivedKeys] = useState<string[]>(['main--menu-home'])
+  const defaultHomeKey = 'main--menu-home'
+  const [menuActivedKeys, setMenuActivedKeys] = useState<string[]>([defaultHomeKey])
   const headerRef = useRef<HTMLDivElement>(null)
 
   const handleSignIn = () => {
@@ -73,20 +76,6 @@ export const Header: React.FC<HeaderProps> = props => {
 
   // useEventListener('scroll', onScroll)
 
-  const logoSite = () => {
-    const logo = !props.logoDom ? LOGO_SITE : props.logoDom
-    if (typeof logo === 'string') {
-      return (
-        <Typography.Title className="h-full">
-          <a href="/" className="align-middle inline-block" style={{ height: 32 }}>
-            <Image src={logo} width={32} height={32} />
-          </a>
-        </Typography.Title>
-      )
-    }
-    return props.logoDom
-  }
-
   const profileMenuHandle = (url?: string) => {
     if (!url || url !== '#') {
       router.push({
@@ -100,15 +89,8 @@ export const Header: React.FC<HeaderProps> = props => {
     return false
   }
 
-  const handlePPVisibleChange = visible => {
-    setIsPopoverProfile(visible)
-  }
-
-  const popoverProfileShow = () => setIsPopoverProfile(true)
-
   const signOutHandle = () => {
     Auth.signOut()
-    setIsPopoverProfile(false)
   }
 
   const profileMenus = () => {
@@ -142,89 +124,6 @@ export const Header: React.FC<HeaderProps> = props => {
     )
   }
 
-  const AuthenticatedRender = () => {
-    const data = [
-      'Racing car sprays burning fuel into crowd.',
-      'Japanese princess to wed commoner.',
-      'Australian walks 100km after outback crash.',
-      'Man charged over missing wedding girl.',
-      'Los Angeles battles huge wildfires.',
-    ]
-
-    return (
-      <Space size={16}>
-        {isAuthenticated ? (
-          <>
-            <Popover
-              trigger="click"
-              overlayClassName="tt-popover popover--profile"
-              placement="bottomRight"
-              arrowPointAtCenter={true}
-              getPopupContainer={() => Helper.getContainer()}
-              align={{
-                offset: [20, 10],
-              }}
-              content={
-                <List
-                  bordered
-                  header={<div>Header</div>}
-                  footer={<div>Footer</div>}
-                  dataSource={data}
-                  renderItem={item => (
-                    <List.Item>
-                      <Typography.Text mark>[ITEM]</Typography.Text> {item}
-                    </List.Item>
-                  )}
-                />
-              }
-            >
-              <Badge overflowCount={9} count={9}>
-                <BellOutlined className="text-lg" />
-              </Badge>
-            </Popover>
-            <Tooltip
-              placement="bottomRight"
-              align={{
-                offset: [20, 10],
-              }}
-              title="Đăng bài"
-              arrowPointAtCenter={true}
-            >
-              <Typography.Link type="secondary">
-                <EditOutlined className="text-lg" />
-              </Typography.Link>
-            </Tooltip>
-            <Popover
-              visible={PopoverProfile}
-              onVisibleChange={handlePPVisibleChange}
-              overlayClassName={`popover--profile`}
-              trigger="click"
-              arrowPointAtCenter={true}
-              content={profileMenus()}
-              destroyTooltipOnHide
-              placement="topRight"
-              align={{
-                offset: [20, 11],
-              }}
-              getPopupContainer={() => Helper.getContainer()}
-            >
-              <Typography.Link className="block" onClick={popoverProfileShow} type="secondary">
-                <Avatar src={profile.avatar} icon={<UserOutlined id="fdfdf" />} />
-              </Typography.Link>
-            </Popover>
-          </>
-        ) : (
-          <Button icon={<UserOutlined className="align-baseline" />} href={Routers.SignInPage}>
-            {/* <Typography.Text>
-              <UserOutlined style={{ fontSize: 19 }} /> Đăng nhập
-            </Typography.Text> */}
-            Đăng nhập
-          </Button>
-        )}
-      </Space>
-    )
-  }
-
   const [visible, setVisible] = useState(false)
   const showDrawer = () => {
     setVisible(true)
@@ -233,13 +132,26 @@ export const Header: React.FC<HeaderProps> = props => {
     setVisible(false)
   }
 
+  const goToByMenuKey = (menu: string) => {
+    const { uri } = MainMenus.find(item => item.key === menu)
+    if (uri) {
+      setMenuActivedKeys([menu])
+      router.push(uri)
+    }
+  }
+
   const handleMenuOnDrawer = e => {
-    console.log(e)
     setVisible(false)
+    goToByMenuKey(e['key'])
   }
 
   const handleMenuOnDesktop = e => {
-    console.log(e)
+    goToByMenuKey(e['key'])
+  }
+
+  const goHome = () => {
+    goToByMenuKey(defaultHomeKey)
+    router.push(Routers.HomePage)
   }
 
   return (
@@ -254,12 +166,12 @@ export const Header: React.FC<HeaderProps> = props => {
               <Col className="text-center" xs={8} sm={8} xxl={18} xl={18} lg={15} md={15}>
                 <Row>
                   <Col xs={24} sm={24} xxl={12} xl={12} lg={12} md={12}>
-                    {logoSite()}
+                    <LogoSite onGoHome={goHome} src={LOGO_SITE} />
                   </Col>
                   <Col xs={0} sm={0} xxl={12} xl={12} lg={12} md={12}>
                     <MainMenu
                       onClick={handleMenuOnDesktop}
-                      selectedKeys={['main--menu-home']}
+                      selectedKeys={menuActivedKeys}
                       defaultSelectedKeys={menuActivedKeys}
                     />
                   </Col>
