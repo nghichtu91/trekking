@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Popover, Typography, Avatar, Row, Col, Button } from 'antd'
 import { UserOutlined, LogoutOutlined, SafetyCertificateFilled } from '@ant-design/icons'
 import { BaseMenu } from '@shared/components/menu'
-import Helper from '@shared/utils/helper'
 import { IProfileMenus } from '@shared/constants/menus'
+import helper from '@shared/utils/helper'
 
 export interface ProfileProps {
   userId?: string
@@ -27,7 +27,7 @@ export const ProfilePopover: React.FC<ProfilePopoverProps> = props => {
     offset: [20, 10],
   }
 
-  const handlePPVisibleChange = visible => {
+  const handlePPVisibleChange = (visible: boolean) => {
     setEnable(visible)
   }
 
@@ -80,16 +80,15 @@ export const ProfilePopover: React.FC<ProfilePopoverProps> = props => {
     <Popover
       visible={enable}
       onVisibleChange={handlePPVisibleChange}
-      overlayClassName={`tt-popover popover--profile`}
       trigger="click"
+      overlayClassName="tt-popover tt-popover--notification"
+      placement="bottomRight"
       arrowPointAtCenter={true}
       content={profileMenus}
-      destroyTooltipOnHide
-      placement="bottomRight"
       align={align}
-      getPopupContainer={() => Helper.getContainer()}
+      getPopupContainer={helper.getContainer}
     >
-      <Typography.Link className="block" type="secondary">
+      <Typography.Link type="secondary">
         <Avatar src={profile?.avatar} icon={<UserOutlined />} />
       </Typography.Link>
     </Popover>

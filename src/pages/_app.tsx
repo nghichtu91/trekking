@@ -24,7 +24,7 @@ import '@shared/infra/services/awsServices'
 import { ContextProvider } from '@shared/infra/context/gobalContext'
 import { defaultValidateMessages } from '@shared/constants/messages'
 import { i18n } from '../../next-i18next.config'
-
+import { authService } from '@modules/profile/services'
 // #endregion
 
 // listing router loading
@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <ContextProvider>
         <ConfigProvider form={{ validateMessages: defaultValidateMessages }}>
-          <BaseLayout>
+          <BaseLayout signOut={authService.signOut}>
             <Component {...pageProps} />
           </BaseLayout>
         </ConfigProvider>

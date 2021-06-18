@@ -1,5 +1,5 @@
 import React from 'react'
-import { Popover, Badge } from 'antd'
+import { Popover, Badge, Typography } from 'antd'
 import Helper from '@shared/utils/helper'
 import { BellOutlined } from '@ant-design/icons'
 import { NotificationContent } from './components/content'
@@ -62,9 +62,11 @@ export const Notification: React.FC<NotificationProps> = ({ notifycount = 0, not
       align={align}
       content={<NotificationContent notifies={notifisTest || notifies} />}
     >
-      <Badge overflowCount={9} count={notifycount}>
-        <BellOutlined className="text-lg" />
-      </Badge>
+      <Typography.Text>
+        <Badge overflowCount={9} count={notifycount}>
+          <BellOutlined className="text-lg" />
+        </Badge>
+      </Typography.Text>
     </Popover>
   )
 }

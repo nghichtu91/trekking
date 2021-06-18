@@ -24,9 +24,10 @@ import { MainMenus, ProfileMenus } from '@shared/constants/menus'
 interface HeaderProps extends LayoutProps {
   isAuthenticated?: boolean
   logoDom?: string | React.ReactNode
+  signOut?: () => void
 }
 
-export const Header: React.FC<HeaderProps> = () => {
+export const Header: React.FC<HeaderProps> = ({ signOut = () => false }) => {
   const { profile } = useProfile()
   const [isAuthenticated] = UseAws()
   const router = useRouter()
@@ -37,80 +38,23 @@ export const Header: React.FC<HeaderProps> = () => {
   const handleSignIn = () => {
     return router.push(Routers.SignInPage)
   }
-  // const onScroll = (event: Event) => {
-  //   console.log('window scrolled!', event)
-  //   console.log('2', headerRef.current.offsetTop)
-  //   console.log('1', window.pageYOffset)
-  //   if (window.pageYOffset >= headerRef.current.offsetTop) {
-  //     headerRef.current.classList.add('sticky')
-  //   } else {
-  //     headerRef.current.classList.remove('sticky')
-  //   }
-  // }
-
-  // useEventListener('scroll', onScroll)
-
-  // const profileMenuHandle = (url?: string) => {
-  //   if (!url || url !== '#') {
-  //     router.push({
-  //       pathname: url,
-  //       query: {
-  //         id: profile.userId,
-  //       },
-  //     })
-  //   }
-  //   setIsPopoverProfile(false)
-  //   return false
-  // }
-
-  // const signOutHandle = () => {
-  //   Auth.signOut()
-  // }
-
-  // const profileMenus = () => {
-  //   return (
-  //     <Row className="" justify="space-between" gutter={[0, 0]}>
-  //       <Col className="p-3 border-b border-gray-200" span={24}>
-  //         <Row>
-  //           <Col span={6}>
-  //             <Avatar size={55} src={profile.avatar} icon={<UserOutlined />} />
-  //           </Col>
-  //           <Col span={18}>
-  //             <Typography.Title className="text-blue-500 mb-1" level={5}>
-  //               {profile.fullName}
-  //               {profile.identified ? (
-  //                 <SafetyCertificateFilled className="align-baseline text-base text-yellow-500" />
-  //               ) : null}
-  //             </Typography.Title>
-  //             <Typography.Text type="secondary">@{profile.username}</Typography.Text>
-  //           </Col>
-  //         </Row>
-  //       </Col>
-  //       <Col slot="popover-profile--menu" className="popover-profile--menu" span={24}>
-  //         <BaseMenu onMenuclick={profileMenuHandle} className="border-0" items={ProfileMenus} />
-  //       </Col>
-  //       <Col className="p-3 border-t border-gray-200 hover:bg-gray-100" span={24}>
-  //         <Typography.Link onClick={signOutHandle}>
-  //           <LogoutOutlined className="align-text-middle" /> Thoát
-  //         </Typography.Link>
-  //       </Col>
-  //     </Row>
-  //   )
-  // }
 
   const [visible, setVisible] = useState(false)
+
   const showDrawer = () => {
     setVisible(true)
   }
+
   const onClose = () => {
     setVisible(false)
   }
 
   const goToByMenuKey = (menu: string) => {
     const { uri } = MainMenus.find(item => item.key === menu)
+    console.log(router.asPath)
     if (uri) {
       setMenuActivedKeys([menu])
-      router.push(uri)
+      router.push({ pathname: uri })
     }
   }
 
@@ -128,7 +72,8 @@ export const Header: React.FC<HeaderProps> = () => {
     router.push(Routers.HomePage)
   }
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
+    signOut()
     router.push(Routers.HomePage)
   }
 

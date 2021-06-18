@@ -17,6 +17,7 @@ interface IAuthService {
   signIn(username: string, password: string): Promise<unknown>
   signInWithEmail(): Promise<boolean>
   signInWithSocial(provider: CognitoHostedUIIdentityProvider): Promise<unknown>
+  signOut(): Promise<unknown>
 }
 
 export class AuthService implements IAuthService {
@@ -86,5 +87,9 @@ export class AuthService implements IAuthService {
   resetPassword(username: string, code: string, password: string): Promise<unknown> {
     const usernameLower = username.trim().toLowerCase()
     return Auth.forgotPasswordSubmit(usernameLower, code, password)
+  }
+
+  signOut(): Promise<unknown> {
+    return Auth.signOut()
   }
 }
