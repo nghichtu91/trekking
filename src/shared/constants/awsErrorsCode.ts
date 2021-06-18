@@ -15,6 +15,7 @@ export const UsernameExists = 'UsernameExistsException'
 export const SignInErrors = {
   UserNotConfirmed,
   UserNotFound,
+  NotAuthorized,
 }
 
 export const ResetPassword = {
