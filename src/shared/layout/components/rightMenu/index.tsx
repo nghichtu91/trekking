@@ -1,28 +1,22 @@
-import React, { useState } from 'react'
-import { Space, Popover, Typography, Button, Avatar } from 'antd'
-import Helper from '@shared/utils/helper'
+import React from 'react'
+import { Space, Button } from 'antd'
 import { CreatePostButton } from './components/createPostButton'
 import { Notification } from './components/notification'
-
+import { ProfilePopover, ProfileProps } from './components/profilePopover'
+import { IProfileMenus } from '@shared/constants/menus'
 import { UserOutlined } from '@ant-design/icons'
-
-interface profileProps {
-  userId?: string
-  fullName?: string
-  avatar?: string
-}
 
 interface RightMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   isAuthenticated?: boolean
   onSignIn?: () => void
-  profile?: profileProps
+  profile?: ProfileProps
+  onSignOut?: () => void
+  profileMenu?: IProfileMenus[]
 }
 
 export const RightMenu: React.FC<RightMenuProps> = props => {
-  const [PopoverProfile, setIsPopoverProfile] = useState<boolean>(false)
-  const { isAuthenticated = false, profile } = props
-  const { onSignIn = () => false } = props
-  const popoverProfileShow = () => setIsPopoverProfile(true)
+  const { isAuthenticated = false, profile, profileMenu } = props
+  const { onSignIn = () => false, onSignOut = () => false } = props
 
   const btnSignInRender = () => {
     if (isAuthenticated) return null
@@ -33,34 +27,13 @@ export const RightMenu: React.FC<RightMenuProps> = props => {
     )
   }
 
-  const handlePPVisibleChange = visible => {
-    setIsPopoverProfile(visible)
-  }
-
   const authenticatedRender = () => {
     if (!isAuthenticated) return null
     return (
       <>
         <Notification />
         <CreatePostButton />
-        <Popover
-          visible={PopoverProfile}
-          onVisibleChange={handlePPVisibleChange}
-          overlayClassName={`popover--profile`}
-          trigger="click"
-          arrowPointAtCenter={true}
-          // content={profileMenus()}
-          destroyTooltipOnHide
-          placement="topRight"
-          align={{
-            offset: [20, 11],
-          }}
-          getPopupContainer={() => Helper.getContainer()}
-        >
-          <Typography.Link className="block" onClick={popoverProfileShow} type="secondary">
-            <Avatar src={profile.avatar} icon={<UserOutlined id="fdfdf" />} />
-          </Typography.Link>
-        </Popover>
+        <ProfilePopover profileMenu={profileMenu} onSignOut={onSignOut} profile={profile} />
       </>
     )
   }

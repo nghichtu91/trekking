@@ -18,7 +18,7 @@ import { UseAws } from '@modules/profile/hooks/useAuthe'
 import { useProfile } from '@modules/profile/hooks/userProfile'
 import { useRouter } from 'next/router'
 import { Routers } from '@shared/constants/routers'
-import { MainMenus } from '@shared/constants/menus'
+import { MainMenus, ProfileMenus } from '@shared/constants/menus'
 
 //#endregion
 interface HeaderProps extends LayoutProps {
@@ -128,6 +128,10 @@ export const Header: React.FC<HeaderProps> = () => {
     router.push(Routers.HomePage)
   }
 
+  const handleSignOut = () => {
+    router.push(Routers.HomePage)
+  }
+
   return (
     <div ref={headerRef} className="w-full top-0 sticky" id="header">
       <Layout.Header style={{ background: '#fff' }}>
@@ -160,6 +164,8 @@ export const Header: React.FC<HeaderProps> = () => {
                   }}
                   isAuthenticated={isAuthenticated}
                   onSignIn={handleSignIn}
+                  onSignOut={handleSignOut}
+                  profileMenu={ProfileMenus}
                 />
               </Col>
             </Row>
