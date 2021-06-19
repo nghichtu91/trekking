@@ -1,6 +1,6 @@
 import { List, Row, Col } from 'antd'
 import { Products } from '@modules/product/faker/products'
-import { ProductItem } from '@modules/product/components/productItem'
+import { WrapperItem } from '@modules/product/components/productItem'
 import { LoadMoreButton } from '@shared/components/button'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { i18n } from '../../next-i18next.config'
@@ -16,7 +16,7 @@ const App = () => {
           loadMore={<LoadMoreButton />}
           itemLayout="vertical"
           dataSource={Products}
-          renderItem={item => <ProductItem item={item} />}
+          renderItem={item => <WrapperItem item={item} />}
         />
       </Col>
     </Row>

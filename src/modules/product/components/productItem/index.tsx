@@ -1,3 +1,3 @@
-import { ProductItem } from './components/ProductItem'
+import { WrapperItem } from './components/wrapper'
 
-export { ProductItem }
+export { WrapperItem }
