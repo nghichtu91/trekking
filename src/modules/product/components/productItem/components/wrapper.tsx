@@ -1,6 +1,6 @@
 import React from 'react'
 import { IProduct } from '@modules/product/models/product'
-import { List, Typography, Avatar, Button, Space } from 'antd'
+import { List, Typography, Avatar, Button, Space, Image } from 'antd'
 import styles from './styles/product.module.scss'
 import { HeartOutlined, UserOutlined } from '@ant-design/icons'
 import Link from 'next/link'
@@ -14,7 +14,17 @@ export const WrapperItem: React.FC<ProductItemProps> = ({ item }) => {
     <div className={`${styles['product']}`} role="button">
       <List.Item
         className={`${styles['item']}`}
-        extra={<Button type="text" icon={<HeartOutlined />} />}
+        extra={
+          <Space size="small" direction="vertical">
+            <Image
+              preview={false}
+              width={32}
+              height={32}
+              src="https://cdn.printgo.vn/uploads/media/761388/toyota4_1559754409.jpg"
+            />
+            <Button type="text" icon={<HeartOutlined />} />
+          </Space>
+        }
       >
         <Link href="/">
           <List.Item.Meta
@@ -42,13 +52,13 @@ export const WrapperItem: React.FC<ProductItemProps> = ({ item }) => {
                     500km
                   </Typography.Text>
                 </Space>
-
                 <Typography.Text className="block" strong type="danger">
                   250.000.000 đ
                 </Typography.Text>
                 <Space>
                   <Typography.Text type="secondary">
-                    <UserOutlined className="align-baseline" /> {item.author}
+                    <UserOutlined className="align-baseline" />
+                    {item.author}
                   </Typography.Text>
                   <Typography.Text type="secondary">
                     {item?.created_at?.toLocaleString() || ''}
