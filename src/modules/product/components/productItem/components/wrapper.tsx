@@ -9,7 +9,7 @@ import { Company } from './company'
 import { Thumb } from './thumb'
 import { Title } from './title'
 import { Attributes } from './attributes'
-
+import { Price } from './price'
 interface ProductItemProps {
   item: IProduct
   productId: string
@@ -39,9 +39,7 @@ export const WrapperItem: React.FC<ProductItemProps> = ({ item, companyId }) => 
             description={
               <>
                 <Attributes />
-                <Typography.Text className="block" strong type="danger">
-                  250.000.000 đ
-                </Typography.Text>
+                <Price value={25000} />
                 <Space>
                   <Author name={item?.author} />
                   <Typography.Text type="secondary">
