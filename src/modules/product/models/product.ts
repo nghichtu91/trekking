@@ -10,6 +10,12 @@ export interface IAttribute {
   country?: Country
 }
 
+export interface Attribute {
+  key: string
+  name: string
+  val: unknown
+}
+
 export interface ICarAttribute {
   company: string
 }
@@ -28,4 +34,5 @@ export interface IProduct {
   content?: string
   created_at?: Date
   author?: string
+  shop?: unknown
 }

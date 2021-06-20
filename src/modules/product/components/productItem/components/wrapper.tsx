@@ -1,70 +1,54 @@
 import React from 'react'
 import { IProduct } from '@modules/product/models/product'
-import { List, Typography, Avatar, Button, Space, Image } from 'antd'
+import { List, Typography, Button, Space } from 'antd'
 import styles from './styles/product.module.scss'
-import { HeartOutlined, UserOutlined } from '@ant-design/icons'
+import { HeartOutlined } from '@ant-design/icons'
 import Link from 'next/link'
+import { Author } from './author'
+import { Company } from './company'
+import { Thumb } from './thumb'
+import { Title } from './title'
+import { Attributes } from './attributes'
 
 interface ProductItemProps {
   item: IProduct
+  productId: string
+  title?: string
+  author?: string
+  authorId?: string
+  companyId?: string
 }
 
-export const WrapperItem: React.FC<ProductItemProps> = ({ item }) => {
+export const WrapperItem: React.FC<ProductItemProps> = ({ item, companyId }) => {
+  const Meta = List.Item.Meta
   return (
     <div className={`${styles['product']}`} role="button">
       <List.Item
         className={`${styles['item']}`}
         extra={
           <Space size="small" direction="vertical">
-            <Image
-              preview={false}
-              width={32}
-              height={32}
-              src="https://cdn.printgo.vn/uploads/media/761388/toyota4_1559754409.jpg"
-            />
+            <Company companyId={companyId} />
             <Button type="text" icon={<HeartOutlined />} />
           </Space>
         }
       >
         <Link href="/">
-          <List.Item.Meta
-            avatar={
-              <Avatar
-                size={84}
-                shape="square"
-                src={
-                  item.thumb ||
-                  'https://static.carmudi.vn/wp-content/uploads/2019-11/FUWAnaL1dl.jpg'
-                }
-              />
-            }
-            title={<Typography.Text strong>{`#${item.id} ${item.title}`}</Typography.Text>}
+          <Meta
+            avatar={<Thumb src={item.thumb} />}
+            title={<Title title={item.title} no={item.id} />}
             description={
-              <Typography>
-                <Space>
-                  <Typography.Text className="block" type="secondary">
-                    2016
-                  </Typography.Text>
-                  <Typography.Text className="block" type="secondary">
-                    Tự động
-                  </Typography.Text>
-                  <Typography.Text className="block" type="secondary">
-                    500km
-                  </Typography.Text>
-                </Space>
+              <>
+                <Attributes />
                 <Typography.Text className="block" strong type="danger">
                   250.000.000 đ
                 </Typography.Text>
                 <Space>
-                  <Typography.Text type="secondary">
-                    <UserOutlined className="align-baseline" />
-                    {item.author}
-                  </Typography.Text>
+                  <Author name={item?.author} />
                   <Typography.Text type="secondary">
                     {item?.created_at?.toLocaleString() || ''}
                   </Typography.Text>
                 </Space>
-              </Typography>
+              </>
             }
           />
         </Link>
