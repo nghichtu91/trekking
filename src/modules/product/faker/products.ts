@@ -1,4 +1,5 @@
 import { IProduct } from '../models/product'
+
 export const Products: IProduct[] = [
   {
     id: '1',
@@ -8,6 +9,34 @@ export const Products: IProduct[] = [
     thumb: 'https://static.carmudi.vn/wp-content/uploads/2019-11/FUWAnaL1dl.jpg',
     author: 'Thành Lê',
     created_at: new Date(),
+    attributes: [
+      {
+        key: 'company',
+        name: 'company',
+        val: 1,
+      },
+      {
+        key: 'carOptions',
+        name: 'carOptions',
+        val: [
+          {
+            key: 'mfg',
+            name: 'mfg',
+            val: 2016,
+          },
+          {
+            key: 'km',
+            name: 'km',
+            val: 500,
+          },
+          {
+            key: 'type',
+            name: 'type',
+            val: 'Tự động',
+          },
+        ],
+      },
+    ],
   },
   {
     id: '2',

@@ -6,9 +6,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { i18n } from '../../next-i18next.config'
 
 const App = () => {
-  // const router = useRouter();
-  // const { locale, locales, defaultLocale } = router;
-  // console.log(locale, locales, defaultLocale )
   return (
     <Row justify="center">
       <Col xs={24} sm={24} xl={12}>
@@ -16,7 +13,7 @@ const App = () => {
           loadMore={<LoadMoreButton />}
           itemLayout="vertical"
           dataSource={Products}
-          renderItem={item => <WrapperItem item={item} />}
+          renderItem={item => <WrapperItem key={item.id} productId={item.id} item={item} />}
         />
       </Col>
     </Row>

@@ -9,6 +9,8 @@ import { ProductFilters } from '@modules/product/components/filters'
 import { Products } from '@modules/product/faker/products'
 import { WrapperItem } from '@modules/product/components/productItem'
 import { LoadMoreButton } from '@shared/components/button'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { i18n } from '../../../next-i18next.config'
 
 const ProductsPage = () => {
   return (
@@ -20,7 +22,7 @@ const ProductsPage = () => {
             loadMore={<LoadMoreButton />}
             itemLayout="vertical"
             dataSource={Products}
-            renderItem={item => <WrapperItem item={item} />}
+            renderItem={item => <WrapperItem productId={item.id} item={item} />}
           />
         </Col>
         <Col xxl={7} xl={7} lg={4} md={4} xs={0} sm={0}>
@@ -30,5 +32,11 @@ const ProductsPage = () => {
     </PageWrapper>
   )
 }
+
+export const getServerSideProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common'], { i18n })),
+  },
+})
 
 export default ProductsPage
