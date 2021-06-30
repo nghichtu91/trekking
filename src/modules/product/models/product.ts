@@ -6,7 +6,6 @@ export type ProductType = 'account' | 'rss' | 'car'
 export type Country = ''
 export type Status = 'trading' | 'completed'
 
-import { AttrCompany } from '../models/company'
 export interface IAttribute {
   country?: Country
 }
@@ -14,7 +13,7 @@ export interface IAttribute {
 export interface Attribute {
   key: string
   name: string
-  val: AttrCompany | unknown
+  val: unknown
 }
 
 export interface ICarAttribute {
@@ -29,11 +28,12 @@ export interface IProduct {
   thumb?: string
   albumId?: string
   attributes?: Attribute[]
-  userId?: string
+  shortAttrs?: Attribute[]
   type?: ProductType
   tag?: string[]
   content?: string
-  created_at?: Date
+  created_at?: Date | string
   author?: string
   shop?: unknown
+  companyId?: string | number
 }

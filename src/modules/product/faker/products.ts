@@ -8,7 +8,24 @@ export const Products: IProduct[] = [
     price: 5000,
     thumb: 'https://static.carmudi.vn/wp-content/uploads/2019-11/FUWAnaL1dl.jpg',
     author: 'Thành Lê',
-    created_at: new Date(),
+    created_at: new Date('Tue Jun 29 2021 10:32:32 GMT+0700'),
+    shortAttrs: [
+      {
+        key: 'mfg',
+        name: 'mfg',
+        val: 2016,
+      },
+      {
+        key: 'km',
+        name: 'km',
+        val: '500Km',
+      },
+      {
+        key: 'type',
+        name: 'type',
+        val: 'Tự động',
+      },
+    ],
     attributes: [
       {
         key: 'company',
@@ -27,7 +44,7 @@ export const Products: IProduct[] = [
           {
             key: 'km',
             name: 'km',
-            val: 500,
+            val: '500 Km',
           },
           {
             key: 'type',
@@ -37,6 +54,8 @@ export const Products: IProduct[] = [
         ],
       },
     ],
+    shop: 'Bán xe',
+    companyId: 1,
   },
   {
     id: '2',
@@ -45,6 +64,24 @@ export const Products: IProduct[] = [
     price: 5000,
     thumb: 'https://static.carmudi.vn/wp-content/uploads/2019-11/O9jszEGa7N.jpg',
     author: 'Thành Lê',
+    shortAttrs: [
+      {
+        key: 'mfg',
+        name: 'mfg',
+        val: 2016,
+      },
+      {
+        key: 'km',
+        name: 'km',
+        val: '500Km',
+      },
+      {
+        key: 'type',
+        name: 'type',
+        val: 'Tự động',
+      },
+    ],
+    companyId: 20,
     created_at: new Date(),
   },
   {
@@ -54,6 +91,24 @@ export const Products: IProduct[] = [
     price: 5000,
     author: 'Thành Lê',
     created_at: new Date(),
+    companyId: 20,
+    shortAttrs: [
+      {
+        key: 'mfg',
+        name: 'mfg',
+        val: 2020,
+      },
+      {
+        key: 'km',
+        name: 'km',
+        val: '500Km',
+      },
+      {
+        key: 'type',
+        name: 'type',
+        val: 'Tự động',
+      },
+    ],
   },
   {
     id: '4',
@@ -62,6 +117,24 @@ export const Products: IProduct[] = [
     price: 5000,
     author: 'Thành Lê',
     created_at: new Date(),
+    companyId: 20,
+    shortAttrs: [
+      {
+        key: 'mfg',
+        name: 'mfg',
+        val: 2016,
+      },
+      {
+        key: 'km',
+        name: 'km',
+        val: '500Km',
+      },
+      {
+        key: 'type',
+        name: 'type',
+        val: 'Tự động',
+      },
+    ],
   },
   {
     id: '5',
@@ -70,6 +143,24 @@ export const Products: IProduct[] = [
     price: 5000,
     author: 'Thành Lê',
     created_at: new Date(),
+    companyId: 20,
+    shortAttrs: [
+      {
+        key: 'mfg',
+        name: 'mfg',
+        val: 2016,
+      },
+      {
+        key: 'km',
+        name: 'km',
+        val: '500Km',
+      },
+      {
+        key: 'type',
+        name: 'type',
+        val: 'Tự động',
+      },
+    ],
   },
   {
     id: '6',
@@ -78,5 +169,23 @@ export const Products: IProduct[] = [
     price: 5000,
     author: 'Thành Lê',
     created_at: new Date(),
+    companyId: 20,
+    shortAttrs: [
+      {
+        key: 'mfg',
+        name: 'mfg',
+        val: 2016,
+      },
+      {
+        key: 'km',
+        name: 'km',
+        val: '500Km',
+      },
+      {
+        key: 'type',
+        name: 'type',
+        val: 'Tự động',
+      },
+    ],
   },
 ]

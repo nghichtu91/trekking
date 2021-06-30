@@ -6,18 +6,14 @@ interface CarDescriptionProps {
   attributes?: Attribute[]
 }
 
-export const Attributes: React.FC<CarDescriptionProps> = () => {
+export const Attributes: React.FC<CarDescriptionProps> = ({ attributes = [] }) => {
   return (
     <Space>
-      <Typography.Text className="block" type="secondary">
-        2016
-      </Typography.Text>
-      <Typography.Text className="block" type="secondary">
-        Tự động
-      </Typography.Text>
-      <Typography.Text className="block" type="secondary">
-        500km
-      </Typography.Text>
+      {attributes.map(attr => (
+        <Typography.Text key={attr.key} className="block" type="secondary">
+          {attr.val}
+        </Typography.Text>
+      ))}
     </Space>
   )
 }

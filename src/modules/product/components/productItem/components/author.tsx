@@ -3,7 +3,7 @@ import { Typography } from 'antd'
 import { UserOutlined, ShopOutlined } from '@ant-design/icons'
 
 interface AuthorProps {
-  name?: string
+  name?: string | unknown
   id?: string
   isShop?: boolean
 }

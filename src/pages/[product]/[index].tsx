@@ -22,7 +22,16 @@ const ProductsPage = () => {
             loadMore={<LoadMoreButton />}
             itemLayout="vertical"
             dataSource={Products}
-            renderItem={item => <WrapperItem productId={item.id} item={item} />}
+            renderItem={item => (
+              <WrapperItem
+                shop={item.shop}
+                shortAttrs={item.shortAttrs}
+                productId={item.id}
+                price={item.price}
+                item={item}
+                companyId={item.companyId}
+              />
+            )}
           />
         </Col>
         <Col xxl={7} xl={7} lg={4} md={4} xs={0} sm={0}>
