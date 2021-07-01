@@ -19,9 +19,17 @@ const ProductsPage = () => {
       <Row>
         <Col xxl={17} xl={17} lg={20} md={20} xs={24} sm={24}>
           <List
-            loadMore={<LoadMoreButton />}
+            // loadMore={<LoadMoreButton />}
+            // loading={true}
             itemLayout="vertical"
             dataSource={Products}
+            pagination={{
+              onChange: page => {
+                console.log(page)
+              },
+              defaultCurrent: 1,
+              pageSize: 4,
+            }}
             renderItem={item => (
               <WrapperItem
                 shop={item.shop}

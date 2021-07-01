@@ -1,17 +1,16 @@
 import React from 'react'
 import { IProduct } from '@modules/product/models/product'
-import { List, Typography, Space } from 'antd'
+import { List, Space } from 'antd'
 import styles from './styles/product.module.scss'
 // mport { HeartOutlined } from '@ant-design/icons'
 import Link from 'next/link'
-import moment from 'moment'
 //#region components
 import { Author } from './author'
-import { Company } from './company'
 import { Thumb } from './thumb'
 import { Title } from './title'
 import { Attributes } from './attributes'
 import { Price } from './price'
+import { ProductCreated } from './created'
 //#endregion
 
 // #region model
@@ -37,22 +36,14 @@ interface WrapperItemProps {
 }
 
 export const WrapperItem: React.FC<WrapperItemProps> = props => {
-  const { productId, item, companyId, shortAttrs, shop, price } = props
+  const { productId, item, shortAttrs, shop, price } = props
 
   const Meta = List.Item.Meta
   const authorName = shop ? shop : item?.author
 
   return (
     <div className={`${styles['product']}`} role="button">
-      <List.Item
-        className={`${styles['item']}`}
-        extra={
-          <Space size="small" direction="vertical">
-            <Company companyId={companyId} />
-            {/* <Button type="text" icon={<HeartOutlined />} /> */}
-          </Space>
-        }
-      >
+      <List.Item className={`${styles['item']}`}>
         <Link href={`/mua-ban/view/${productId}`}>
           <Meta
             avatar={<Thumb src={item.thumb} />}
@@ -63,9 +54,7 @@ export const WrapperItem: React.FC<WrapperItemProps> = props => {
                 <Price value={price} />
                 <Space>
                   <Author isShop={!!shop} name={authorName} />
-                  <Typography.Text type="secondary">
-                    {moment(item?.created_at).fromNow()}
-                  </Typography.Text>
+                  <ProductCreated created_at={item?.created_at} />
                 </Space>
               </>
             }

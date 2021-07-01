@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Space } from 'antd'
+import { Typography } from 'antd'
 import { Attribute } from '@modules/product/models/product'
 
 interface CarDescriptionProps {
@@ -7,13 +7,10 @@ interface CarDescriptionProps {
 }
 
 export const Attributes: React.FC<CarDescriptionProps> = ({ attributes = [] }) => {
+  const fdf: string[] = attributes.map(attr => attr.val) as string[]
   return (
-    <Space>
-      {attributes.map(attr => (
-        <Typography.Text key={attr.key} className="block" type="secondary">
-          {attr.val}
-        </Typography.Text>
-      ))}
-    </Space>
+    <Typography.Text className="block" type="secondary">
+      {fdf.join(' - ')}
+    </Typography.Text>
   )
 }

@@ -7,5 +7,5 @@ interface TitleProps {
 }
 
 export const Title: React.FC<TitleProps> = ({ title, no }) => {
-  return <Typography.Text strong>{`#${no} ${title}`}</Typography.Text>
+  return <Typography.Text className="product--title" strong>{`#${no} ${title}`}</Typography.Text>
 }
