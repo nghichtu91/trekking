@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { API } from 'aws-amplify'
 
 export interface IWithProductServiceProps {
   handleChangePage?: (page: number, pageSize?: number) => void
@@ -11,6 +12,21 @@ export function withProductService<P extends IWithProductServiceProps>(
 ) {
   const HocComponent = (props: P) => {
     const router = useRouter()
+    useEffect(() => {
+      const getProduct = async () => {
+        const { query } = router
+        const pageQuery = query['paged'] as string
+        const paged = query?.paged ? parseInt(pageQuery) : 1
+        const products = await API.get('treekingProductService', '/products', {
+          queryStringParameters: {
+            paged,
+          },
+        })
+        console.log(products)
+      }
+      getProduct()
+    }, [])
+
     const handlePagination = (page: number) => {
       const { pathname, query } = router
       router.push({
@@ -21,7 +37,6 @@ export function withProductService<P extends IWithProductServiceProps>(
         },
       })
     }
-
     return <WrappedComponent handleChangePage={handlePagination} {...props} />
   }
   return HocComponent

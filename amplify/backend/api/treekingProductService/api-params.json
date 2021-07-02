@@ -1,0 +1,61 @@
+{
+    "paths": [
+        {
+            "name": "/product",
+            "lambdaFunction": "treekingProductService",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ],
+                "unauth": [
+                    "/GET"
+                ]
+            },
+            "policyResourceName": "/product"
+        },
+        {
+            "name": "/products",
+            "lambdaFunction": "treekingProductService",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/GET"
+                ],
+                "unauth": [
+                    "/GET"
+                ]
+            },
+            "policyResourceName": "/products"
+        }
+    ],
+    "resourceName": "treekingProductService",
+    "apiName": "treekingProductService",
+    "authResourceName": "trekking73950f9273950f92",
+    "functionArns": [
+        {
+            "lambdaFunction": "treekingProductService"
+        }
+    ],
+    "privacy": {
+        "auth": 2,
+        "unauth": 2,
+        "authRoleName": "amplify-trekking-dev-112657-authRole",
+        "unAuthRoleName": "amplify-trekking-dev-112657-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "treekingProductService",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "084dbe78"
+}

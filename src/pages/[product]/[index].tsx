@@ -11,7 +11,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { i18n } from '../../../next-i18next.config'
 import { Products } from '@modules/product/faker/products'
 import { useRouter } from 'next/router'
-
+import { GetServerSideProps } from 'next'
 import {
   withProductService,
   IWithProductServiceProps,
@@ -44,7 +44,7 @@ const ProductsPage: React.FC<IWithProductServiceProps> = props => {
   )
 }
 
-export const getServerSideProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common'], { i18n })),
