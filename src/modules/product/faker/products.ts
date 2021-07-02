@@ -162,30 +162,4 @@ export const Products: IProduct[] = [
       },
     ],
   },
-  {
-    id: '6',
-    title: 'Rss',
-    tradeType: 1,
-    price: 5000,
-    author: 'Thành Lê',
-    created_at: new Date(),
-    companyId: 20,
-    shortAttrs: [
-      {
-        key: 'mfg',
-        name: 'mfg',
-        val: 2016,
-      },
-      {
-        key: 'km',
-        name: 'km',
-        val: '500Km',
-      },
-      {
-        key: 'type',
-        name: 'type',
-        val: 'Tự động',
-      },
-    ],
-  },
 ]

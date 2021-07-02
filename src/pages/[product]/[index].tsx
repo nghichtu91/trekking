@@ -2,44 +2,38 @@
  * @author ThanhLe
  * @version v0.0.1
  */
-import { Row, Col, List } from 'antd'
-// import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import React from 'react'
+import { Row, Col } from 'antd'
 import { PageWrapper } from '@shared/components/wrapper'
 import { ProductFilters } from '@modules/product/components/filters'
-import { Products } from '@modules/product/faker/products'
-import { WrapperItem } from '@modules/product/components/productItem'
-import { LoadMoreButton } from '@shared/components/button'
+import { ProductList } from '@modules/product/components/ListProduct'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { i18n } from '../../../next-i18next.config'
+import { Products } from '@modules/product/faker/products'
+import { useRouter } from 'next/router'
 
-const ProductsPage = () => {
+import {
+  withProductService,
+  IWithProductServiceProps,
+} from '@modules/product/hocs/withProductService'
+
+const ProductsPage: React.FC<IWithProductServiceProps> = props => {
+  const { handleChangePage } = props
+  const router = useRouter()
+  const { query } = router
+  const pageQuery = query['paged'] as string
+  const paged = query?.paged ? parseInt(pageQuery) : 1
+
   return (
     <PageWrapper>
       <ProductFilters />
       <Row>
         <Col xxl={17} xl={17} lg={20} md={20} xs={24} sm={24}>
-          <List
-            // loadMore={<LoadMoreButton />}
-            // loading={true}
-            itemLayout="vertical"
+          <ProductList
+            total={50}
+            paged={paged}
             dataSource={Products}
-            pagination={{
-              onChange: page => {
-                console.log(page)
-              },
-              defaultCurrent: 1,
-              pageSize: 4,
-            }}
-            renderItem={item => (
-              <WrapperItem
-                shop={item.shop}
-                shortAttrs={item.shortAttrs}
-                productId={item.id}
-                price={item.price}
-                item={item}
-                companyId={item.companyId}
-              />
-            )}
+            onChangePagination={handleChangePage}
           />
         </Col>
         <Col xxl={7} xl={7} lg={4} md={4} xs={0} sm={0}>
@@ -50,10 +44,12 @@ const ProductsPage = () => {
   )
 }
 
-export const getServerSideProps = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common'], { i18n })),
-  },
-})
+export const getServerSideProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'], { i18n })),
+    },
+  }
+}
 
-export default ProductsPage
+export default withProductService(ProductsPage)
