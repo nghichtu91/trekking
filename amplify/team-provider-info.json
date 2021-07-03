@@ -25,7 +25,7 @@
         "trekking73950f9273950f92PreTokenGeneration": {},
         "treekingProductService": {
           "deploymentBucketName": "amplify-trekking-dev-112657-deployment",
-          "s3Key": "amplify-builds/treekingProductService-325a3473422f546b6d45-build.zip"
+          "s3Key": "amplify-builds/treekingProductService-6b6b685a506675363851-build.zip"
         }
       },
       "auth": {

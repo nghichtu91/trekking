@@ -31,6 +31,34 @@
                 ]
             },
             "policyResourceName": "/products"
+        },
+        {
+            "name": "/categories",
+            "lambdaFunction": "treekingProductService",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/GET"
+                ],
+                "unauth": [
+                    "/GET"
+                ]
+            },
+            "policyResourceName": "/categories"
+        },
+        {
+            "name": "/tags",
+            "lambdaFunction": "treekingProductService",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/GET"
+                ],
+                "unauth": [
+                    "/GET"
+                ]
+            },
+            "policyResourceName": "/tags"
         }
     ],
     "resourceName": "treekingProductService",
@@ -42,8 +70,8 @@
         }
     ],
     "privacy": {
-        "auth": 2,
-        "unauth": 2,
+        "auth": 4,
+        "unauth": 4,
         "authRoleName": "amplify-trekking-dev-112657-authRole",
         "unAuthRoleName": "amplify-trekking-dev-112657-unauthRole"
     },
@@ -57,5 +85,5 @@
             ]
         }
     ],
-    "uuid": "084dbe78"
+    "uuid": "b0538bff"
 }

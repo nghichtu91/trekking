@@ -45,6 +45,16 @@ app.get('/products', function(req, res) {
   res.json({products: products, total: 200 });
 });
 
+app.get('/categories', function(req, res) {
+  // Add your code here
+  res.json({categories: {} });
+});
+
+app.get('/tags', function(req, res) {
+  // Add your code here
+  res.json({tags: {} });
+});
+
 app.get('//*', function(req, res) {
   // Add your code here
   res.json({success: 'get call succeed!', url: req.url});
