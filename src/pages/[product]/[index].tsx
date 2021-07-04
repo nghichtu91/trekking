@@ -30,6 +30,7 @@ const ProductsPage: React.FC<IWithProductServiceProps> = props => {
       <Row>
         <Col xxl={17} xl={17} lg={20} md={20} xs={24} sm={24}>
           <ProductList
+            layout="vertical"
             total={50}
             paged={paged}
             dataSource={Products}

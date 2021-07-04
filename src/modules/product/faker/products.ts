@@ -3,10 +3,11 @@ import { IProduct } from '../models/product'
 export const Products: IProduct[] = [
   {
     id: '1',
-    title: 'Nissan Sunny 2020',
+    title: 'Nissan Sunny 2020 Nissan Sunny 2020 Nissan Sunny 2020',
     tradeType: 1,
     price: 5000,
-    thumb: 'https://static.carmudi.vn/wp-content/uploads/2019-11/FUWAnaL1dl.jpg',
+    thumb:
+      'https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg',
     author: 'Thành Lê',
     created_at: new Date('Tue Jun 29 2021 10:32:32 GMT+0700'),
     shortAttrs: [
@@ -62,7 +63,8 @@ export const Products: IProduct[] = [
     title: 'Toyota Yaris Cross',
     tradeType: 2,
     price: 5000,
-    thumb: 'https://static.carmudi.vn/wp-content/uploads/2019-11/O9jszEGa7N.jpg',
+    thumb:
+      'https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg',
     author: 'Thành Lê',
     shortAttrs: [
       {
@@ -92,6 +94,8 @@ export const Products: IProduct[] = [
     author: 'Thành Lê',
     created_at: new Date(),
     companyId: 20,
+    thumb:
+      'https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg',
     shortAttrs: [
       {
         key: 'mfg',
@@ -111,6 +115,8 @@ export const Products: IProduct[] = [
     ],
   },
   {
+    thumb:
+      'https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg',
     id: '4',
     title: 'Rss',
     tradeType: 1,
@@ -144,6 +150,148 @@ export const Products: IProduct[] = [
     author: 'Thành Lê',
     created_at: new Date(),
     companyId: 20,
+    thumb:
+      'https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg',
+    shortAttrs: [
+      {
+        key: 'mfg',
+        name: 'mfg',
+        val: 2016,
+      },
+      {
+        key: 'km',
+        name: 'km',
+        val: '500Km',
+      },
+      {
+        key: 'type',
+        name: 'type',
+        val: 'Tự động',
+      },
+    ],
+  },
+  {
+    id: '6',
+    title: 'Rss',
+    tradeType: 1,
+    price: 5000,
+    author: 'Thành Lê',
+    created_at: new Date(),
+    companyId: 20,
+    thumb:
+      'https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg',
+    shortAttrs: [
+      {
+        key: 'mfg',
+        name: 'mfg',
+        val: 2016,
+      },
+      {
+        key: 'km',
+        name: 'km',
+        val: '500Km',
+      },
+      {
+        key: 'type',
+        name: 'type',
+        val: 'Tự động',
+      },
+    ],
+  },
+  {
+    id: '7',
+    title: 'Rss',
+    tradeType: 1,
+    price: 5000,
+    author: 'Thành Lê',
+    created_at: new Date(),
+    companyId: 20,
+    thumb:
+      'https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg',
+    shortAttrs: [
+      {
+        key: 'mfg',
+        name: 'mfg',
+        val: 2016,
+      },
+      {
+        key: 'km',
+        name: 'km',
+        val: '500Km',
+      },
+      {
+        key: 'type',
+        name: 'type',
+        val: 'Tự động',
+      },
+    ],
+  },
+  {
+    id: '8',
+    title: 'Rss',
+    tradeType: 1,
+    price: 5000,
+    author: 'Thành Lê',
+    created_at: new Date(),
+    companyId: 20,
+    thumb:
+      'https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg',
+    shortAttrs: [
+      {
+        key: 'mfg',
+        name: 'mfg',
+        val: 2016,
+      },
+      {
+        key: 'km',
+        name: 'km',
+        val: '500Km',
+      },
+      {
+        key: 'type',
+        name: 'type',
+        val: 'Tự động',
+      },
+    ],
+  },
+  {
+    id: '9',
+    title: 'Rss',
+    tradeType: 1,
+    price: 5000,
+    author: 'Thành Lê',
+    created_at: new Date(),
+    companyId: 20,
+    thumb:
+      'https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg',
+    shortAttrs: [
+      {
+        key: 'mfg',
+        name: 'mfg',
+        val: 2016,
+      },
+      {
+        key: 'km',
+        name: 'km',
+        val: '500Km',
+      },
+      {
+        key: 'type',
+        name: 'type',
+        val: 'Tự động',
+      },
+    ],
+  },
+  {
+    id: '10',
+    title: 'Rss',
+    tradeType: 1,
+    price: 5000,
+    author: 'Thành Lê',
+    created_at: new Date(),
+    companyId: 20,
+    thumb:
+      'https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg',
     shortAttrs: [
       {
         key: 'mfg',

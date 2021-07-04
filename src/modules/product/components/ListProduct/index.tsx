@@ -8,10 +8,12 @@ type Layout = 'horizontal' | 'vertical'
 
 export interface ProductListProps {
   dataSource?: IProduct[]
-  total?: 0
+  total?: number
   onChangePagination?: (page: number, pageSize?: number) => void
   paged?: number
   layout?: Layout
+  loadBtn?: React.ReactNode
+  isPagination?: boolean
 }
 
 export const ProductList: React.FC<ProductListProps> = props => {
@@ -21,6 +23,7 @@ export const ProductList: React.FC<ProductListProps> = props => {
     paged = 1,
     onChangePagination,
     layout = 'horizontal',
+    isPagination = false,
   } = props
 
   const pagination: PaginationConfig = {
@@ -30,7 +33,6 @@ export const ProductList: React.FC<ProductListProps> = props => {
     onChange: onChangePagination,
     responsive: true,
     current: paged,
-    // itemRender: itemRender,
   }
 
   const itemRender = (item: IProduct) => (
@@ -43,10 +45,22 @@ export const ProductList: React.FC<ProductListProps> = props => {
       companyId={item.companyId}
     />
   )
+
+  if (layout === 'horizontal') {
+    return (
+      <List
+        grid={{ column: 3, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }}
+        className={`list-products list-products-${layout}`}
+        dataSource={dataSource}
+        pagination={isPagination ? pagination : false}
+        rowKey="id"
+        renderItem={itemRender}
+      />
+    )
+  }
+
   return (
     <List
-      // itemLayout="vertical"
-      // grid={{ xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }}
       className={`list-products list-products-${layout}`}
       dataSource={dataSource}
       pagination={pagination}

@@ -1,3 +1,3 @@
 import { WrapperItem } from './components/wrapper'
-
-export { WrapperItem }
+import { WrapperItemVertical } from './components/wrapperVertical'
+export { WrapperItem, WrapperItemVertical }

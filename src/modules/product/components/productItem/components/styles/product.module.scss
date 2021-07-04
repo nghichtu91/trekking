@@ -2,12 +2,12 @@
   border-bottom: none !important;
   padding: 0;
   .item {
-    padding: 12px;
-    min-height: 124px;
-    overflow: hidden;
-    background-color: #fff;
-    border-top: 1px solid #f4f4f4;
-    position: relative;
+    // padding: 12px;
+    // min-height: 124px;
+    // overflow: hidden;
+    // background-color: #fff;
+    // border-top: 1px solid #f4f4f4;
+    // position: relative;
     &:hover {
       box-shadow: 0 1px 8px 0 rgb(0 0 0 / 30%);
       z-index: 1;
@@ -18,12 +18,91 @@
   }
 }
 
+.item { 
+  &:hover {
+    box-shadow: 0 1px 7px 0 rgb(0 0 0 / 30%);
+    z-index: 2;
+  }
+}
+
+
+
+.product-vertical {
+  // width: 192px;
+  width: 100%;
+  overflow: hidden;
+  padding: 12px;
+  background: #fff;
+  .wrapper {
+    position: relative;
+    display: block;
+    height: 100%;
+  }
+  .thumbnailWrapper {
+    position: relative;
+    display: flex;
+    margin: -1px;
+    justify-content: center;
+    .thumbnailImg { 
+      position: relative;
+      width: 100%;
+      background-size: cover !important;
+      background: url('https://static.chotot.com/storage/default_images/c2c_ad_image.jpg') 50% no-repeat;
+      border-radius: 2px;
+      overflow: hidden;
+      display: inline-block;
+      img {
+        object-fit:cover;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+      }
+      &::after {
+        display: block;
+        padding-top: 100%;
+        content: "";
+      }
+    }
+  }
+  .caption {
+    padding-bottom: 8px;
+    position: relative;
+  }
+
+  .footer {
+    color: #9b9b9b;
+    bottom: -6px;
+    width: 100%;
+    left: 0;
+    display: flex;
+  }
+  // &:hover {
+  //   box-shadow: 0 1px 8px 0 rgb(0 0 0 / 30%);
+  //   z-index: 1;
+  // }
+}
+
+@media only screen and (min-width: 768px) {
+  .border--right {
+    border-right: 1px solid #f0f0f0;
+    &:last-child {
+      border-right: none;
+    }
+  }
+  
+}
+
 @media only screen and (max-width: 767px) {
   .product {
     .item {
       &:hover {
         box-shadow: none; 
       }
+    }
+  }
+  .item { 
+    &:hover {
+      box-shadow: none; 
     }
   }
 }

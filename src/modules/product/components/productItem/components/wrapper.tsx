@@ -2,7 +2,6 @@ import React from 'react'
 import { IProduct } from '@modules/product/models/product'
 import { List, Space } from 'antd'
 import styles from './styles/product.module.scss'
-// mport { HeartOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 //#region components
 import { Author } from './author'
