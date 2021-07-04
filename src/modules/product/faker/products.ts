@@ -5,7 +5,7 @@ export const Products: IProduct[] = [
     id: '1',
     title: 'Nissan Sunny 2020 Nissan Sunny 2020 Nissan Sunny 2020',
     tradeType: 1,
-    price: 5000,
+    price: 50000000000,
     thumb:
       'https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg',
     author: 'Thành Lê',

@@ -1,5 +1,8 @@
 .price .ant-statistic-content { 
-  font-size:17px;
-  color:#ff4d4f !important;
-  font-weight:500
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.33;
+  color: #d0021b;
+  display: inline-block;
+  margin: 2px 4px 0 0;
 }

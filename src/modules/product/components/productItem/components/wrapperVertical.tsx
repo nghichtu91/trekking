@@ -9,6 +9,7 @@ import { Title } from './title'
 import { Attributes } from './attributes'
 import { Price } from './price'
 import { ProductCreated } from './created'
+import { Condition } from './condition'
 //#endregion
 
 // #region model
@@ -49,7 +50,7 @@ export const WrapperItemVertical: React.FC<WrapperItemProps> = props => {
             </div>
             <div className={`${styles['caption']}`}>
               <Title title={item.title} no={item.id} />
-              <Attributes attributes={shortAttrs} />
+              <Condition attributes={shortAttrs} />
               <Price value={price} />
             </div>
             <div className={`${styles['footer']}`}>

@@ -42,7 +42,7 @@ const App = () => {
                   <WrapperItemVertical
                     shortAttrs={item.shortAttrs}
                     item={item}
-                    price={50000}
+                    price={item.price}
                     productId={item['id']}
                     key={item['id']}
                   />
