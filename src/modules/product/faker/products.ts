@@ -8,7 +8,7 @@ export const Products: IProduct[] = [
     price: 50000000000,
     thumb:
       'https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg',
-    author: 'Thành Lê',
+    author: 'Thành Lê dsdsd sdsdsfdf',
     created_at: new Date('Tue Jun 29 2021 10:32:32 GMT+0700'),
     shortAttrs: [
       {

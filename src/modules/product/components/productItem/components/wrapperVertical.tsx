@@ -1,12 +1,11 @@
 import React from 'react'
 import { IProduct } from '@modules/product/models/product'
-import { List, Space, Image, Avatar } from 'antd'
 import styles from './styles/product.module.scss'
 import Link from 'next/link'
+import { Space } from 'antd'
 //#region components
 import { Author } from './author'
 import { Title } from './title'
-import { Attributes } from './attributes'
 import { Price } from './price'
 import { ProductCreated } from './created'
 import { Condition } from './condition'
@@ -55,7 +54,7 @@ export const WrapperItemVertical: React.FC<WrapperItemProps> = props => {
             </div>
             <div className={`${styles['footer']}`}>
               <Author name={authorName} />
-              <ProductCreated created_at={item.created_at}></ProductCreated>
+              <ProductCreated created_at={item.created_at} />
             </div>
           </a>
         </Link>

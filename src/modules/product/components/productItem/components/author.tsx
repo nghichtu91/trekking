@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography } from 'antd'
 import { UserOutlined, ShopOutlined } from '@ant-design/icons'
-import Styles from './styles/author.module.scss'
+import globalStyles from './styles/global.module.scss'
 
 interface AuthorProps {
   name?: string | unknown
@@ -10,19 +10,17 @@ interface AuthorProps {
 }
 
 export const Author: React.FC<AuthorProps> = ({ name, isShop = false }) => {
+  const AuthorIcon = isShop ? (
+    <ShopOutlined className="align-baseline" />
+  ) : (
+    <UserOutlined className="align-baseline" />
+  )
   return (
-    <Typography.Text>
-      {isShop ? (
-        <ShopOutlined className="align-baseline" />
-      ) : (
-        <UserOutlined className="align-baseline" />
-      )}{' '}
-      <Typography.Text
-        className={` product--author  ${Styles['item--mobile']}`}
-        type={isShop ? 'warning' : 'secondary'}
-      >
-        {name}
-      </Typography.Text>
+    <Typography.Text
+      className={` ${globalStyles['text-overflow']} w-14`}
+      type={isShop ? 'warning' : 'secondary'}
+    >
+      {AuthorIcon} {name}
     </Typography.Text>
   )
 }

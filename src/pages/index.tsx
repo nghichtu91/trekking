@@ -22,10 +22,10 @@ const App = () => {
             background: '#fff',
           }}
           className="mb-8"
-          title="Bài mới đăng"
+          title="Xe mới đăng bán"
         >
           <List
-            grid={{ gutter: 8, xs: 2, sm: 2, md: 5, lg: 5, xl: 5, xxl: 5 }}
+            grid={{ gutter: 8, xs: 2, sm: 2, md: 3, lg: 3, xl: 4, xxl: 5 }}
             dataSource={Products}
             loadMore={
               <div className="text-center">
