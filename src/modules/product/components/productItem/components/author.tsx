@@ -15,11 +15,10 @@ export const Author: React.FC<AuthorProps> = ({ name, isShop = false }) => {
   ) : (
     <UserOutlined className="align-baseline" />
   )
+  const type = isShop ? 'warning' : 'secondary'
+
   return (
-    <Typography.Text
-      className={` ${globalStyles['text-overflow']} w-14`}
-      type={isShop ? 'warning' : 'secondary'}
-    >
+    <Typography.Text className={` ${globalStyles['text-overflow']} w-14`} type={type}>
       {AuthorIcon} {name}
     </Typography.Text>
   )
