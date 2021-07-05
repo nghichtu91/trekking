@@ -5,6 +5,7 @@ import { API } from 'aws-amplify'
 export interface IWithProductServiceProps {
   handleChangePage?: (page: number, pageSize?: number) => void
   paged?: number
+  total?: number
 }
 
 export function withProductService<P extends IWithProductServiceProps>(
@@ -12,19 +13,20 @@ export function withProductService<P extends IWithProductServiceProps>(
 ) {
   const HocComponent = (props: P) => {
     const router = useRouter()
+
     useEffect(() => {
-      const getProduct = async () => {
-        const { query } = router
-        const pageQuery = query['paged'] as string
-        const paged = query?.paged ? parseInt(pageQuery) : 1
-        const products = await API.get('treekingProductService', '/products', {
-          queryStringParameters: {
-            paged,
-          },
-        })
-        console.log(products)
-      }
-      getProduct()
+      // const getProduct = async () => {
+      //   const { query } = router
+      //   const pageQuery = query['paged'] as string
+      //   const paged = query?.paged ? parseInt(pageQuery) : 1
+      //   const products = await API.get('treekingProductService', '/products', {
+      //     queryStringParameters: {
+      //       paged,
+      //     },
+      //   })
+      //   console.log(products)
+      // }
+      // getProduct()
     }, [])
 
     const handlePagination = (page: number) => {

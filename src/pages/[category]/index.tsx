@@ -6,7 +6,7 @@ import React from 'react'
 import { Row, Col } from 'antd'
 import { PageWrapper } from '@shared/components/wrapper'
 import { ProductFilters } from '@modules/product/components/filters'
-import { ProductList } from '@modules/product/components/ListProduct'
+import { ProductList } from '@modules/product/components'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { i18n } from '../../../next-i18next.config'
 import { Products } from '@modules/product/faker/products'
@@ -23,21 +23,27 @@ const ProductsPage: React.FC<IWithProductServiceProps> = props => {
   const { query } = router
   const pageQuery = query['paged'] as string
   const paged = query?.paged ? parseInt(pageQuery) : 1
+  const total = props?.total || 6
 
   return (
     <PageWrapper>
       <ProductFilters />
       <Row>
-        <Col xxl={17} xl={17} lg={20} md={20} xs={24} sm={24}>
+        <Col xxl={20} xl={20} lg={20} md={20} xs={24} sm={24}>
           <ProductList
-            layout="vertical"
-            total={50}
+            grid={{ gutter: 8, xs: 2, sm: 2, md: 3, lg: 3, xl: 3, xxl: 3 }}
             paged={paged}
             dataSource={Products}
-            onChangePagination={handleChangePage}
+            pagination={{
+              total,
+              current: paged,
+              defaultCurrent: 1,
+              pageSize: 6,
+              onChange: handleChangePage,
+            }}
           />
         </Col>
-        <Col xxl={7} xl={7} lg={4} md={4} xs={0} sm={0}>
+        <Col xxl={4} xl={4} lg={4} md={4} xs={0} sm={0}>
           2
         </Col>
       </Row>

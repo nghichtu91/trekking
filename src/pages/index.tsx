@@ -1,17 +1,27 @@
-import { Row, Col, Card, Button, List } from 'antd'
-import { Products } from '@modules/product/faker/products'
+import { Row, Col, Card, Button } from 'antd'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { i18n } from '../../next-i18next.config'
-import { WrapperItemVertical } from '@modules/product/components/productItem'
+import { ProductList } from '@modules/product/components'
 import { useRouter } from 'next/router'
+//
+import { Products } from '@modules/product/faker/products'
+// import { brands } from '@modules/product/faker/brands'
+// import { categories } from '@modules/product/faker/categories'
 
-const App = () => {
+// categoryFollowUrl
+const IndexPage = () => {
   const router = useRouter()
+  // const { categoryFollowUrl } = categories
 
   return (
     <Row justify="center">
       <Col xs={24} sm={24} xl={12}>
-        <Card title="Danh mục xe ô tô" className="mb-8"></Card>
+        <Card title="Danh mục xe ô tô" className="mb-8">
+          {/* {Object.keys(categoryFollowUrl).map(item => (
+            <p key={item['id']}> 1 </p>
+          ))} */}
+        </Card>
+
         <Card
           bordered={false}
           style={{ background: 'none' }}
@@ -24,50 +34,28 @@ const App = () => {
           className="mb-8"
           title="Xe mới đăng bán"
         >
-          <List
-            grid={{ gutter: 8, xs: 2, sm: 2, md: 3, lg: 3, xl: 4, xxl: 5 }}
+          <ProductList
             dataSource={Products}
             loadMore={
               <div className="text-center">
-                <Button href={`${router.asPath}mua-ban-xe/ds`} key="loadd">
+                <Button href={`${router.asPath}mua-ban-xe`} key="loadd">
                   Xem thêm 2000 sản phẩn
                 </Button>
               </div>
             }
-            rowKey="id"
-            itemLayout="vertical"
-            renderItem={item => (
-              <List.Item>
-                <Card bordered bodyStyle={{ padding: 0 }}>
-                  <WrapperItemVertical
-                    shortAttrs={item.shortAttrs}
-                    item={item}
-                    price={item.price}
-                    productId={item['id']}
-                    key={item['id']}
-                  />
-                </Card>
-              </List.Item>
-            )}
           />
         </Card>
 
-        <Card
-          className="mb-2"
-          title="Tin tức xe và công nghệ"
-          actions={[
-            <Button href={`${router.asPath}mua-ban-xe/ds`} type="link" key="loadd">
-              Xem thêm
-            </Button>,
-          ]}
-        ></Card>
+        <Card className="mb-2" title="Tin tức xe và công nghệ"></Card>
       </Col>
     </Row>
   )
 }
+
 export const getServerSideProps = async ({ locale }) => ({
   props: {
     ...(await serverSideTranslations(locale, ['common'], { i18n })),
   },
 })
-export default App
+
+export default IndexPage

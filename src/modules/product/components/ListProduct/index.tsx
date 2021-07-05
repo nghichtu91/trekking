@@ -1,12 +1,11 @@
 import React from 'react'
-import { List } from 'antd'
-import { WrapperItem } from '../productItem'
+import { List, Card, ListProps } from 'antd'
+import { WrapperItem, WrapperItemVertical } from '../productItem'
 import { PaginationConfig } from 'antd/es/pagination'
 import { IProduct } from '@modules/product/models/product'
+type Layout = 'horizontal' | 'vertical' | 'grid'
 
-type Layout = 'horizontal' | 'vertical'
-
-export interface ProductListProps {
+export interface ProductListProps extends ListProps<IProduct> {
   dataSource?: IProduct[]
   total?: number
   onChangePagination?: (page: number, pageSize?: number) => void
@@ -14,26 +13,17 @@ export interface ProductListProps {
   layout?: Layout
   loadBtn?: React.ReactNode
   isPagination?: boolean
+  // loadMore?: React.ReactNode
 }
 
 export const ProductList: React.FC<ProductListProps> = props => {
   const {
+    pagination,
     dataSource = [],
-    total = 10,
-    paged = 1,
-    onChangePagination,
-    layout = 'horizontal',
-    isPagination = false,
+    layout = 'grid',
+    loadMore = null,
+    grid = { gutter: 8, xs: 2, sm: 2, md: 3, lg: 3, xl: 4, xxl: 5 },
   } = props
-
-  const pagination: PaginationConfig = {
-    total,
-    defaultPageSize: 5,
-    defaultCurrent: 1,
-    onChange: onChangePagination,
-    responsive: true,
-    current: paged,
-  }
 
   const itemRender = (item: IProduct) => (
     <WrapperItem
@@ -46,15 +36,28 @@ export const ProductList: React.FC<ProductListProps> = props => {
     />
   )
 
-  if (layout === 'horizontal') {
+  if (layout === 'grid') {
     return (
       <List
-        grid={{ column: 3, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }}
-        className={`list-products list-products-${layout}`}
+        grid={grid}
         dataSource={dataSource}
-        pagination={isPagination ? pagination : false}
+        loadMore={loadMore}
         rowKey="id"
-        renderItem={itemRender}
+        itemLayout="vertical"
+        pagination={pagination}
+        renderItem={item => (
+          <List.Item>
+            <Card bordered bodyStyle={{ padding: 0 }}>
+              <WrapperItemVertical
+                shortAttrs={item.shortAttrs}
+                item={item}
+                price={item.price}
+                productId={item['id']}
+                key={item['id']}
+              />
+            </Card>
+          </List.Item>
+        )}
       />
     )
   }
