@@ -9,6 +9,7 @@ import 'tailwindcss/tailwind.css'
 import '@shared/layout/baseLayout.css'
 import 'nprogress/nprogress.css'
 import '@shared/components/button/styles/LoadMoreButton.css'
+import '@modules/product/components/productItem/components/styles/price.css'
 // #endregion
 // #region  import package
 import Router from 'next/router'

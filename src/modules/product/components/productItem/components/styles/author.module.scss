@@ -1,0 +1,13 @@
+
+@media (max-width: 480px) {
+  .item--mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .item--mobile {
+    font-size: 11px;
+  }
+}
+

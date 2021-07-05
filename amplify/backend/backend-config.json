@@ -23,11 +23,33 @@
       "customAuth": false
     }
   },
-  "function": {},
+  "function": {
+    "treekingProductService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
   "storage": {
     "s381a6f277": {
       "service": "S3",
       "providerPlugin": "awscloudformation"
+    }
+  },
+  "api": {
+    "treekingProductService": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "treekingProductService",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   }
 }
