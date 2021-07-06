@@ -7,7 +7,7 @@ import regStyles from '@assets/styles/reg.module.scss'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { i18n } from '../../next-i18next.config'
 
-const App = () => {
+const DetailPage = () => {
   return (
     <Row justify="center" className={regStyles['authen--page']}>
       <Col xs={24} sm={24} xl={12}>
@@ -26,4 +26,4 @@ export const getServerSideProps = async ({ locale, params }) => {
   }
 }
 
-export default App
+export default DetailPage
