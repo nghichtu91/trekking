@@ -1,0 +1,118 @@
+[
+  {
+  "id": 1,
+  "title": "Nissan Sunny 2020",
+  "price": 5000,
+  "thumb": "https://static.carmudi.vn/wp-content/uploads/2019-11/FUWAnaL1dl.jpg",
+  "author": "Thành Lê",
+  "created_at": "Tue Jun 29 2021 10:32:32 GMT+0700",
+  "shortAttrs": [
+    {
+      "key": "mfg",
+      "name": "mfg",
+      "val": 2016
+    },
+    {
+      "key": "km",
+      "name": "km",
+      "val": "500Km"
+    },
+    {
+      "key": "type",
+      "name": "type",
+     "val" : "Tự động"
+    }
+  ],
+  "attributes": [
+    
+  ],
+  "shop": "Bán xe",
+  "companyId": 1
+}, {
+  "id": 2,
+  "title": "Nissan Sunny 2020",
+  "price": 5000,
+  "thumb": "https://static.carmudi.vn/wp-content/uploads/2019-11/FUWAnaL1dl.jpg",
+  "author": "Thành Lê",
+  "created_at": "Tue Jun 29 2021 10:32:32 GMT+0700",
+  "shortAttrs": [
+    {
+      "key": "mfg",
+      "name": "mfg",
+      "val": 2016
+    },
+    {
+      "key": "km",
+      "name": "km",
+      "val": "500Km"
+    },
+    {
+      "key": "type",
+      "name": "type",
+     "val" : "Tự động"
+    }
+  ],
+  "attributes": [
+    
+  ],
+  "shop": "Bán xe",
+  "companyId": 1
+}, {
+  "id": 3,
+  "title": "Nissan Sunny 2020",
+  "price": 5000,
+  "thumb": "https://static.carmudi.vn/wp-content/uploads/2019-11/FUWAnaL1dl.jpg",
+  "author": "Thành Lê",
+  "created_at": "Tue Jun 29 2021 10:32:32 GMT+0700",
+  "shortAttrs": [
+    {
+      "key": "mfg",
+      "name": "mfg",
+      "val": 2016
+    },
+    {
+      "key": "km",
+      "name": "km",
+      "val": "500Km"
+    },
+    {
+      "key": "type",
+      "name": "type",
+     "val" : "Tự động"
+    }
+  ],
+  "attributes": [
+    
+  ],
+  "shop": "Bán xe",
+  "companyId": 1
+}, {
+  "id": 4,
+  "title": "Nissan Sunny 2020",
+  "price": 5000,
+  "thumb": "https://static.carmudi.vn/wp-content/uploads/2019-11/FUWAnaL1dl.jpg",
+  "author": "Thành Lê",
+  "created_at": "Tue Jun 29 2021 10:32:32 GMT+0700",
+  "shortAttrs": [
+    {
+      "key": "mfg",
+      "name": "mfg",
+      "val": 2016
+    },
+    {
+      "key": "km",
+      "name": "km",
+      "val": "500Km"
+    },
+    {
+      "key": "type",
+      "name": "type",
+     "val" : "Tự động"
+    }
+  ],
+  "attributes": [
+    
+  ],
+  "shop": "Bán xe",
+  "companyId": 1
+}]

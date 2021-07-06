@@ -11,7 +11,6 @@ type ProfilePageProps = IForumOperations
 
 const Profile: React.FC<ProfilePageProps> = props => {
   const { profile } = useContext(Context)
-  console.log(props)
   return (
     <PageWrapper>
       <Head>

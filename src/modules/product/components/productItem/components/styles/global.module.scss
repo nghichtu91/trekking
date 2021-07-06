@@ -1,0 +1,11 @@
+.text-overflow { 
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 11px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+  margin-top: 2px;
+  flex: 1;
+}
