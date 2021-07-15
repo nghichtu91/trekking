@@ -9,9 +9,10 @@ interface ProductCreatedProps {
 
 export const ProductCreated: React.FC<ProductCreatedProps> = ({ created_at }) => {
   if (!created_at) return null
+  const timeString = moment(created_at).fromNow()
   return (
     <Typography.Text className={` ${globalStyles['text-overflow']} text-right `} type="secondary">
-      {moment(created_at).fromNow()}
+      {timeString}
     </Typography.Text>
   )
 }

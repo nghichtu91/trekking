@@ -2,54 +2,78 @@
  * @author ThanhLe
  * @version v0.0.1
  */
-import { Row, Col, Card, Carousel, Typography, Statistic, Avatar } from 'antd'
+import { Row, Col, Card, Carousel, Typography, Space, Avatar, Button } from 'antd'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { i18n } from '../../next-i18next.config'
 import { ProductList } from '@modules/product/components'
 import { Products } from '@modules/product/faker/products'
 import { UserOutlined, ShopOutlined } from '@ant-design/icons'
-
+import Link from 'next/link'
+// import Slider from 'react-slick'
 // #region components
-import { BuyButton, Price } from '@modules/product/components'
+import { Price } from '@modules/product/components'
 // #endregion
+import styles from '@assets/styles/slug.module.scss'
+
 const DetailPage = () => {
   const settings = {
     dots: {
       className: 'slick-dots slick-thumb',
     },
     infinite: true,
+    centerMode: true,
+    centerPadding: '-1px',
+    adaptiveHeight: true,
   }
 
   return (
     <Row justify="center">
-      <Col xs={24} sm={24} md={16} lg={16} xl={14} xxl={14}>
+      <Col xs={24} sm={24} md={15} lg={15} xl={13} xxl={13}>
         <Card className="mb-5">
           <Row justify="space-around">
             <Col xs={24} sm={24} md={12}>
-              <Carousel {...settings} infinite slidesToShow={1} slidesToScroll={1}>
-                <div>
-                  <Card bodyStyle={{ padding: 0 }} bordered={false}>
-                    <img alt="" src="https://cf.shopee.vn/file/29db120d6423fe42513d1264ce3768c5" />
-                  </Card>
-                </div>
-                <div>
-                  <Card bodyStyle={{ padding: 0 }} bordered={false}>
-                    <img alt="" src="https://cf.shopee.vn/file/29db120d6423fe42513d1264ce3768c5" />
-                  </Card>
-                </div>
-              </Carousel>
+              <div className={styles.imageWraper}>
+                <Carousel {...settings}>
+                  <div>
+                    <Card bodyStyle={{ padding: 0 }} bordered={false}>
+                      <img
+                        alt=""
+                        src="https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg"
+                      />
+                    </Card>
+                  </div>
+                  <div>
+                    <Card bodyStyle={{ padding: 0 }} bordered={false}>
+                      <img
+                        alt=""
+                        src="https://cdn.chotot.com/lHi5DOpXbdEyu47cvfExjenS0A3e8f6Iv-S1TVN1bE0/preset:view/plain/fa59bc5cf5fc3be1fe7f1fea4eadad63-2719301845888308990.jpg"
+                      />
+                    </Card>
+                  </div>
+                </Carousel>
+              </div>
             </Col>
             <Col xs={24} sm={24} md={10}>
               <Typography.Title className="product-title" level={4}>
                 Bán oto Bán otoBán otoBán otoBán otoBán oto
               </Typography.Title>
-              <div>
-                <Avatar icon={<UserOutlined />} size={20} /> Thành Lê
-              </div>
-              <div>
+
+              <Space direction="vertical">
+                <div>
+                  <Avatar icon={<UserOutlined />} size={20} />
+                  <Link href="/">
+                    <Button type="link">Thành Lê</Button>
+                  </Link>
+                </div>
                 <Price value={5000000} />
-                <BuyButton />
-              </div>
+                <div>
+                  <Space size="middle">
+                    <Button type="default">Đặt Hàng</Button>
+                    <Button type="primary"> Liên hệ người bán </Button>
+                  </Space>
+                </div>
+              </Space>
+              {/* <Divider /> */}
             </Col>
           </Row>
         </Card>
@@ -139,7 +163,7 @@ const DetailPage = () => {
           title="Xe tương tự"
         >
           <ProductList
-            grid={{ gutter: 8, xs: 2, sm: 2, md: 4, lg: 4, xl: 5, xxl: 5 }}
+            grid={{ gutter: 8, xs: 2, sm: 2, md: 4, lg: 4, xl: 4, xxl: 4 }}
             dataSource={Products}
           />
         </Card>

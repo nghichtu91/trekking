@@ -4,7 +4,7 @@
  */
 
 // #region  import global css
-import 'antd/dist/antd.css'
+// import 'antd/dist/antd.css'
 import 'tailwindcss/tailwind.css'
 import '@shared/layout/baseLayout.css'
 import 'nprogress/nprogress.css'
