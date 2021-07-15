@@ -22,8 +22,10 @@
       "@utils":["./src/utils"],
       "@utils/*":["./src/utils/*"],
       "@modules/*":["./src/modules/*"],
-    }
+    },
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next-i18next.config.ts"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next-i18next.config.ts", "**/*.scss"],
+  
 }

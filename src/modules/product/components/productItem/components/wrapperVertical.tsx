@@ -40,7 +40,7 @@ export const WrapperItemVertical: React.FC<WrapperItemProps> = props => {
   return (
     <div className={`${styles['product-vertical']}  ${styles['border--right']} ${styles['item']} `}>
       <div className={`${styles['wrapper']}`}>
-        <Link href={`/mua-ban/view/${productId}`}>
+        <Link href={`/mua-ban-xe/${productId}.html`}>
           <a>
             <div className={`${styles['thumbnailWrapper']}`}>
               <div className={`${styles['thumbnailImg']}`}>
