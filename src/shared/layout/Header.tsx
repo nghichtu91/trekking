@@ -121,7 +121,6 @@ export const Header: React.FC<HeaderProps> = ({ signOut = () => false }) => {
             defaultSelectedKeys={['main--menu-home']}
             selectedKeys={menuActivedKeys}
             onClick={handleMenuOnDrawer}
-            mode="vertical-left"
           />
         </Drawer>
       </Layout.Header>
