@@ -1,7 +1,7 @@
 app: leonuiapp
 stage: "test"
 leonuiapp:
-  component: "@sls-next/serverless-component@1.19.0-alpha.35"
+  component: "@sls-next/serverless-component"
   inputs:
     timeout: 30
     build:

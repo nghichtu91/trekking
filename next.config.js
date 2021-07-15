@@ -32,7 +32,7 @@ const lesttt = withAntdLess({
 });
 
 module.exports = withPlugins([[withBundleAnalyzer, lesttt]], {
-  // target: 'serverless',
+  target: 'serverless',
   i18n: {
     defaultNS: 'common',
     defaultLocale: 'vi',
